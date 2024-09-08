@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{/include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/facility/facility.css}">
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+
+    <section>
+        <h3>서울시 공공 체육시설 데이터</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>시설명</th>
+                    <th>시설View</th>
+                    <th>시설 연락처</th>
+                    <!-- 필요한 컬럼 추가 -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="facility : ${data}">
+                    <td><a th:href="@{/facility/detailView/{id}(id=${facility.SVCID})}" th:text="${facility.SVCNM}"></a></td> 
+                    <td><a th:href="@{/facility/detailView/{id}(id=${facility.SVCID})}"><img class="facility-image" th:src="${facility.IMGURL}" alt="시설 이미지"></a></td>
+                    <td th:text="${facility.TELNO}"></td> 
+                    <!-- 필요한 데이터 필드 추가 -->
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

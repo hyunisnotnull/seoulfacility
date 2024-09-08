@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+	<div id="header_wrap" th:if="${session.loginedMemberID == null}">
+		<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+		<a th:href="@{/member/create_account_form}">회원가입</a> &nbsp;&nbsp;
+		<a th:href="@{/member/member_login_form}">로그인</a>
+	</div>
+	<div id="header_wrap" th:unless="${session.loginedMemberID == null}">
+		<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+		<a th:href="@{/member/member_modify_form}">정보수정</a> &nbsp;&nbsp;
+		<a th:href="@{/member/member_logout_confirm}">로그아웃</a>
+	</div>
+</header>
+
+<nav th:fragment="nav">
+	<div id="nav_wrap">
+		<a th:href="@{/facility}">체육시설</a>
+	</div>
+</nav>
+
+<footer th:fragment="footer">
+	<div id="footer_wrap">
+		Copyright OFFICE Corp. All Rights Reserved.
+	</div>
+</footer>

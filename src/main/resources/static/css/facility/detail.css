@@ -1,0 +1,30 @@
+/* facility-detail.css */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.facility-image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.facility-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.facility-info {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.facility-info h4 {
+    margin: 0 0 10px 0;
+}
+
+.facility-info p {
+    margin: 5px 0;
+}
