@@ -1,0 +1,14 @@
+section {
+	width: 100%;
+	padding: 30px 0;
+}
+
+section #section_wrap {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+section #section_wrap .word {
+	text-align: center;
+	font-weight: bolder;
+	}
