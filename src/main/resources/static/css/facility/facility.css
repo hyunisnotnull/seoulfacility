@@ -1,5 +1,105 @@
-.facility-image {
-    max-width: 300px;
-    max-height: 300px;
-    object-fit: cover;
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 이미지 스타일 */
+.facility-image {
+    width: 100px;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.pagination-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    margin: 0 5px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-button i {
+    margin: 0 5px;
+}
+
+.pagination-button:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.prev-button {
+    font-weight: bold;
+}
+
+.next-button {
+    font-weight: bold;
+}
+
+.pagination-info {
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+

@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <title th:replace="~{/include/title.html::title}"></title>
 <link rel="stylesheet" th:href="@{/css/facility/facility.css}">
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -12,8 +15,10 @@
     <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
 
     <section>
-        <h3>서울시 공공 체육시설 데이터</h3>
-        <table>
+    	<div class="section_wrap">
+        <h3>서울시 공공 체육시설</h3>
+    	</div>
+        <table class="facility-table">
             <thead>
                 <tr>
                     <th>시설명</th>
@@ -23,14 +28,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="facility : ${data}">
-                    <td><a th:href="@{/facility/detailView/{id}(id=${facility.SVCID})}" th:text="${facility.SVCNM}"></a></td> 
-                    <td><a th:href="@{/facility/detailView/{id}(id=${facility.SVCID})}"><img class="facility-image" th:src="${facility.IMGURL}" alt="시설 이미지"></a></td>
-                    <td th:text="${facility.TELNO}"></td> 
+                <tr th:each="facility : ${facilities}">
+                    <td><a th:href="@{/facility/detailView/{id}(id=${facility.svcid})}" th:text="${facility.svcnm}"></a></td> 
+                    <td><a th:href="@{/facility/detailView/{id}(id=${facility.svcid})}"><img class="facility-image" th:src="${facility.imgurl}" alt="시설 이미지"></a></td>
+                    <td th:text="${facility.telno}"></td> 
                     <!-- 필요한 데이터 필드 추가 -->
                 </tr>
             </tbody>
         </table>
+        
+        <div class="pagination">
+	        <a th:href="@{/facility/facilities(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 0}" class="pagination-button prev-button">
+                <i class="fas fa-chevron-left"></i> 이전
+            </a>
+            <span class="pagination-info">Page [[${currentPage + 1}]] of [[${totalPages}]]</span>
+            <a th:href="@{/facility/facilities(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages - 1}" class="pagination-button next-button">
+                다음 <i class="fas fa-chevron-right"></i>
+            </a>
+	    </div>
         
     </section>
     
