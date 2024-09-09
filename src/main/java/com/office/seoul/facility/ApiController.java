@@ -92,7 +92,7 @@ public class ApiController {
             
             log.info("facilityData : ", jsonArray.toJSONString());
             
-            return "redirect:/facility/home";
+            return "redirect:/facility";
         } catch (Exception e) {
             e.printStackTrace();
             return "error"; 
