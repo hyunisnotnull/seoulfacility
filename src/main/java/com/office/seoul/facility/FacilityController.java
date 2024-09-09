@@ -33,16 +33,6 @@ public class FacilityController {
 		return nextPage;
 	}
 	
-//	@GetMapping
-//    public String getFacilityPage(Model model) {
-//        // 데이터 로드
-//        List<FacilityDto> facilities = facilityService.getAllFacilities();
-//        model.addAttribute("data", facilities);
-//
-//        // 뷰 페이지 반환
-//        return "facility/facility"; 
-//    }
-	
 	@GetMapping("/detailView")
 	public String detailView(@RequestParam("id") String id, Model model) {
 		log.info("detailView");
