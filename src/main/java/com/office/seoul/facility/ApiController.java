@@ -5,9 +5,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -28,6 +27,7 @@ public class ApiController {
 	@Value("${api-key}")
     private String apiKey;
 	
+	private static final Map<String, JSONArray> facilityDataStore = new ConcurrentHashMap<>();
 	private FacilityService facilityService;
 	
 	public ApiController(FacilityService facilityService) {
@@ -36,6 +36,7 @@ public class ApiController {
 	
     @GetMapping("/data")
     public String facility(Model model) {
+    	log.info("ApiController facility()");
         StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
         
         try {
@@ -87,12 +88,21 @@ public class ApiController {
 //            	
 //            }
 
-            model.addAttribute("data", jsonArray);
+            facilityDataStore.put("facilityData", jsonArray);
             
-            return "facility/facility"; 
+            log.info("facilityData : ", jsonArray.toJSONString());
+            
+            return "redirect:/facility/home";
         } catch (Exception e) {
             e.printStackTrace();
             return "error"; 
         }
     }
+    
+    public static JSONArray getStoredData() {
+    	log.info("getStoredData()");
+    	
+        return facilityDataStore.get("facilityData");
+    }
+
 }

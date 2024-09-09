@@ -1,7 +1,6 @@
 package com.office.seoul.facility;
 
-import java.util.List;
-
+import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +18,19 @@ public class FacilityController {
 	
 	public FacilityController(FacilityService facilityService) {
 		this.facilityService = facilityService;
+	}
+	
+	@GetMapping({"", "/"})
+	public Object home(Model model) {
+		log.info("home()");
+		
+		JSONArray facilities = ApiController.getStoredData();
+        model.addAttribute("data", facilities);
+        log.info("data: " + facilities.toJSONString());
+		
+		String nextPage = "facility/home";
+		
+		return nextPage;
 	}
 	
 //	@GetMapping
