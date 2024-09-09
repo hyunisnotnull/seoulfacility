@@ -44,7 +44,7 @@ public class ApiController {
             urlBuilder.append("/").append(URLEncoder.encode("json", "UTF-8"));							// data type 결정
             urlBuilder.append("/").append(URLEncoder.encode("ListPublicReservationSport", "UTF-8"));	// 요청한 url
             urlBuilder.append("/").append(URLEncoder.encode("1", "UTF-8"));								// 페이지 시작 번호
-            urlBuilder.append("/").append(URLEncoder.encode("5", "UTF-8"));								// 페이지 끝 번호
+            urlBuilder.append("/").append(URLEncoder.encode("10", "UTF-8"));							// 페이지 끝 번호 [최대 446]
 
             // HTTP 요청 및 응답 처리
             URL url = new URL(urlBuilder.toString());
