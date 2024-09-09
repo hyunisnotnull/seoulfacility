@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/facility/facility.css}">
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+
+    <section>
+    	<div>
+    		<h3>서울시 공공 체육시설 데이터</h3>
+    	</div>
+        <div>
+        	<form 	th:action="@{/member/create_account_confirm}" 
+        			name="create_account_form" 
+        			method="post">
+        		<input type="text" name="u_m_id" placeholder="아이디 입력하세요"><br>
+				<input type="password" name="u_m_pw" placeholder="비밀번호 입력하세요"><br>
+        		<input type="text" name="u_m_name" placeholder="이름 입력하세요"><br>
+        		<select>
+        			<option>성별</option>
+        			<option>남</option>
+        			<option>여</option>
+        		</select>
+				<input type="email" name="u_m_mail" placeholder="메일 주소 입력하세요"><br>
+				<input type="text" name="m_phone" placeholder="전화번호 입력하세요"><br>
+				<input type="button" value="회원가입" onclick="createAccountForm();">
+				<input type="reset" value="초기화">
+        	</form>
+        </div>
+		
+		<div>
+			<a th:href="@{/member/member_login_form}">이미 회원이신가요? 로그인으로 이동하기</a>
+		</div>
+    </section>
+    
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>
