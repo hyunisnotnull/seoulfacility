@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.office.seoul.facility.member.IMemberDao">
+
+	<select id="isMember" 
+			parameterType="String" 
+			resultType="Boolean">
+	
+		SELECT 
+			COUNT(*) 
+		FROM 
+			TBL_USER_MEMBER 
+		WHERE 
+			U_M_ID = #{u_m_id}
+			
+	</select>
+	
+	<insert id="insertMember" 
+			parameterType="com.office.seoul.facility.member.MemberDto">
+	
+		INSERT INTO 
+			TBL_USER_MEMBER(U_M_ID, U_M_PW, U_M_NAME, U_M_GENDER, U_M_MAIL, U_M_PHONE) 
+		VALUES(#{u_m_id}, #{u_m_pw}, #{u_m_name}, #{u_m_gender}, #{u_m_mail}, #{u_m_phone})
+	
+	</insert>
+
+</mapper>

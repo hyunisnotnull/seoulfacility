@@ -5,7 +5,7 @@
 <title th:replace="~{include/title.html::title}"></title>
 <link rel="stylesheet" th:href="@{/css/facility/facility.css}">
 
-<script th:src="@{/js/create_account_form.js}"></script>
+<script th:src="@{/js/member_login_form.js}"></script>
 </head>
 <body>
 
@@ -15,29 +15,21 @@
 
     <section>
     	<div>
-    		<h3>회원가입</h3>
+    		<h3>로그인</h3>
     	</div>
         <div>
-        	<form 	th:action="@{/member/create_account_confirm}" 
-        			name="create_account_form" 
+        	<form 	th:action="@{/member/create_login_confirm}" 
+        			name="member_login_form" 
         			method="post">
         		<input type="text" name="u_m_id" placeholder="ID"><br>
 				<input type="password" name="u_m_pw" placeholder="비밀번호"><br>
-        		<input type="text" name="u_m_name" placeholder="이름"><br>
-        		<select>
-        			<option value="">성별</option>
-					<option value="M">남성</option>
-        			<option value="W">여성</option>
-        		</select><br>
-				<input type="email" name="u_m_mail" placeholder="이메일"><br>
-				<input type="text" name="u_m_phone" placeholder="휴대폰 번호"><br>
-				<input type="button" value="회원가입" onclick="createAccountForm();">
+				<input type="button" value="회원가입" onclick="memberLoginForm();">
 				<input type="reset" value="초기화">
         	</form>
         </div>
 		
 		<div>
-			<a th:href="@{/member/member_login_form}">이미 회원이신가요?<br>로그인 화면으로 이동</a>
+			<a th:href="@{/member/create_account_form}">회원가입</a>
 		</div>
     </section>
     
