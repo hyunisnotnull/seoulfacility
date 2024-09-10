@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html xmlns:th="http://www.thymeleaf.org">
 
 <header th:fragment="header">
@@ -22,12 +23,29 @@
 	</div>
 	<div id="nav_wrap" th:unless="${session.loginedMemberID == null}">
 		<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+=======
+<html 	xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+		
+<header th:fragment="header">
+
+
+	<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+		
+	<div id="header_wrap" sec:authorize="!isAuthenticated()">
+		<a th:href="@{/member/create_account_form}">회원가입</a> &nbsp;&nbsp;
+		<a th:href="@{/member/member_login_form}">로그인</a>
+	</div>
+	
+	<div id="header_wrap" sec:authorize="isAuthenticated()">
+>>>>>>> 7f2ed4edde0b238a3e0e261535bd9e2ca1b12c33
 		<a th:href="@{/member/member_modify_form}">정보수정</a> &nbsp;&nbsp;
 		<a th:href="@{/member/member_logout_confirm}">로그아웃</a>
 	</div>
 </nav> -->
 
 
+<<<<<<< HEAD
 	<nav th:fragment="nav">
         <div id="nav_wrap"> 
 		   <div><ul>
@@ -92,3 +110,11 @@
             © Seoul Metropolitan Government all rights reserved.
         </div>
 	</footer>
+=======
+<footer th:fragment="footer">
+	<div id="footer_wrap">
+		Copyright OFFICE Corp. All Rights Reserved.
+	</div>
+</footer>
+</html>
+>>>>>>> 7f2ed4edde0b238a3e0e261535bd9e2ca1b12c33

@@ -54,4 +54,10 @@ public class MemberService {
 		}
 	}
 
+	public MemberDto MemberModifyForm(String loginedMemberID) {
+		log.info("MemberModifyForm()");
+			
+		return iMemberDao.getLoginedMemberByUmId(loginedMemberID);
+	}
+
 }

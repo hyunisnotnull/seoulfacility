@@ -22,11 +22,15 @@
     		<h3>로그인</h3><br>
     	
         <div>
-        	<form 	th:action="@{/member/create_login_confirm}" 
+        	<form 	th:action="@{/member/member_login_confirm}" 
         			name="member_login_form" 
         			method="post">
         		<input type="text" name="u_m_id" placeholder="ID"><br>
 				<input type="password" name="u_m_pw" placeholder="비밀번호"><br>
+<<<<<<< HEAD
+=======
+				<input type="button" value="로그인" onclick="memberLoginForm();">
+>>>>>>> 7f2ed4edde0b238a3e0e261535bd9e2ca1b12c33
 				<input type="reset" value="초기화">
 				<input type="button" value="회원가입" onclick="memberLoginForm();">
         	</form>
