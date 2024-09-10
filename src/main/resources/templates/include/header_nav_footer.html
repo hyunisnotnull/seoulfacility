@@ -1,12 +1,17 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html 	xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+		
 <header th:fragment="header">
-	<div id="header_wrap" th:if="${session.loginedMemberID == null}">
-		<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+
+
+	<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+		
+	<div id="header_wrap" sec:authorize="!isAuthenticated()">
 		<a th:href="@{/member/create_account_form}">회원가입</a> &nbsp;&nbsp;
 		<a th:href="@{/member/member_login_form}">로그인</a>
 	</div>
-	<div id="header_wrap" th:unless="${session.loginedMemberID == null}">
-		<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+	
+	<div id="header_wrap" sec:authorize="isAuthenticated()">
 		<a th:href="@{/member/member_modify_form}">정보수정</a> &nbsp;&nbsp;
 		<a th:href="@{/member/member_logout_confirm}">로그아웃</a>
 	</div>
@@ -23,3 +28,4 @@
 		Copyright OFFICE Corp. All Rights Reserved.
 	</div>
 </footer>
+</html>

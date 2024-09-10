@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/facility/facility.css}">
+
+<script th:src="@{/js/member_modify_form.js}"></script>
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+
+    <section>
+    	<div>
+    		<h3>정보 수정</h3>
+    	</div>
+        <div>
+        	<form 	th:action="@{/member/member_modify_confirm}" 
+        			name="member_modify_form" 
+        			method="post">
+        		
+        		<input type="hidden" name="u_m_no" th:value="${loginedMemberDto.u_m_no}">
+        			
+        		<input type="text" name="u_m_id" th:value="${loginedMemberDto.u_m_id}" readonly disabled><br>
+				<input type="password" name="u_m_pw" th:value="${loginedMemberDto.u_m_pw}" placeholder="비밀번호"><br>
+        		<input type="text" name="u_m_name" th:value="${loginedMemberDto.u_m_name}" placeholder="이름"><br>
+        		<select name="u_m_gender" th:value="${loginedMemberDto.u_m_gender}">
+        			<option value="">성별</option>
+					<option value="M">남성</option>
+        			<option value="W">여성</option>
+        		</select><br>
+				<input type="email" name="u_m_mail" th:value="${loginedMemberDto.u_m_mail}" placeholder="이메일"><br>
+				<input type="text" name="u_m_phone" th:value="${loginedMemberDto.u_m_phone}" placeholder="휴대폰 번호"><br>
+				<input type="button" value="정보수정" onclick="MemberModifyForm();">
+				<input type="reset" value="초기화">
+        	</form>
+        </div>
+		
+		<div>
+			<a th:href="@{/member/member_delete_confirm}">delete account</a>
+		</div>
+    </section>
+    
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

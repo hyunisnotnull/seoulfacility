@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+                   
 <mapper namespace="com.office.seoul.facility.member.IMemberDao">
 
 	<select id="isMember" 
 			parameterType="String" 
 			resultType="Boolean">
 	
-		SELECT 
-			COUNT(*) 
-		FROM 
+		SELECT COUNT(*) FROM 
 			TBL_USER_MEMBER 
 		WHERE 
 			U_M_ID = #{u_m_id}
@@ -25,5 +23,27 @@
 		VALUES(#{u_m_id}, #{u_m_pw}, #{u_m_name}, #{u_m_gender}, #{u_m_mail}, #{u_m_phone})
 	
 	</insert>
+	
+	<select id="selectMemberByMId"
+			parameterType="String"
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT * FROM 
+			TBL_USER_MEMBER 
+		WHERE 
+			U_M_ID = #{u_m_id}
+	
+	</select>
+	
+	<select id="getLoginedMemberByUmId"
+			parameterType="String"
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT * FROM 
+			TBL_USER_MEMBER 
+		WHERE 
+			U_M_ID = #{u_m_id}
+	
+	</select>
 
 </mapper>
