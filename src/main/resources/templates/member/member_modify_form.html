@@ -27,10 +27,10 @@
         		<input type="text" name="u_m_id" th:value="${loginedMemberDto.u_m_id}" readonly disabled><br>
 				<input type="password" name="u_m_pw" th:value="${loginedMemberDto.u_m_pw}" placeholder="비밀번호"><br>
         		<input type="text" name="u_m_name" th:value="${loginedMemberDto.u_m_name}" placeholder="이름"><br>
-        		<select name="u_m_gender" th:value="${loginedMemberDto.u_m_gender}">
+        		<select name="u_m_gender">
         			<option value="">성별</option>
-					<option value="M">남성</option>
-        			<option value="W">여성</option>
+					<option value="M" th:selected="${loginedMemberDto.u_m_gender == 'M'}">남성</option>
+        			<option value="W" th:selected="${loginedMemberDto.u_m_gender == 'W'}">여성</option>
         		</select><br>
 				<input type="email" name="u_m_mail" th:value="${loginedMemberDto.u_m_mail}" placeholder="이메일"><br>
 				<input type="text" name="u_m_phone" th:value="${loginedMemberDto.u_m_phone}" placeholder="휴대폰 번호"><br>

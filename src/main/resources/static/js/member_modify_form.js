@@ -9,6 +9,11 @@ function MemberModifyForm() {
 	} else if (form.u_m_pw.value === '') {
 		alert('비밀번호 입력하세요');
 		form.u_m_pw.focus();
+		
+	} else if (form.u_m_pw.value !== form.u_m_pw.defaultValue) { 
+		if (!confirm('비밀번호를 변경하시겠습니까?')) {
+			return;
+       }
 			
 	} else if (form.u_m_name.value === '') {
 		alert('이름 입력하세요');
