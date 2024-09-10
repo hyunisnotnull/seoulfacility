@@ -17,13 +17,32 @@
 	
 	<nav th:replace="~{/include/header_nav_footer.html::nav}">
 	</nav>
+	
+	<article th:replace="~{/include/header_nav_footer.html::article}">
+	</article>
 
-	<section>
-		<div id="section_wrap">
-			<div class="word">
-					<span>서울시 공공 체육시설</span>
-			</div>
-		</div>
+	<section id="home_section"> 
+      <div id="section_wrap">
+        <div class="mention"> 
+            <img src="http://ecobus.co.kr/wp-content/uploads/2024project/mainbanner.png" alt="">
+        </div>
+         
+		<div class="search_form"> 
+ 
+            <form action="" method="get" name="s_form">
+                <h3>
+                   ※ 빠른 예약하기     
+                </h3> <br>
+                    <select name="area" id="" class="area">             
+                    </select>
+                    <select name="category" id="">             
+                    </select>
+                    <select name="result" id="">             
+                    </select>
+                    <input type="button"  value="예약하기">
+            </form>
+        </div>
+      </div>
 	</section>
 	
 	<footer th:replace="~{/include/header_nav_footer.html::footer}">

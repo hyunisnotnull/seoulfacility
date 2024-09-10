@@ -1,39 +1,124 @@
 header {
 	width: 100%;
-	border-bottom: 1px solid #ccc;
 	padding: 7px 0;
 	}
 
-header #header_wrap {
-	width: 1500px;
+ header #header_wrap {
+	width: 1300px;
 	margin: 0 auto;
 	text-align: right;
-	}
-
-nav {
-	width: 100%;
-	border-bottom: 1px solid #ccc;
-	padding: 10px 0;
-	}
-
-nav #nav_wrap {
-	width: 1500px;
-	margin: 0 auto;
-	text-align: right;
-	}
 	
-footer {
+	}
+
+header #header_wrap a {
+	color: #c0c0c0;
+}
+
+
+/* NAV CSS  */
+
+ nav {
 	width: 100%;
-	border-top: 1px solid #ccc;
+	padding: 10px 0;
+	background-image: linear-gradient(to right,  #7167ee , #00afee);
+	}
+
+ nav #nav_wrap {
+	width: 1300px;
+    height: 50px;
+	margin: 0 auto;
+	text-align: right;
+    line-height: 50px;
+    color: #fff;
+	}
+
+
+
+nav #nav_wrap a {
+
+ color: #fff;
+
+ } 
+
+ nav #nav_wrap ul li{
+
+    font-size: 1.1em;
+    float: left;
+  }  
+
+
+  nav #nav_wrap ul li.navigation {
+
+    float: right;
+ }   
+
+
+/* ARTICLE CSS  */
+
+
+  article {
+    width: 100%;
+    height: 120px;
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban01.png");
+	background-repeat: no-repeat;
+	background-color: #f1f1f1;
+
+}
+
+
+  article #article_wrap {
+	width: 1300px;
+	margin: 0 auto;
+	padding-top: 10px;
+	}
+
+	article #article_wrap div ul {
+
+		display:flex;
+   		justify-content: right;
+	
+	  }  
+	
+
+
+
+  article div ul li a {
+	display: block;
+	width: 130px; height: 30px;
+	background-color: #fff;
+	line-height: 30px;
+	font-weight: bold;
+	padding: 5px;
+    margin: 5px;
+	border: 1px solid #bebebe;
+    border-radius: 5px;
+	text-align: center;
+  }
+ 
+
+  article div ul li a:hover {
+	background-color: #378bee;
+	border: 1px solid #378bee;
+	color: #fff;
+	transition: 0.8s;
+  }
+
+
+
+/* FOOTER CSS  */
+
+ footer {
+	width: 100%;
 	padding: 10px 0;
 	background-color: #363636;
 }
 
-footer #footer_wrap {
+ footer #footer_wrap {
 	width: 1500px; height: 100px;
 	line-height: 100px;
 	color: #fafafa;
 	margin: 0 auto;
 	text-align: center;
 	font-size: .9em;
+
 	}

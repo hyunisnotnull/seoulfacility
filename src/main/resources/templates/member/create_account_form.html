@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title th:replace="~{include/title.html::title}"></title>
-<link rel="stylesheet" th:href="@{/css/facility/facility.css}">
-
+<!-- <link rel="stylesheet" th:href="@{/css/facility/facility.css}"> -->
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member/create_account.css}">
 <script th:src="@{/js/create_account_form.js}"></script>
 </head>
 <body>
@@ -13,32 +15,36 @@
     
     <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
 
+	<article th:replace="~{/include/header_nav_footer.html::article}">
+	</article>
+
     <section>
-    	<div>
-    		<h3>회원가입</h3>
-    	</div>
-        <div>
-        	<form 	th:action="@{/member/create_account_confirm}" 
+    	<div id="section_wrap">
+    		<h3>회원가입</h3><br>
+    	
+         <div>
+        	<form th:action="@{/member/create_account_confirm}" 
         			name="create_account_form" 
         			method="post">
         		<input type="text" name="u_m_id" placeholder="ID"><br>
 				<input type="password" name="u_m_pw" placeholder="비밀번호"><br>
         		<input type="text" name="u_m_name" placeholder="이름"><br>
-        		<select>
+        		<select name="u_m_gender">
         			<option value="">성별</option>
 					<option value="M">남성</option>
         			<option value="W">여성</option>
         		</select><br>
 				<input type="email" name="u_m_mail" placeholder="이메일"><br>
 				<input type="text" name="u_m_phone" placeholder="휴대폰 번호"><br>
-				<input type="button" value="회원가입" onclick="createAccountForm();">
 				<input type="reset" value="초기화">
+				<input type="button" value="회원가입" onclick="createAccountForm();">
         	</form>
         </div>
 		
-		<div>
-			<a th:href="@{/member/member_login_form}">이미 회원이신가요?<br>로그인 화면으로 이동</a>
+		<div class="go_button">
+			<br> <br> 이미 회원이신가요? <br> <a th:href="@{/member/member_login_form}">로그인 화면으로 이동 </a>
 		</div>
+		  </div>
     </section>
     
     <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
