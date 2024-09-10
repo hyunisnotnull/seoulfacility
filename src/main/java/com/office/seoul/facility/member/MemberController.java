@@ -1,12 +1,13 @@
 package com.office.seoul.facility.member;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -62,6 +63,18 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("/member_modify_form")
+	public String MemberModifyForm(Principal principal, Model model) {
+		log.info("MemberModifyForm()");
+		
+		String nextPage = "/member/member_modify_form";
+		
+		MemberDto loginedMemberDto = memberService.MemberModifyForm(principal.getName());
+		
+		model.addAttribute("loginedMemberDto", loginedMemberDto);
+		
+		return nextPage;
+	}
 
 	
 }

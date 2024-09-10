@@ -1,26 +1,129 @@
+<<<<<<< HEAD
 <html xmlns:th="http://www.thymeleaf.org">
+
 <header th:fragment="header">
-	<div id="header_wrap" th:if="${session.loginedMemberID == null}">
+	<div id="header_wrap">
+		 <div class="profile">
+                 <a href="#none"> USER |</a> 
+                <a href="#none"> ADMIN </a>
+          </div>
+		
+		
+</header>
+
+<!-- <nav th:fragment="nav">
+
+		
+	</div>
+	
+	<div id="nav_wrap" th:if="${session.loginedMemberID == null}">
 		<a th:href="@{/}">홈</a> &nbsp;&nbsp;
 		<a th:href="@{/member/create_account_form}">회원가입</a> &nbsp;&nbsp;
 		<a th:href="@{/member/member_login_form}">로그인</a>
 	</div>
-	<div id="header_wrap" th:unless="${session.loginedMemberID == null}">
+	<div id="nav_wrap" th:unless="${session.loginedMemberID == null}">
 		<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+=======
+<html 	xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+		
+<header th:fragment="header">
+
+
+	<a th:href="@{/}">홈</a> &nbsp;&nbsp;
+		
+	<div id="header_wrap" sec:authorize="!isAuthenticated()">
+		<a th:href="@{/member/create_account_form}">회원가입</a> &nbsp;&nbsp;
+		<a th:href="@{/member/member_login_form}">로그인</a>
+	</div>
+	
+	<div id="header_wrap" sec:authorize="isAuthenticated()">
+>>>>>>> 7f2ed4edde0b238a3e0e261535bd9e2ca1b12c33
 		<a th:href="@{/member/member_modify_form}">정보수정</a> &nbsp;&nbsp;
 		<a th:href="@{/member/member_logout_confirm}">로그아웃</a>
 	</div>
-</header>
+</nav> -->
 
+<<<<<<< HEAD
 <nav th:fragment="nav">
 	<div id="nav_wrap">
 		<a th:href="@{/api/data}">공공 API 불러오기</a>&nbsp;&nbsp;&nbsp;
 		<a th:href="@{/facility}">체육시설</a>
 	</div>
 </nav>
+=======
+>>>>>>> 02c355b8fb24e813ce1010b09496d8d7cc8d7171
 
+<<<<<<< HEAD
+	<nav th:fragment="nav">
+        <div id="nav_wrap"> 
+		   <div><ul>
+                <li></li>
+                <li class="logo"> <a href=""><img src="http://ecobus.co.kr/wp-content/uploads/2024project/logo_m.png" alt="logo" width="230px"></a></li>
+                <li class="navigation" >
+                  <div th:if="${session.loginedMemberID == null}" >
+                    <a th:href="@{/}">HOME</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/member/member_login_form}">로그인</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/member/create_account_form}">회원가입</a> &nbsp; |&nbsp; 
+                	<a th:href="@{/facility/facilities}">체육시설</a>
+                   </div>
+                  <div th:unless="${session.loginedMemberID == null}" >
+                    <a th:href="@{/}">HOME</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/member/member_modify_form}">마이페이지</a>&nbsp; |&nbsp; 
+                    <a th:href="@{/member/member_logout_confirm}">로그아웃</a>
+                  	<a th:href="@{/facility/facilities}">체육시설</a>
+                   </div>
+                </li>
+           </ul>
+          </div>  
+        </div>
+	</nav>
+
+
+ <article th:fragment="article">
+        <div id="article_wrap">
+            <div>
+                <ul class="btns1">
+                    <!-- <li><a href="#">전체보기</a></li> -->
+                    <li><a href="#">축구장</a></li>
+                    <li><a href="#">풋살장</a></li>
+                    <li><a href="#">족구장</a></li>
+                    <li><a href="#">야구장</a></li>
+                    <li><a href="#">테니스장</a></li>
+                    <li><a href="#">농구장</a></li>
+                    <li><a href="#">배구장</a></li>
+                </ul>
+            </div> 
+            <div>
+                <ul class="btns2">    
+                    <li><a href="#">다목적경기장</a></li>
+                    <li><a href="#">운동장</a></li>
+                    <li><a href="#">체육장</a></li>
+                    <li><a href="#">배드민턴장</a></li>
+                    <li><a href="#">탁구장</a></li>
+                    <li><a href="#">교육시설</a></li>
+                    <li><a href="#">수영장</a></li>
+                    <li><a href="#">골프장</a></li>
+            </ul>
+            </div> 
+     </div>
+
+    </article>
+
+
+
+
+
+	<footer th:fragment="footer">
+        <div id="footer_wrap">
+            © Seoul Metropolitan Government all rights reserved.
+        </div>
+	</footer>
+=======
 <footer th:fragment="footer">
 	<div id="footer_wrap">
 		Copyright OFFICE Corp. All Rights Reserved.
 	</div>
 </footer>
+</html>
+>>>>>>> 7f2ed4edde0b238a3e0e261535bd9e2ca1b12c33

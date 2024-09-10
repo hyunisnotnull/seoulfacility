@@ -9,4 +9,8 @@ public interface IMemberDao {
 
 	public int insertMember(MemberDto memberDto);
 
+	public MemberDto selectMemberByMId(String username);
+
+	public MemberDto getLoginedMemberByUmId(String loginedMemberID);
+
 }
