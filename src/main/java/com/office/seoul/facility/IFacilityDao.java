@@ -16,4 +16,10 @@ public interface IFacilityDao {
 
 	public FacilityDto getFacilityById(String id);
 
+	public List<String> getAreas();
+
+	public List<String> getCategories();
+
+	public List<String> getResults(Map<String, Object> params);
+
 }

@@ -47,4 +47,25 @@
 		SELECT * FROM TBL_FACILITY WHERE SVCID = #{id}	
 	</select>
 	
+	<!-- 홈 빠른 예약 -->
+	<select id="getAreas" resultType="String">
+        SELECT DISTINCT AREANM FROM TBL_FACILITY
+    </select>
+
+    <select id="getCategories" resultType="String">
+        SELECT DISTINCT MINCLASSNM FROM TBL_FACILITY
+    </select>
+
+    <select id="getResults" parameterType="Map" resultType="String">
+        SELECT DISTINCT PLACENM FROM TBL_FACILITY
+        <where>
+            <if test="area != null and area != ''">
+                AND AREANM = #{area}
+            </if>
+            <if test="category != null and category != ''">
+                AND MINCLASSNM = #{category}
+            </if>
+        </where>
+    </select>
+	
 </mapper>
