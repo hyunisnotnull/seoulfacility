@@ -185,7 +185,7 @@ a:hover {
  section #section_wrap .s_result > ul {
 
 	display:flex;
-	justify-content: space-between;
+	justify-content: left;
  }
 
  section #section_wrap  .result_count {
