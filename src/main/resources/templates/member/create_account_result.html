@@ -18,16 +18,17 @@
 	</article>
 
     <section>
-    	<div>
-    		<p th:if="${isSuccess}">회원가입 성공</p>
-            <p th:if="${!isSuccess}">회원가입 실패</p>
-    	</div>
-		
-		<div>
-			<a th:if="${isSuccess}" th:href="@{/member/member_login_form}">로그인 화면으로 이동</a>
-            <a th:if="${!isSuccess}" th:href="@{/member/create_account_form}">다시 회원 가입하기</a>
-		</div>
-		
+    	<div id="section_wrap">
+	    	<div>
+	    		<p th:if="${isSuccess}">회원가입 성공</p>
+	            <p th:if="${!isSuccess}">회원가입 실패</p>
+	    	</div>
+			
+			<div class="go_button">
+				<a th:if="${isSuccess}" th:href="@{/member/member_login_form}">로그인 화면으로 이동</a>
+	            <a th:if="${!isSuccess}" th:href="@{/member/create_account_form}">다시 회원 가입하기</a>
+			</div>
+	  	</div>
     </section>
     
     <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>

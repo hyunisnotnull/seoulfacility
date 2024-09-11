@@ -57,7 +57,7 @@ function renderTable(facilities, totalItems) {
         <div class="img_box">
         <img class="thumb" src="${item.imgurl}"  alt=""> <br>
             <div class="ib_top">
-              <span class="status1">${item.svcstatnm}</span>
+              <span class="${item.svcstatnm == "접수중" ? 'status1' : 'status2'}">${item.svcstatnm}</span>
               <span class="${item.payatnm == "무료" ? 'type1' : 'type2'}">${item.payatnm}</span>
             </div>
        </div>  
