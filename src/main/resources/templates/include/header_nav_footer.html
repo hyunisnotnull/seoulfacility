@@ -1,4 +1,10 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
+<script th:replace="~{/include/pagination_js.html::js}"></script>
+</head>
 
 <header th:fragment="header">
 	<div id="header_wrap">
@@ -7,8 +13,9 @@
                 <a href="#none"> ADMIN </a>
           </div>
 		
-		
+	</div>
 </header>
+
 
 
 
@@ -44,25 +51,22 @@
             <div>
                 <ul class="btns1">
                     <!-- <li><a href="#">전체보기</a></li> -->
-                    <li><a href="#">축구장</a></li>
-                    <li><a href="#">풋살장</a></li>
-                    <li><a href="#">족구장</a></li>
-                    <li><a href="#">야구장</a></li>
-                    <li><a href="#">테니스장</a></li>
-                    <li><a href="#">농구장</a></li>
-                    <li><a href="#">배구장</a></li>
+                    <li><a th:href="@{/facility/home(type='축구장')}">축구장</a></li>
+                    <li><a th:href="@{/facility/home(type='풋살장')}">풋살장</a></li>
+	                <li><a th:href="@{/facility/home(type='족구장')}">족구장</a></li>
+	                <li><a th:href="@{/facility/home(type='야구장')}">야구장</a></li>
+	                <li><a th:href="@{/facility/home(type='테니스장')}">테니스장</a></li>
+	                <li><a th:href="@{/facility/home(type='농구장')}">농구장</a></li>
                 </ul>
             </div> 
             <div>
                 <ul class="btns2">    
-                    <li><a href="#">다목적경기장</a></li>
-                    <li><a href="#">운동장</a></li>
-                    <li><a href="#">체육장</a></li>
-                    <li><a href="#">배드민턴장</a></li>
-                    <li><a href="#">탁구장</a></li>
-                    <li><a href="#">교육시설</a></li>
-                    <li><a href="#">수영장</a></li>
-                    <li><a href="#">골프장</a></li>
+	                <li><a th:href="@{/facility/home(type='배구장')}">배구장</a></li>
+                    <li><a th:href="@{/facility/home(type='다목적경기장')}">다목적경기장</a></li>
+	                <li><a th:href="@{/facility/home(type='배드민턴장')}">배드민턴장</a></li>
+	                <li><a th:href="@{/facility/home(type='탁구장')}">탁구장</a></li>
+	                <li><a th:href="@{/facility/home(type='교육시설')}">교육시설</a></li>
+	                <li><a th:href="@{/facility/home(type='골프장')}">골프장</a></li>
             </ul>
             </div> 
      </div>
@@ -77,5 +81,4 @@
 	</footer>
 
 	
-	</html>
-
+</html>

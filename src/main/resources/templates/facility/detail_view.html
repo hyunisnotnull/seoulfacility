@@ -6,6 +6,8 @@
 <link rel="stylesheet" th:href="@{/css/facility/detail.css}">
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
+<script th:replace="~{/include/pagination_js.html::js}"></script>
 </head>
 <body>
     <header th:replace="~{/include/header_nav_footer.html::header}"></header>
@@ -14,19 +16,19 @@
 
     <section class="detail-section">
         <div class="section_wrap">
-            <h1 th:text="${facilityDto.svcnm}">시설명</h1>
+            <h1 th:text="${facilityDto.SVCNM}">시설명</h1>
         </div>
         <div class="facility-detail">
             <div class="image-container">
-                <img class="facility-image" th:src="${facilityDto.imgurl}" alt="시설 이미지">
+                <img class="facility-image" th:src="${facilityDto.IMGURL}" alt="시설 이미지">
             </div>
             <div class="detail-content">
-                <p><strong>시설명:</strong> <span th:text="${facilityDto.svcnm}"></span></p>
-                <p><strong>주소:</strong> <span th:text="${facilityDto.placenm}"></span></p>
-                <p><strong>전화번호:</strong> <span th:text="${facilityDto.telno}"></span></p>
-                <p><strong>서비스 시작일:</strong> <span th:text="${facilityDto.svcopnbgndt}"></span></p>
-                <p><strong>서비스 종료일:</strong> <span th:text="${facilityDto.svcopnenddt}"></span></p>
-                <p><strong>상세 내용:</strong> <span th:text="${facilityDto.dtlcont}"></span></p>
+                <p><strong>시설명:</strong> <span th:text="${facilityDto.SVCNM}"></span></p>
+                <p><strong>주소:</strong> <span th:text="${facilityDto.PLACENM}"></span></p>
+                <p><strong>전화번호:</strong> <span th:text="${facilityDto.TELNO}"></span></p>
+                <p><strong>서비스 시작일:</strong> <span th:text="${facilityDto.SVCOPNBGNDT}"></span></p>
+                <p><strong>서비스 종료일:</strong> <span th:text="${facilityDto.SVCOPNENDDT}"></span></p>
+                <p><strong>상세 내용:</strong> <span th:text="${facilityDto.DTLCONT}"></span></p>
             </div>
         </div>
     </section>

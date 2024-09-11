@@ -4,19 +4,39 @@
 
 <mapper namespace="com.office.seoul.facility.IFacilityDao">
 
-	<select id="getAllFacility" resultType="com.office.seoul.facility.FacilityDto">
+	<select id="getAllFacility" parameterType="String" resultType="com.office.seoul.facility.FacilityDto">
 		SELECT * FROM TBL_FACILITY
+		<where>
+	        <if test="type != null and type != ''">
+	            AND MINCLASSNM = #{type}
+	        </if>
+	    </where>
 	</select>
 	
 	<!-- 페이지별 데이터 조회 -->
     <select id="getFacilities" parameterType="Map" resultType="com.office.seoul.facility.FacilityDto">
         SELECT * FROM TBL_FACILITY
+        <where>
+	        <if test="type != null and type != ''">
+	            AND MINCLASSNM = #{type}
+	        </if>
+	    </where>
         LIMIT #{offset}, #{size}
     </select>
     
     <!-- 전체 시설 수 조회 -->
-    <select id="getTotalFacilitiesCount" resultType="Integer">
+    <select id="getTotalFacilitiesCount" parameterType="String" resultType="Integer">
         SELECT COUNT(*) FROM TBL_FACILITY
+        <where>
+	        <if test="type != null and type != ''">
+	            AND MINCLASSNM = #{type}
+	        </if>
+	    </where>
     </select>
-
+    
+    <!-- 시설 상세정보 -->
+	<select id="getFacilityById" parameterType="String" resultType="com.office.seoul.facility.FacilityDto">
+		SELECT * FROM TBL_FACILITY WHERE SVCID = #{id}	
+	</select>
+	
 </mapper>

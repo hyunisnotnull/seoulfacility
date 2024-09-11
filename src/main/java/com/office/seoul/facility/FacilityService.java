@@ -18,19 +18,22 @@ public class FacilityService {
 		this.iFacilityDao = iFacilityDao;
 	}
 
-	public List<FacilityDto> home() {
+	public List<FacilityDto> home(String type) {
 		
-		return iFacilityDao.getAllFacility();
+		return iFacilityDao.getAllFacility(type);
 	}
 	
-	 public Map<String, Object> getFacilities(int page, int size) {
+	 public Map<String, Object> getFacilities(int page, int size, String type) {
 	        int offset = (page - 1) * size;
 	        Map<String, Object> params = new HashMap<>();
 	        params.put("offset", offset);
 	        params.put("size", size);
+	        params.put("type", type);
+	        
+	        log.info("type : {}", type);
 
 	        List<FacilityDto> facilities = iFacilityDao.getFacilities(params);
-	        int totalItems = iFacilityDao.getTotalFacilitiesCount();
+	        int totalItems = iFacilityDao.getTotalFacilitiesCount(type);
 
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("items", facilities);
@@ -38,5 +41,10 @@ public class FacilityService {
 
 	        return response;
 	    }
+
+	public FacilityDto getFacilityById(String id) {
+		
+		return iFacilityDao.getFacilityById(id);
+	}
 
 }
