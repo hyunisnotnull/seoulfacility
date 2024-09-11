@@ -256,7 +256,6 @@ a:hover {
 
 
  section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top span {
-	background-color: #f8981a;
 	display: inline-block;
 	padding: 0 8px;
 	height: 30px;
@@ -268,6 +267,14 @@ a:hover {
 	font-size: 0.9em;
 
  }
+ 
+  section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top .status1 {
+  	background-color: #f8981a;
+  }
+ 
+   section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top .status2 {
+  	background-color: #000;
+  }
 
  section #section_wrap .s_result .show_list .result_wrap .img_box .ib_top .type1 {
 	background-color: #4b94da;
