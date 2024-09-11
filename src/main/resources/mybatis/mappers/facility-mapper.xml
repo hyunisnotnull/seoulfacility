@@ -18,7 +18,11 @@
         SELECT * FROM TBL_FACILITY
         <where>
 	        <if test="type != null and type != ''">
-	            AND MINCLASSNM = #{type}
+	            AND (
+                MINCLASSNM LIKE CONCAT('%', #{type}, '%')
+                OR PLACENM LIKE CONCAT('%', #{type}, '%')
+                OR AREANM LIKE CONCAT('%', #{type}, '%')
+            )
 	        </if>
 	    </where>
         LIMIT #{offset}, #{size}
@@ -29,7 +33,11 @@
         SELECT COUNT(*) FROM TBL_FACILITY
         <where>
 	        <if test="type != null and type != ''">
-	            AND MINCLASSNM = #{type}
+	            AND (
+                MINCLASSNM LIKE CONCAT('%', #{type}, '%')
+                OR PLACENM LIKE CONCAT('%', #{type}, '%')
+                OR AREANM LIKE CONCAT('%', #{type}, '%')
+            )
 	        </if>
 	    </where>
     </select>

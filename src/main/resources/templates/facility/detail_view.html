@@ -19,9 +19,16 @@
             <h1 th:text="${facilityDto.SVCNM}">시설명</h1>
         </div>
         <div class="facility-detail">
+        <ul>
+        <li>
             <div class="image-container">
                 <img class="facility-image" th:src="${facilityDto.IMGURL}" alt="시설 이미지">
             </div>
+            <div class="map">
+                지도 API 자리
+            </div>
+        </li>
+        </ul>
             <div class="detail-content">
                 <p><strong>시설명:</strong> <span th:text="${facilityDto.SVCNM}"></span></p>
                 <p><strong>주소:</strong> <span th:text="${facilityDto.PLACENM}"></span></p>

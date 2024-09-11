@@ -1,12 +1,19 @@
 <script th:fragment="js">
 
+// 페이지, 타입 변수 정의
+const pageSize = 6;
+let currentPage = 1;
+let totalItems = 0;
+let totalPages = 0;
+let type = getQueryParam('type') || '';
+
+// 랜더링 시작
 $(document).ready(function() {
 	console.log('DOCUMENT READY');
-    const pageSize = 6;
-    let currentPage = 1;
-    let totalItems = 0;
-    let totalPages = 0;
-    let type = getQueryParam('type') || '';
+    
+	// 페이지 로드
+    loadData(currentPage, type);
+});
     
  // Query Parameter 가져오기
 function getQueryParam(param) {
@@ -142,10 +149,6 @@ $('#pagination').on('click', 'a', function(e) {
         currentPage = page;
         loadData(currentPage, type);
     }
-});
-
-	// 페이지 로드
-    loadData(currentPage, type);
 });
 
 </script>
