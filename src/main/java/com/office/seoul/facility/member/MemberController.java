@@ -65,6 +65,19 @@ public class MemberController {
 	}
 	
 	/*
+	 * 로그인
+	 */
+	@GetMapping("/member_login_result")
+	public String memberLoginConfirm() {
+		log.info("memberLoginConfirm()");
+		
+		String nextPage = "/member/member_login_result";
+		
+		return nextPage;
+		
+	}
+	
+	/*
 	 * 정보수정
 	 */
 	@GetMapping("/member_modify_form")
