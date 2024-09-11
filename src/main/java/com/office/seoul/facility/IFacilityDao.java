@@ -8,10 +8,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IFacilityDao {
 
-	public List<FacilityDto> getAllFacility();
+	public List<FacilityDto> getAllFacility(String type);
 	
 	public List<FacilityDto> getFacilities(Map<String, Object> params);
 	
-	public int getTotalFacilitiesCount();
+	public int getTotalFacilitiesCount(String type);
+
+	public FacilityDto getFacilityById(String id);
 
 }

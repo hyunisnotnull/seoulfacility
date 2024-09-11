@@ -16,30 +16,80 @@
     <header th:replace="~{/include/header_nav_footer.html::header}"></header>
     
     <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+    <article th:replace="~{/include/header_nav_footer.html::article}"></article>
+    
 
     <section>
-    	<div class="section_wrap">
-        <h3>서울시 공공 체육시설</h3>
-    	</div>
-        <table class="facility-table">
-            <thead>
-                <tr>
-                    <th>시설명</th>
-                    <th>시설View</th>
-                    <th>시설 연락처</th>
+
+    	<div id="section_wrap">
+
                     <!-- 필요한 컬럼 추가 -->
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr th:each="facility : ${facilityDto}">
-                    <td><a th:href="@{/facility/detailView/{id}(id=${facility.SVCID})}" th:text="${facility.SVCNM}"></a></td> 
-                    <td><a th:href="@{/facility/detailView/{id}(id=${facility.SVCID})}"><img class="facility-image" th:src="${facility.IMGURL}" alt="시설 이미지"></a></td>
-                    <td th:text="${facility.TELNO}"></td> 
-                    필요한 데이터 필드 추가
-                </tr> -->
+                
             </tbody>
         </table>
+
         
+
+     
+              <!-- 검색창 -->
+		<div class="search_form"> 
+		
+		
+            
+            <form action="" method="get" name="s_form">
+              
+                    <select name="area" id="search"> 
+                        <option value="all">전체</option>  
+                        <option value="area">지역</option>   
+                        <option value="service">서비스</option>   
+                        <option value="location">장소</option>            
+                    </select>
+                    <input type="text" name="keyword" id="">
+                    <input type="button"  value="검색">
+            </form>
+        </div>
+    	
+  		<div class="result_count">
+           	<img src="https://yeyak.seoul.go.kr/common/img/ko/bullet_1.png" width="20px"> 총<span></span>건
+        </div>
+       
+    	
+     <div class="s_result">
+  	    
+
+               <!-- 결과물 1개 출력  -->
+<!--                 <li class="result_wrap">
+                   <div class="img_box">
+                       <img class="thumb" src="https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20240222/1708585054845G6MKD7YX0QIQH538QU9PKV9QF_IM02.jpg" alt=""> <br>
+                       <div class="ib_top">
+                         <span class="status1">접수중</span>
+                         <span class="type1">유료</span>
+                       </div>
+                  </div>  
+                   
+                  <div class="text_wrap">
+                    <p>축구장</p>
+                    <h3>월드컵 보조 경기장</h3><br>
+                    <ul>
+                        <li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_place.png" width="16px" alt=""> <span> 장소명 :</span> 보조구장(마포구)</li> 
+                        <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_user.png" width="16px" alt=""> <span> 이용대상 :</span> 제한없음</li> 
+                        <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_date1.png" width="16px" alt=""> <span> 접수기간 :</span> 2024.08.24 ~ 2024.09.18 </li> 
+                        <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_date2.png" width="16px" alt=""> <span> 이용기간 :</span> 2024.03.04 ~ 2024.09.30 </li> 
+                    </ul> 
+                    <br>
+                    <button>상세보기 + </button><br>
+                   </div>  
+                </li> -->
+             <!-- 결과물 1개 출력 종료  -->
+
+
+           
+
+
+          </div>   
         <div id="pagination" class="pagination">
     
 		</div>
