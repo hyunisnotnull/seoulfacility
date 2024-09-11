@@ -60,4 +60,29 @@ public class MemberService {
 		return iMemberDao.getLoginedMemberByUmId(loginedMemberID);
 	}
 
+	public int memberModifyConfirm(MemberDto memberDto) {
+		log.info("memberModifyConfirm()");
+		
+		int result = iMemberDao.updateMemberModify(memberDto);
+		
+		switch (result) {
+		case INSERT_FAIL_AT_DB:
+			log.info("회원 정보수정 실패");
+			break;
+			
+		case INSERT_SUCCESS_AT_DB:
+			log.info("회원 정보수정 성공");
+			break;
+		}
+		
+		return result;
+	}
+
+	public int memberDeleteConfirm(String loginedMemberID) {
+		log.info("memberDeleteConfirm()");
+			
+		return iMemberDao.deleteMemberByMId(loginedMemberID);
+	}
+
+	
 }

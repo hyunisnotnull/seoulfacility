@@ -64,6 +64,16 @@ public class SecurityConfig {
 					response.sendRedirect("/member/member_login_form");
 					
 				}));
+	    
+	    http
+	    .logout(logout -> logout
+	    		.logoutUrl("/member/member_logout_confirm")
+	    		.logoutSuccessHandler((request, response, authentication) -> {
+	    			log.info("[MEMBER LOGOUT SUCCESS]");
+					
+					response.sendRedirect("/");
+	    		}));
+	    
 
 	    return http.build();
 	}

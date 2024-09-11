@@ -13,4 +13,8 @@ public interface IMemberDao {
 
 	public MemberDto getLoginedMemberByUmId(String loginedMemberID);
 
+	public int updateMemberModify(MemberDto memberDto);
+
+	public int deleteMemberByMId(String loginedMemberID);
+
 }

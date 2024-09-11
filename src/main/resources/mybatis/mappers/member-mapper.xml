@@ -45,5 +45,30 @@
 			U_M_ID = #{u_m_id}
 	
 	</select>
+	
+	<update id="updateMemberModify"
+			parameterType="com.office.seoul.facility.member.MemberDto">
+	
+		UPDATE 
+			TBL_USER_MEMBER 
+		SET 
+			U_M_PW = #{u_m_pw}, U_M_NAME = #{u_m_name}, 
+			U_M_GENDER = #{u_m_gender}, U_M_MAIL = #{u_m_mail}, 
+			U_M_PHONE = #{u_m_phone}, U_M_MOD_DATE = NOW() 
+		WHERE 
+			U_M_NO = #{u_m_no}
+	
+	</update>
+	
+	<delete id="deleteMemberByMId"
+			parameterType="com.office.seoul.facility.member.MemberDto">
+	
+		DELETE FROM 
+			TBL_USER_MEMBER 
+		WHERE 
+			U_M_ID = #{u_m_id}
+	
+	</delete>
+
 
 </mapper>

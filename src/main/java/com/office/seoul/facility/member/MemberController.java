@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -63,6 +64,9 @@ public class MemberController {
 		
 	}
 	
+	/*
+	 * 정보수정
+	 */
 	@GetMapping("/member_modify_form")
 	public String MemberModifyForm(Principal principal, Model model) {
 		log.info("MemberModifyForm()");
@@ -76,5 +80,40 @@ public class MemberController {
 		return nextPage;
 	}
 
+	/*
+	 * 정보 수정 확인
+	 */
+	@PostMapping("/member_modify_confirm")
+	public String memberModifyConfirm(MemberDto memberDto, Model model) {
+		log.info("memberModifyConfirm()");
+		
+		String nextPage = "/member/member_modify_result";
+		
+		int result = memberService.memberModifyConfirm(memberDto);
+		
+		boolean isModify = result == MemberService.INSERT_SUCCESS_AT_DB;
+	    model.addAttribute("isModify", isModify);
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 회원 탈퇴
+	 */
+	@GetMapping("/member_delete_confirm")
+	public String memberDeleteConfirm(@RequestParam("confirm") boolean confirm, Principal principal) {
+		log.info("memberDeleteConfirm()");
+		
+		String nextPage = "redirect:/member/member_logout_confirm";
+
+		int result = memberService.memberDeleteConfirm(principal.getName());
+		if (result <= 0) 
+			nextPage = "member/member_delete_result";
+		
+		return nextPage;
+		
+	}
+	
 	
 }

@@ -28,11 +28,12 @@
         			method="post">
         		
         		<input type="hidden" name="u_m_no" th:value="${loginedMemberDto.u_m_no}">
+        		<input type="hidden" name="u_m_gender" th:value="${loginedMemberDto.u_m_gender}">
         			
-        		<input type="text" name="u_m_id" th:value="${loginedMemberDto.u_m_id}" readonly disabled><br>
+        		<input type="text" name="u_m_id" th:value="${loginedMemberDto.u_m_id}" readonly><br>
 				<input type="password" name="u_m_pw" th:value="${loginedMemberDto.u_m_pw}" placeholder="비밀번호"><br>
         		<input type="text" name="u_m_name" th:value="${loginedMemberDto.u_m_name}" placeholder="이름"><br>
-        		<select name="u_m_gender">
+        		<select name="u_m_gender" disabled>
         			<option value="">성별</option>
 					<option value="M" th:selected="${loginedMemberDto.u_m_gender == 'M'}">남성</option>
         			<option value="W" th:selected="${loginedMemberDto.u_m_gender == 'W'}">여성</option>
@@ -41,11 +42,13 @@
 				<input type="text" name="u_m_phone" th:value="${loginedMemberDto.u_m_phone}" placeholder="휴대폰 번호"><br>
 				<input type="button" value="정보수정" onclick="MemberModifyForm();">
 				<input type="reset" value="초기화">
+				<!-- <input type="button" value="회원탈퇴" onclick="MemberDeleteForm();"> -->
         	</form>
         </div>
 		
+		
 		<div>
-			<a th:href="@{/member/member_delete_confirm}">delete account</a>
+			<a th:href="@{/member/member_delete_confirm}">회원탈퇴</a>
 		</div>
 		
 		</div>
