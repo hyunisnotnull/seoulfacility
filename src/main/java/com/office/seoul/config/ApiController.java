@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.office.seoul.facility.FacilityDto;
 import com.office.seoul.facility.FacilityRepository;
@@ -71,10 +69,13 @@ public class ApiController {
             }
             rd.close();
             conn.disconnect();
+            
+            String response = sb.toString();
+            String cleanResponse = removeCommentsFromJson(response);
 
             // JSON 응답 파싱
             JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(new InputStreamReader(url.openStream()));
+            JSONObject jsonObject = (JSONObject) parser.parse(cleanResponse);
             Map<String, Object> map = (Map<String, Object>) jsonObject.get("ListPublicReservationSport");
             JSONArray jsonArray = (JSONArray) map.get("row");
             
@@ -117,5 +118,10 @@ public class ApiController {
         }
         return "home";
 	}
+	
+	private String removeCommentsFromJson(String jsonResponse) {
+
+        return jsonResponse.replaceAll("<!--.*?-->", "");
+    }
 	
 }

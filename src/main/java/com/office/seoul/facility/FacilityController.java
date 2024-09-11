@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,14 +34,15 @@ public class FacilityController {
 	}
 	
 	@GetMapping("/home")
-	public String home(Model model) {
+	public String home(@RequestParam(value = "type", required = false) String type, Model model) {
 		log.info("home()");
 		
 		String nextPage = "facility/home";
 		
-		List<FacilityDto> facilityDto = facilityService.home();
+		List<FacilityDto> facilityDto = facilityService.home(type);
 		
 		model.addAttribute("facilityDto", facilityDto);
+		model.addAttribute("selectedType", type);
 		
 		return nextPage;
 	}
@@ -48,11 +50,32 @@ public class FacilityController {
 	@GetMapping("/page")
 	@ResponseBody
     public Map<String, Object> getFacilities(	@RequestParam(value = "page", defaultValue = "1") int page, 
-            									@RequestParam(value = "size", defaultValue = "6") int size) {
-		log.info("Request Params - page: {}, size: {}", page, size);
-	    Map<String, Object> response = facilityService.getFacilities(page, size);
-	    log.info("Response: {}", response);
+            									@RequestParam(value = "size", defaultValue = "6") int size,
+            									@RequestParam(value = "type", required = false) String type) {
+		
+		log.info("Request Params - page: {}, size: {}, type: {}", page, size, type);
+		
+	    Map<String, Object> response = facilityService.getFacilities(page, size, type);
+	    
 	    return response;
+	    
     }
+	
+	@GetMapping("/detailView/{id}")
+	public String detailView(@PathVariable("id") String id, Model model) {
+		log.info("detailView() with id: {}", id);
+		
+		String nextPage = "facility/detail_view";
+	    
+	    FacilityDto facilityDto = facilityService.getFacilityById(id);
+	    if (facilityDto != null) {
+	        model.addAttribute("facilityDto", facilityDto);
+	    } else {
+	        // 시설이 없을 경우 예외 처리
+	        model.addAttribute("error", "Facility not found");
+	    }
+	    
+	    return nextPage; 
+	}
 
 }
