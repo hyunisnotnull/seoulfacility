@@ -51,12 +51,11 @@ public class FacilityController {
 	@ResponseBody
     public Map<String, Object> getFacilities(	@RequestParam(value = "page", defaultValue = "1") int page, 
             									@RequestParam(value = "size", defaultValue = "6") int size,
-            									@RequestParam(value = "type", required = false) String type,
-            									@RequestParam(value = "keyword", required = false) String keyword) {
+            									@RequestParam(value = "type", required = false) String type) {
 		
-		log.info("Request Params - page: {}, size: {}, type: {}, keyword: {}", page, size, type, keyword);
+		log.info("Request Params - page: {}, size: {}, type: {}, keyword: {}", page, size, type);
 		
-	    Map<String, Object> response = facilityService.getFacilities(page, size, type, keyword);
+	    Map<String, Object> response = facilityService.getFacilities(page, size, type);
 	    
 	    return response;
 	    

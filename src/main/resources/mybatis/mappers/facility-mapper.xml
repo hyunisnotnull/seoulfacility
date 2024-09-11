@@ -24,13 +24,6 @@
                 OR AREANM LIKE CONCAT('%', #{type}, '%')
             )
 	        </if>
-	        <if test="keyword != null and keyword != ''">
-	            AND (
-	                MINCLASSNM LIKE CONCAT('%', #{keyword}, '%')
-	                OR PLACENM LIKE CONCAT('%', #{keyword}, '%')
-	                OR AREANM LIKE CONCAT('%', #{keyword}, '%')
-	            )
-	        </if>
 	    </where>
         LIMIT #{offset}, #{size}
     </select>
@@ -45,13 +38,6 @@
                 OR PLACENM LIKE CONCAT('%', #{type}, '%')
                 OR AREANM LIKE CONCAT('%', #{type}, '%')
             )
-	        </if>
-	        <if test="keyword != null and keyword != ''">
-	            AND (
-	                MINCLASSNM LIKE CONCAT('%', #{keyword}, '%')
-	                OR PLACENM LIKE CONCAT('%', #{keyword}, '%')
-	                OR AREANM LIKE CONCAT('%', #{keyword}, '%')
-	            )
 	        </if>
 	    </where>
     </select>
