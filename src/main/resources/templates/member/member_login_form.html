@@ -28,15 +28,28 @@
         		<input type="text" name="u_m_id" placeholder="ID"><br>
 				<input type="password" name="u_m_pw" placeholder="비밀번호"><br>
 
-				<input type="reset" value="초기화">
 				<input type="button" value="로그인" onclick="memberLoginForm();">
-
-        	</form>
+			</form>
+				<br>
+				<p>
+	              	<a href="javascript:void(0)" onclick="findpassword()">비밀번호</a>
+	              	<button onclick="location.href='/member/create_account_form'">회원가입</button>
+				</p>
+        	
         </div>
+        
+        <script type="text/javascript">
+        function findid() {
+            var url = "/member/find_id_form";
+            window.open(url, "_blank1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
+        }
 
-		<div class="go_button">
-			<br> <br> 아직 회원이 아니신가요? <br> <a th:href="@{/member/create_account_form}">회원가입 화면으로 이동 </a>
-		</div>
+        function findpassword() {
+            var url = "/member/find_password_form";
+            window.open(url, "_blank1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
+        }
+		</script>
+
 	   </div>
     </section>
     

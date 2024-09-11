@@ -61,7 +61,7 @@ public class SecurityConfig {
 					log.info("[MEMBER LOGIN FAIL]");
 					log.info("Exception: {}", exception);
 					
-					response.sendRedirect("/member/member_login_form");
+					response.sendRedirect("/member/member_login_result");
 					
 				}));
 	    

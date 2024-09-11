@@ -63,6 +63,11 @@ public class MemberService {
 	public int memberModifyConfirm(MemberDto memberDto) {
 		log.info("memberModifyConfirm()");
 		
+		if (memberDto.getU_m_pw() != null && !memberDto.getU_m_pw().isEmpty()) {
+			String encodedPassword = passwordEncoder.encode(memberDto.getU_m_pw());
+	        memberDto.setU_m_pw(encodedPassword);
+		}
+		
 		int result = iMemberDao.updateMemberModify(memberDto);
 		
 		switch (result) {
