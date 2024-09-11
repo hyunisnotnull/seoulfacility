@@ -1,0 +1,70 @@
+<script th:fragment="js">
+
+$(document).ready(function() {
+    const pageSize = 6;
+    let currentPage = 1;
+    let totalItems = 0;
+    let totalPages = 0;
+
+    function loadData(page = 1) {
+        $.ajax({
+            url: `/api/pagedata?page=${page}&size=${pageSize}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                const facilities = response.items;
+                totalItems = response.totalItems;
+                totalPages = Math.ceil(totalItems / pageSize);
+                renderTable(facilities);
+                renderPagination();
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", status, error);
+                alert("데이터를 로드하는 데 실패했습니다.");
+            }
+        });
+    }
+
+    function renderTable(facilities) {
+        let rows = '';
+        facilities.forEach(item => {
+            rows += `<tr>
+                        <td><a href="/facility/detailView/${item.SVCID}">${item.SVCNM}</a></td>
+                        <td><a href="/facility/detailView/${item.SVCID}"><img class="facility-image" src="${item.IMGURL}" alt="시설 이미지"></a></td>
+                        <td>${item.TELNO}</td>
+                     </tr>`;
+        });
+        $('.facility-table tbody').html(rows);
+    }
+
+    function renderPagination() {
+        let paginationHtml = '';
+        if (currentPage > 1) {
+            paginationHtml += `<a href="#" data-page="${currentPage - 1}" class="pagination-button prev-button">이전</a>`;
+        }
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === currentPage) {
+                paginationHtml += `<span class="pagination-info">${i}</span>`;
+            } else {
+                paginationHtml += `<a href="#" data-page="${i}" class="pagination-button">${i}</a>`;
+            }
+        }
+        if (currentPage < totalPages) {
+            paginationHtml += `<a href="#" data-page="${currentPage + 1}" class="pagination-button next-button">다음</a>`;
+        }
+        $('#pagination').html(paginationHtml);
+    }
+
+    $('#pagination').on('click', 'a', function(e) {
+        e.preventDefault();
+        const page = $(this).data('page');
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            loadData(currentPage);
+        }
+    });
+
+    loadData(currentPage);
+});
+
+</script>

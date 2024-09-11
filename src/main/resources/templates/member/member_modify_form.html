@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title th:replace="~{include/title.html::title}"></title>
-<link rel="stylesheet" th:href="@{/css/facility/facility.css}">
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member/member_modify.css}">
 
 <script th:src="@{/js/member_modify_form.js}"></script>
 </head>
@@ -12,13 +14,16 @@
     <header th:replace="~{/include/header_nav_footer.html::header}"></header>
     
     <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+    
+    <article th:replace="~{/include/header_nav_footer.html::article}">
+	</article>
 
     <section>
-    	<div>
+    	<div id="section_wrap">
     		<h3>정보 수정</h3>
-    	</div>
+    	
         <div>
-        	<form 	th:action="@{/member/member_modify_confirm}" 
+        	<form th:action="@{/member/member_modify_confirm}" 
         			name="member_modify_form" 
         			method="post">
         		
@@ -41,6 +46,8 @@
 		
 		<div>
 			<a th:href="@{/member/member_delete_confirm}">delete account</a>
+		</div>
+		
 		</div>
     </section>
     
