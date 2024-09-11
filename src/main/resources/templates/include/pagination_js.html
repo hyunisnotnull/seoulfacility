@@ -1,27 +1,20 @@
 <script th:fragment="js">
 
-// 페이지, 타입 변수 정의
-const pageSize = 6;
-let currentPage = 1;
-let totalItems = 0;
-let totalPages = 0;
-let type = getQueryParam('type') || '';
-
-// 랜더링 시작
 $(document).ready(function() {
 	console.log('DOCUMENT READY');
-    
-	// 페이지 로드
-    loadData(currentPage, type);
-});
-    
- // Query Parameter 가져오기
+    const pageSize = 6;
+    let currentPage = 1;
+    let totalItems = 0;
+    let totalPages = 0;
+    let type = getQueryParam('type') || '';
+
+// Query Parameter 가져오기
 function getQueryParam(param) {
-	console.log('param : ', param);
+	console.log('param : ', param );
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
 }
-
+ 
 // Facility Home
 function loadData(page = 1, type = '') {
 	console.log('Loading data with type:', type);
@@ -151,4 +144,7 @@ $('#pagination').on('click', 'a', function(e) {
     }
 });
 
+// 페이지 로드
+loadData(currentPage, type);
+});
 </script>
