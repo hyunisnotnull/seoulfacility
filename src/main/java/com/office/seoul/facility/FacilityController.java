@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -44,10 +45,14 @@ public class FacilityController {
 		return nextPage;
 	}
 	
-	@GetMapping("/pagedata")
+	@GetMapping("/page")
+	@ResponseBody
     public Map<String, Object> getFacilities(	@RequestParam(value = "page", defaultValue = "1") int page, 
             									@RequestParam(value = "size", defaultValue = "6") int size) {
-        return facilityService.getFacilities(page, size);
+		log.info("Request Params - page: {}, size: {}", page, size);
+	    Map<String, Object> response = facilityService.getFacilities(page, size);
+	    log.info("Response: {}", response);
+	    return response;
     }
 
 }

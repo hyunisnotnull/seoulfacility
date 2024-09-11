@@ -10,8 +10,8 @@ public interface IFacilityDao {
 
 	public List<FacilityDto> getAllFacility();
 	
-	List<FacilityDto> getFacilities(Map<String, Object> params);
+	public List<FacilityDto> getFacilities(Map<String, Object> params);
 	
-	int getTotalFacilitiesCount();
+	public int getTotalFacilitiesCount();
 
 }

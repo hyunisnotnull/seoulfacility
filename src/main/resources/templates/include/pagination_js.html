@@ -1,0 +1,100 @@
+<script th:fragment="js">
+
+$(document).ready(function() {
+	console.log('DOCUMENT READY');
+    const pageSize = 6;
+    let currentPage = 1;
+    let totalItems = 0;
+    let totalPages = 0;
+
+// Facility Home
+function loadData(page = 1) {
+    $.ajax({
+        url: `/facility/page?page=${page}&size=${pageSize}`,
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+        	console.log('AJAX Response:', response);
+            const facilities = response.items;
+            totalItems = response.totalItems;
+            totalPages = Math.ceil(totalItems / pageSize);
+            renderTable(facilities);
+            renderPagination();
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error:", status, error);
+            alert("데이터를 로드하는 데 실패했습니다.");
+        }
+    });
+}
+
+// Table(tbody UI 생성)
+function renderTable(facilities) {
+	console.log('Facilities Data:', facilities);
+    let rows = '';
+    facilities.forEach(item => {
+    	console.log('Rendering Item:', item);
+        rows += `<tr>
+                    <td><a href="/facility/detailView/${item.svcid}">${item.svcnm}</a></td>
+                    <td><a href="/facility/detailView/${item.svcid}"><img class="facility-image" src="${item.imgurl}" alt="시설 이미지"></a></td>
+                    <td>${item.telno}</td>
+                 </tr>`;
+    });
+    $('.facility-table tbody').html(rows);
+}
+
+// 페이지네이션 랜더링 
+function renderPagination() {
+    let paginationHtml = '';
+    
+    // 맨 앞, 맨 뒤 버튼
+    if (currentPage > 1) {
+        paginationHtml += `<a href="#" data-page="1" class="pagination-button first-button">&lt;&lt;</a>`;
+        paginationHtml += `<a href="#" data-page="${currentPage - 1}" class="pagination-button prev-button">&lt;</a>`;
+    }
+
+    // 페이지 번호
+    const pageRange = 5; // 항상 표시할 페이지 버튼 수
+    const halfRange = Math.floor(pageRange / 2);
+    let startPage = Math.max(1, currentPage - halfRange);
+    let endPage = Math.min(totalPages, currentPage + halfRange);
+
+    // 페이지가 부족할 경우 앞쪽 또는 뒤쪽으로 페이지 범위를 조정
+    if (endPage - startPage < pageRange - 1) {
+        startPage = Math.max(1, endPage - pageRange + 1);
+        endPage = Math.min(totalPages, startPage + pageRange - 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === currentPage) {
+            paginationHtml += `<span class="pagination-info">${i}</span>`;
+        } else {
+            paginationHtml += `<a href="#" data-page="${i}" class="pagination-button">${i}</a>`;
+        }
+    }
+
+    // "다음" 버튼 및 맨 뒤 버튼
+    if (currentPage < totalPages) {
+        paginationHtml += `<a href="#" data-page="${currentPage + 1}" class="pagination-button next-button">&gt;</a>`;
+        paginationHtml += `<a href="#" data-page="${totalPages}" class="pagination-button last-button">&gt;&gt;</a>`;
+    }
+    
+    paginationHtml += `<div class="pagination-status">현재 페이지: ${currentPage} / 총 ${totalPages} 페이지</div>`;
+
+    $('#pagination').html(paginationHtml);
+}
+
+// 페이지 버튼 클릭 이벤트 핸들러
+$('#pagination').on('click', 'a', function(e) {
+    e.preventDefault();
+    const page = $(this).data('page');
+    if (page >= 1 && page <= totalPages) {
+        currentPage = page;
+        loadData(currentPage);
+    }
+});
+	// 페이지 로드
+    loadData(currentPage);
+});
+
+</script>

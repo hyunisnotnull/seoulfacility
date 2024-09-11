@@ -9,13 +9,13 @@
 	</select>
 	
 	<!-- 페이지별 데이터 조회 -->
-    <select id="getFacilities" parameterType="map" resultType="com.office.seoul.facility.FacilityDto">
+    <select id="getFacilities" parameterType="Map" resultType="com.office.seoul.facility.FacilityDto">
         SELECT * FROM TBL_FACILITY
         LIMIT #{offset}, #{size}
     </select>
     
     <!-- 전체 시설 수 조회 -->
-    <select id="getTotalFacilitiesCount" resultType="int">
+    <select id="getTotalFacilitiesCount" resultType="Integer">
         SELECT COUNT(*) FROM TBL_FACILITY
     </select>
 
