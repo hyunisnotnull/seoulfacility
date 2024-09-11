@@ -1,29 +1,32 @@
 <script th:fragment="js">
 
 $(document).ready(function() {
-	console.log('DOCUMENT READY');
+    console.log('DOCUMENT READY');
+    
+    // 변수 선언
     const pageSize = 6;
     let currentPage = 1;
     let totalItems = 0;
     let totalPages = 0;
     let type = getQueryParam('type') || '';
+    let keyword = ''; 
 
 // Query Parameter 가져오기
 function getQueryParam(param) {
-	console.log('param : ', param );
+    console.log('param : ', param );
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
 }
- 
+
 // Facility Home
-function loadData(page = 1, type = '') {
-	console.log('Loading data with type:', type);
+function loadData(page = 1, type = '', keyword = '') {
+    console.log('Loading data with type:', type, 'and keyword:', keyword);
     $.ajax({
-        url: `/facility/page?page=${page}&size=${pageSize}&type=${type}`,
+        url: `/facility/page?page=${page}&size=${pageSize}&type=${type}&keyword=${keyword}`,
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-        	console.log('AJAX Response:', response);
+            console.log('AJAX Response:', response);
             const facilities = response.items;
             totalItems = response.totalItems;
             totalPages = Math.ceil(totalItems / pageSize);
@@ -39,20 +42,18 @@ function loadData(page = 1, type = '') {
 
 // Table(tbody UI 생성)
 function renderTable(facilities, totalItems) {
-	console.log('Facilities Data:', facilities);
-	$('div.result_count span').text(totalItems);
+    console.log('Facilities Data:', facilities);
+    $('div.result_count span').text(totalItems);
     let rows = '<ul class="show_list">';
     let item_count = 0;
     facilities.forEach(item => {
-    	
-    	
-    rows += `<a href="/facility/detailView/${item.svcid}"><li class="result_wrap">
-        <div class="img_box">
-        <img class="thumb" src="${item.imgurl}"  alt=""> <br>
-            <div class="ib_top">
-              <span class="${item.svcstatnm == "접수중" ? 'status1' : 'status2'}">${item.svcstatnm}</span>
-              <span class="${item.payatnm == "무료" ? 'type1' : 'type2'}">${item.payatnm}</span>
-            </div>
+        rows += `<a href="/facility/detailView/${item.svcid}"><li class="result_wrap">
+            <div class="img_box">
+            <img class="thumb" src="${item.imgurl}"  alt=""> <br>
+                <div class="ib_top">
+                  <span class="${item.svcstatnm == "접수중" ? 'status1' : 'status2'}">${item.svcstatnm}</span>
+                  <span class="${item.payatnm == "무료" ? 'type1' : 'type2'}">${item.payatnm}</span>
+                </div>
        </div>  
         
        <div class="text_wrap">
@@ -69,28 +70,12 @@ function renderTable(facilities, totalItems) {
        
         </div>  
 
-     </li></a>`
+     </li></a>`;
      item_count++;
-     if (item_count == 3 ) rows += `</ul><ul class="show_list">`;  	
-    	
-    	
-    	
-   /*  	
-    	console.log('Rendering Item:', item);
-        rows += `<tr>
-                    <td><a href="/facility/detailView/${item.svcid}">${item.svcnm}</a></td>
-                    <td><a href="/facility/detailView/${item.svcid}"><img class="facility-image" src="${item.imgurl}" alt="시설 이미지"></a></td>
-                    <td>${item.telno}</td>
-                 </tr>`; */
-                 
-                 
-    }    );
+     if (item_count == 3) rows += `</ul><ul class="show_list">`;     
+    });
     rows += `</ul>`;
-
     $('div.s_result').html(rows);
-    
-    /* <div class="s_result">
-    <ul class="show_list"> */
 }
 
 // 페이지네이션 랜더링 
@@ -140,11 +125,23 @@ $('#pagination').on('click', 'a', function(e) {
     const page = $(this).data('page');
     if (page >= 1 && page <= totalPages) {
         currentPage = page;
-        loadData(currentPage, type);
+        loadData(currentPage, type, keyword);
     }
 });
 
+// 검색 폼 제출 이벤트 핸들러
+$('#searchForm').on('submit', function(e) {
+    e.preventDefault(); 
+    type = $('#searchArea').val(); 
+    keyword = $('#searchKeyword').val().trim();
+    currentPage = 1; 
+    loadData(currentPage, type, keyword);
+    
+    $('#searchKeyword').val('');
+});
+
 // 페이지 로드
-loadData(currentPage, type);
+loadData(currentPage, type, keyword);
+
 });
 </script>

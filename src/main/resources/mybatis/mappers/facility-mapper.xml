@@ -24,12 +24,19 @@
                 OR AREANM LIKE CONCAT('%', #{type}, '%')
             )
 	        </if>
+	        <if test="keyword != null and keyword != ''">
+	            AND (
+	                MINCLASSNM LIKE CONCAT('%', #{keyword}, '%')
+	                OR PLACENM LIKE CONCAT('%', #{keyword}, '%')
+	                OR AREANM LIKE CONCAT('%', #{keyword}, '%')
+	            )
+	        </if>
 	    </where>
         LIMIT #{offset}, #{size}
     </select>
     
     <!-- 전체 시설 수 조회 -->
-    <select id="getTotalFacilitiesCount" parameterType="String" resultType="Integer">
+    <select id="getTotalFacilitiesCount" parameterType="Map" resultType="Integer">
         SELECT COUNT(*) FROM TBL_FACILITY
         <where>
 	        <if test="type != null and type != ''">
@@ -38,6 +45,13 @@
                 OR PLACENM LIKE CONCAT('%', #{type}, '%')
                 OR AREANM LIKE CONCAT('%', #{type}, '%')
             )
+	        </if>
+	        <if test="keyword != null and keyword != ''">
+	            AND (
+	                MINCLASSNM LIKE CONCAT('%', #{keyword}, '%')
+	                OR PLACENM LIKE CONCAT('%', #{keyword}, '%')
+	                OR AREANM LIKE CONCAT('%', #{keyword}, '%')
+	            )
 	        </if>
 	    </where>
     </select>

@@ -23,17 +23,19 @@ public class FacilityService {
 		return iFacilityDao.getAllFacility(type);
 	}
 	
-	 public Map<String, Object> getFacilities(int page, int size, String type) {
+	 public Map<String, Object> getFacilities(int page, int size, String type, String keyword) {
 	        int offset = (page - 1) * size;
 	        Map<String, Object> params = new HashMap<>();
 	        params.put("offset", offset);
 	        params.put("size", size);
 	        params.put("type", type);
+	        params.put("keyword", keyword);
 	        
 	        log.info("type : {}", type);
+	        log.info("keyword : {}", keyword);
 
 	        List<FacilityDto> facilities = iFacilityDao.getFacilities(params);
-	        int totalItems = iFacilityDao.getTotalFacilitiesCount(type);
+	        int totalItems = iFacilityDao.getTotalFacilitiesCount(params);
 
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("items", facilities);
