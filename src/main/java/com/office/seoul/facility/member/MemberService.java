@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -100,13 +101,28 @@ public class MemberService {
 		return iMemberDao.deleteMemberByMId(loginedMemberID);
 	}
 
+	public MemberDto findIdConfirm(MemberDto memberDto) {
+		log.info("sendNewPasswordByMail()");
+		
+		MemberDto dto = iMemberDao.selectForFindId(memberDto.getU_m_name(), 
+	            								memberDto.getU_m_mail());
+		
+		if (dto != null) {
+	        return dto;
+	        
+	    } else {
+	        return null;
+	        
+	    }
+	}
+
 	public int findPasswordConfirm(MemberDto memberDto) {
 		log.info("findPasswordConfirm()");
 	    
 	    MemberDto dto = iMemberDao.selectForFindPassword(
-	            memberDto.getU_m_id(),
-	            memberDto.getU_m_name(),
-	            memberDto.getU_m_mail());
+										            memberDto.getU_m_id(),
+										            memberDto.getU_m_name(),
+										            memberDto.getU_m_mail());
 		
 		int result = 0;
 		if (dto != null) {
@@ -119,39 +135,22 @@ public class MemberService {
 				sendNewPasswordByMail(memberDto.getU_m_mail(), newPassword);
 			
 		}
-		log.info("result : {}", result);
+
 		return result;
 
 	}
 
 	private String createNewPassword() {
-		log.info("createNewPassword()");
-		
-		char[] chars = new char[] {
-				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
-				'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 
-				'u', 'v', 'w', 'x', 'y', 'z'
-				};
-		
-		StringBuffer stringBuffer = new StringBuffer();
-		SecureRandom secureRandom = new SecureRandom();
-		secureRandom.setSeed(new Date().getTime());
-		
-		int index = 0;
-		int length = chars.length;
-		for (int i = 0; i < 8; i++) {
-			index = secureRandom.nextInt(length);
-			
-			if (index % 2 == 0) {
-				stringBuffer.append(String.valueOf(chars[index]).toUpperCase());
-			} else {
-				stringBuffer.append(String.valueOf(chars[index]).toLowerCase());
-			}
-		}
-		
-		return stringBuffer.toString();
-		
+	    log.info("createNewPassword()");
+	    
+	    // UUID를 생성하고 문자열로 변환
+	    String uuid = UUID.randomUUID().toString();
+	    
+	    // UUID에서 하이픈을 제거
+	    String password = uuid.replace("-", "");
+
+	    // 비밀번호 길이 조절
+	    return password.substring(0, 8);
 	}
 
 	private void sendNewPasswordByMail(String toMailAddr, String newPassword) {
@@ -162,7 +161,7 @@ public class MemberService {
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-				mimeMessageHelper.setTo("wkdwlsdjs@gmail.com");
+				mimeMessageHelper.setTo(toMailAddr);
 				mimeMessageHelper.setSubject("[공공예약서비스] 새 비밀번호 안내입니다.");
 				mimeMessageHelper.setText("새 비밀번호 : " + newPassword, true);
 				
@@ -173,5 +172,6 @@ public class MemberService {
 		javaMailSenderImpl.send(mimeMessagePreparator);
 		
 	}
+
 	
 }

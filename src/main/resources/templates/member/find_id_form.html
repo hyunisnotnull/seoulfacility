@@ -8,19 +8,17 @@
 <body>
     <section>
    		<div>
-			<h3>비밀번호 찾기</h3>
-			<p>(입력된 정보로 임시 비밀번호가 전송됩니다.)</p>
+			<h3>아이디 찾기</h3>
+            <p>(입력된 정보로 아이디가 조회됩니다.)</p>
 		</div>
 		<div>
-			<form 	th:action="@{/member/find_password_confirm}" 
-					name="find_password_form" 
+			<form 	th:action="@{/member/find_id_confirm}" 
+					name="find_id_form" 
 					method="post">
 				
-				<input type="text" name="u_m_id" placeholder="아이디"> <br>
 				<input type="text" name="u_m_name" placeholder="이름"> <br>
 				<input type="text" name="u_m_mail" placeholder="메일 주소"> <br>
-				<input type="button" value="비밀번호 찾기" onclick="findPassword();">
-				<input type="reset" value="초기화">
+				<input type="button" value="아이디 찾기" onclick="findId();">
 				
 			</form>
 		</div>

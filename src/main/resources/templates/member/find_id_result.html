@@ -10,9 +10,13 @@
 </head>
 <body>
     <section>
-    	<div>
-    		<p th:if="${isUpdate}">메일이 발송 되었습니다. 확인해 주세요.</p>
-            <p th:if="${!isUpdate}">메일 발송 실패</p>
+		<div>
+			<p th:if="${isUpdate}">
+            	<span th:text="${name}"></span>님의 아이디는 '<span th:text="${userId}"></span>' 입니다.
+            </p>
+            <p th:if="${!isUpdate}">
+                입력하신 정보와 일치하는 회원이 없습니다.
+            </p>
     	</div>
     </section>
 </body>
