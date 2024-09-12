@@ -100,7 +100,12 @@
         <li class="right_box">
            <ul>
             <li><b>대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 상 </b> : <span th:text="${facilityDto.USETGTINFO}"></span></li>
-            <li><b>장&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 소 </b> : <div th:text="${facilityDto.SVCNM}"></div></li>
+            <li><b>장&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 소 </b> : 
+            	<span class="line2" th:if="${facilityDto.SVCNM.length >= 32}" th:text="${facilityDto.SVCNM}" />
+            	<span class="line1"  th:unless="${facilityDto.SVCNM.length >= 32}" th:text="${facilityDto.SVCNM}" />
+            
+          	</li>
+
             <li><b>이용기간 </b> : <span th:text="${facilityDto.SVCOPNBGNDT}"></span></li>
             <li><b>접수기간 </b> : <span th:text="${facilityDto.RCPTBGNDT}"></span> </li>
             <li><b>선별방법 </b> : <span>선착순</span></li>
@@ -112,7 +117,9 @@
       
             </li>
             <li><b>예약방법 </b> : <span>인터넷</span></li>
-            <li><b>문의전화 </b> : <span th:text="${facilityDto.TELNO}"></span></li>
+            <li><b>문의전화 </b> : 
+            <span class="line2" th:if="${facilityDto.TELNO.length >= 33}" th:text="${facilityDto.TELNO}" />
+            <span class="line1"  th:unless="${facilityDto.TELNO.length >= 33}" th:text="${facilityDto.TELNO}" />
            </ul>
             <button class="reservation_apply">예약하기</button>
         </li>

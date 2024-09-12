@@ -5,7 +5,7 @@
 <title th:replace="~{include/title.html::title}"></title>
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
-<link rel="stylesheet" th:href="@{/css/member/member_modify.css}">
+<link rel="stylesheet" th:href="@{/css/member/member_result.css}">
 
 </head>
 <body>
@@ -17,13 +17,13 @@
     <article th:replace="~{/include/header_nav_footer.html::article}">
 	</article>
 
-    <section>
+    <section id="section_wrap">
     	<div>
     		<p>회원탈퇴 실패</p>
     	</div>
 
 
-		<div>
+		<div class="go_button">
 			<a th:href="@{/member/member_delete_confirm}">다시 삭제하기</a>
 		</div>
 

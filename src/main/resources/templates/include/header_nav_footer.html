@@ -48,28 +48,27 @@
 
  <article th:fragment="article">
         <div id="article_wrap">
-            <div>
+            <div class="btns">
                 <ul class="btns1">
-                    <!-- <li><a href="#">전체보기</a></li> -->
-                    <li><a th:href="@{/facility/home(type='축구장')}">축구장</a></li>
-                    <li><a th:href="@{/facility/home(type='풋살장')}">풋살장</a></li>
-	                <li><a th:href="@{/facility/home(type='족구장')}">족구장</a></li>
-	                <li><a th:href="@{/facility/home(type='야구장')}">야구장</a></li>
-	                <li><a th:href="@{/facility/home(type='테니스장')}">테니스장</a></li>
-	                <li><a th:href="@{/facility/home(type='농구장')}">농구장</a></li>
+                    <li class="soccer" ><a  th:href="@{/facility/home(type='축구장')}">축구장</a></li>
+                    <li class="futsal"><a th:href="@{/facility/home(type='풋살장')}">풋살장</a></li>
+	                <li class="foot"><a th:href="@{/facility/home(type='족구장')}">족구장</a></li>
+	                <li class="baseball"><a th:href="@{/facility/home(type='야구장')}">야구장</a></li>
+	                <li class="tennis"><a th:href="@{/facility/home(type='테니스장')}">테니스장</a></li>
+	                <li class="basket"><a  th:href="@{/facility/home(type='농구장')}">농구장</a></li>
                 </ul>
-            </div> 
-            <div>
                 <ul class="btns2">    
-	                <li><a th:href="@{/facility/home(type='배구장')}">배구장</a></li>
-                    <li><a th:href="@{/facility/home(type='다목적경기장')}">다목적경기장</a></li>
-	                <li><a th:href="@{/facility/home(type='배드민턴장')}">배드민턴장</a></li>
-	                <li><a th:href="@{/facility/home(type='탁구장')}">탁구장</a></li>
-	                <li><a th:href="@{/facility/home(type='교육시설')}">교육시설</a></li>
-	                <li><a th:href="@{/facility/home(type='골프장')}">골프장</a></li>
+	                <li class="volley" ><a th:href="@{/facility/home(type='배구장')}">배구장</a></li>
+                    <li class="multi"><a th:href="@{/facility/home(type='다목적경기장')}">다목적경기장</a></li>
+	                <li class="badminton"><a th:href="@{/facility/home(type='배드민턴장')}">배드민턴장</a></li>
+	                <li class="table"><a th:href="@{/facility/home(type='탁구장')}">탁구장</a></li>
+	                <li class="study"><a th:href="@{/facility/home(type='교육시설')}">교육시설</a></li>
+	                <li class="golf"><a th:href="@{/facility/home(type='골프장')}">골프장</a></li>
             </ul>
-            </div> 
+           </div> 
      </div>
+     
+     
 
     </article>
 

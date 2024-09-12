@@ -58,8 +58,8 @@ nav #nav_wrap a {
 
   article {
     width: 100%;
-    height: 120px;
-	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban01.png");
+    height: 140px;
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban.png");
 	background-repeat: no-repeat;
 	background-color: #f1f1f1;
 
@@ -69,7 +69,7 @@ nav #nav_wrap a {
   article #article_wrap {
 	width: 1300px;
 	margin: 0 auto;
-	padding-top: 10px;
+	padding-top: 20px;
 	}
 
 	article #article_wrap div ul {
@@ -96,21 +96,99 @@ nav #nav_wrap a {
   }
  
 
-  article div ul li a:hover {
+ article div ul li a:hover {
 	background-color: #378bee;
 	border: 1px solid #378bee;
 	color: #fff;
-	transition: 0.8s;
+/* 	transition: 0.9s; */
   }
+
+
+
+
+
+/* 단추 마우스 오버시 이미지 변경  */
+
+
+
+  article:has(.soccer:hover) {
+   background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban00.png");
+   transition: 0.5s ease-in-out;
+
+  }
+
+   
+  article:has(.futsal:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban02.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+
+  article:has(.foot:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban03.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.baseball:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban04.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.tennis:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban05.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.basket:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban06.png");
+    transition: 0.5s ease-in-out;
+
+  }
+  article:has(.volley:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban07.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.multi:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban08.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.badminton:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban09.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.table:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban10.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.study:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban11.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.golf:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban12.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+
+
+
+
 
 
 
 /* FOOTER CSS  */
 
  footer {
+
 	width: 100%;
 	padding: 10px 0;
 	background-color: #363636;
+	bottom: 0;
 }
 
  footer #footer_wrap {

@@ -62,8 +62,6 @@
 
 
 
-
-
  section #section_wrap .left_box .thumb img {
 	width: 100%;
 	height: 100%;
@@ -124,19 +122,43 @@
  }
 
  section #section_wrap .right_box ul li {
-
 	border-bottom: 1px dotted #bebebe;
 	font-size: 1.1em;
 	line-height: 3.7em;
 	padding-left: 30px; 
-	
+	 word-wrap: break-word; /* 단어가 길면 강제 줄바꿈 */
+    overflow: hidden; /* 넘치는 텍스트 숨김 */
 
 }
 
-section #section_wrap .right_box ul li:nth-child(2) div {
+section #section_wrap .right_box ul li:nth-child(2) span {
+	width: 430px;
+	padding: 0 5px;
+	float: right;
 	display: inline-block;
 	line-height: 1.9em;
+	
 }
+
+section #section_wrap .right_box ul li:nth-child(2) span.line1 {
+	
+	line-height: 3.7em;
+}
+
+section #section_wrap .right_box ul li:nth-child(10) span {
+	width: 430px;
+	padding: 0 5px;
+	float: right;
+	display: inline-block;
+	line-height: 1.9em;
+	
+}
+
+section #section_wrap .right_box ul li:nth-child(10) span.line1 {
+	
+	line-height: 3.7em;
+}
+
 
 
 section #section_wrap .right_box .reservation_apply {
