@@ -23,6 +23,20 @@ $(document).ready(function() {
     availableTimes.forEach(time => {
         timeSelect.append(new Option(time, time));
     });
+
+    // 예약 확정 버튼 핸들러
+    $('#time_select_form').on('submit', function(event) {
+        console.log('FORM SUBMIT CLICK');
+
+        
+        const selectedTime = $('#selectedTime').val();
+
+        if (!selectedTime) {
+            alert('시간을 선택해 주세요.');
+            event.preventDefault(); 
+            return;
+        }
+    });
 });
 
 </script>
