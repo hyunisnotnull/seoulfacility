@@ -40,7 +40,7 @@ public class HomeController {
 		
 		Map<String, Object> options = new HashMap<>();
 		options.put("areas", facilityService.getAreas());
-		options.put("categories", facilityService.getCategories());
+		options.put("categories", facilityService.getCategoriesByArea(area));
 		options.put("results", facilityService.getResults(area, category));
 		
 		log.info("area : {}", area);
