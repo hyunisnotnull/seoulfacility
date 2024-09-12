@@ -1,9 +1,5 @@
 package com.office.seoul.facility.member;
 
-import java.security.SecureRandom;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;

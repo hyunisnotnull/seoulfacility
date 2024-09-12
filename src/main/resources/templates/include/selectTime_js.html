@@ -1,10 +1,24 @@
-<script th:fragment="js">
+<script th:fragment="js" th:inline="javascript">
 
 // 랜더링 시작
 $(document).ready(function() {
-	console.log('DOCUMENT READY');
-	
-	
-	
+    console.log('DOCUMENT READY');
+
+    // 서버에서 동적으로 전달된 데이터로 시간 옵션을 생성합니다.
+    const allTimes = /*[[${allTimes}]]*/ [];
+    const reservedTimes = /*[[${reservedTimes} != null ? reservedTimes : '[]']]*/ [];
+
+    console.log('allTimes', allTimes);
+    console.log('reservedTimes', reservedTimes);
+
+    // 예약되지 않은 시간 목록을 필터링합니다.
+    const availableTimes = allTimes.filter(time => !reservedTimes.includes(time));
+
+    // 선택 박스에 시간 옵션을 추가합니다.
+    const timeSelect = $('#selectedTime');
+    availableTimes.forEach(time => {
+        timeSelect.append(new Option(time, time));
+    });
 });
+
 </script>

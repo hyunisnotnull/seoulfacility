@@ -42,23 +42,50 @@ public class ReservationController {
 	
 	@PostMapping("/select")
     public String select(@RequestParam("facilityId") String facilityId,
-                          @RequestParam("userId") String userId,
-                          @RequestParam("selectedDate") String selectedDate,
-                          Model model) {
-        log.info("reserve() - facilityId: {}, userId: {}, selectedDate: {}", facilityId, userId, selectedDate);
+                         @RequestParam("userId") String userId,
+                         @RequestParam("selectedDate") String selectedDate,
+                         Model model) {
+        log.info("select() - facilityId: {}, userId: {}, selectedDate: {}", facilityId, userId, selectedDate);
         
         String nextPage = "reservation/select";
-        
-        List<String> availableTimes = reservationService.getAvailableTime(facilityId, selectedDate);
         
         model.addAttribute("facilityId", facilityId);
         model.addAttribute("userId", userId);
         model.addAttribute("selectedDate", selectedDate);
-        model.addAttribute("availableTimes", availableTimes);
+        
+        // 예약된 시간 목록과 전체 시간 목록을 가져와서 모델에 추가
+        List<String> reservedTimes = reservationService.getReservedTimes(facilityId, selectedDate);
+        List<String> allTimes = reservationService.getAllTimes();
+        
+        log.info("select222() - availableTimes: {}, allTimes: {}", reservedTimes, allTimes);
+        
+        model.addAttribute("availableTimes", reservedTimes);
+        model.addAttribute("allTimes", allTimes);
         
         return nextPage;
     }
 	
-	
+	@PostMapping("/confirm")
+	public String confirm(@RequestParam("facilityId") String facilityId,
+	                      @RequestParam("userId") String userId,
+	                      @RequestParam("selectedDate") String selectedDate,
+	                      @RequestParam("selectedTime") String selectedTime,
+	                      Model model) {
+	    log.info("confirm() - facilityId: {}, userId: {}, selectedDate: {}, selectedTime: {}", facilityId, userId, selectedDate, selectedTime);
+	    
+	    String nextPage = "reservation/confirm";
+
+	    // 예약 정보 저장
+	    boolean isSaved = reservationService.saveReservation(facilityId, userId, selectedDate, selectedTime);
+
+	    // 모델에 추가할 데이터 설정
+	    model.addAttribute("facilityId", facilityId);
+	    model.addAttribute("userId", userId);
+	    model.addAttribute("selectedDate", selectedDate);
+	    model.addAttribute("selectedTime", selectedTime);
+	    model.addAttribute("isSaved", isSaved); 
+
+	    return nextPage; 
+	}
 
 }
