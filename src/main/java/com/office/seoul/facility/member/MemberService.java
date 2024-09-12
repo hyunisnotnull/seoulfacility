@@ -1,8 +1,17 @@
 package com.office.seoul.facility.member;
 
+import java.security.SecureRandom;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import jakarta.mail.internet.MimeMessage;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -16,11 +25,13 @@ public class MemberService {
 	
 	final private IMemberDao iMemberDao;
 	final private PasswordEncoder passwordEncoder;
+	final private JavaMailSenderImpl javaMailSenderImpl;
 	
 	
-	public MemberService(IMemberDao iMemberDao, PasswordEncoder passwordEncoder) {
+	public MemberService(IMemberDao iMemberDao, PasswordEncoder passwordEncoder, JavaMailSenderImpl javaMailSenderImpl) {
 		this.iMemberDao = iMemberDao;
 		this.passwordEncoder = passwordEncoder;
+		this.javaMailSenderImpl = javaMailSenderImpl;
 	
 	}
 
@@ -89,5 +100,78 @@ public class MemberService {
 		return iMemberDao.deleteMemberByMId(loginedMemberID);
 	}
 
+	public int findPasswordConfirm(MemberDto memberDto) {
+		log.info("findPasswordConfirm()");
+	    
+	    MemberDto dto = iMemberDao.selectForFindPassword(
+	            memberDto.getU_m_id(),
+	            memberDto.getU_m_name(),
+	            memberDto.getU_m_mail());
+		
+		int result = 0;
+		if (dto != null) {
+			
+			final String newPassword = createNewPassword();
+			// 비밀번호 암호화
+			String encodedPassword = passwordEncoder.encode(newPassword);
+            result = iMemberDao.updatePassword(memberDto.getU_m_id(), encodedPassword);
+			if (result > 0) 
+				sendNewPasswordByMail(memberDto.getU_m_mail(), newPassword);
+			
+		}
+		log.info("result : {}", result);
+		return result;
+
+	}
+
+	private String createNewPassword() {
+		log.info("createNewPassword()");
+		
+		char[] chars = new char[] {
+				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
+				'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 
+				'u', 'v', 'w', 'x', 'y', 'z'
+				};
+		
+		StringBuffer stringBuffer = new StringBuffer();
+		SecureRandom secureRandom = new SecureRandom();
+		secureRandom.setSeed(new Date().getTime());
+		
+		int index = 0;
+		int length = chars.length;
+		for (int i = 0; i < 8; i++) {
+			index = secureRandom.nextInt(length);
+			
+			if (index % 2 == 0) {
+				stringBuffer.append(String.valueOf(chars[index]).toUpperCase());
+			} else {
+				stringBuffer.append(String.valueOf(chars[index]).toLowerCase());
+			}
+		}
+		
+		return stringBuffer.toString();
+		
+	}
+
+	private void sendNewPasswordByMail(String toMailAddr, String newPassword) {
+		log.info("sendNewPasswordByMail()");
+		
+		final MimeMessagePreparator mimeMessagePreparator = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				mimeMessageHelper.setTo("wkdwlsdjs@gmail.com");
+				mimeMessageHelper.setSubject("[공공예약서비스] 새 비밀번호 안내입니다.");
+				mimeMessageHelper.setText("새 비밀번호 : " + newPassword, true);
+				
+			}
+			
+		};
+		
+		javaMailSenderImpl.send(mimeMessagePreparator);
+		
+	}
 	
 }

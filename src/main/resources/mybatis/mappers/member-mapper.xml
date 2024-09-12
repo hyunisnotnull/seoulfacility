@@ -70,5 +70,28 @@
 	
 	</delete>
 
+	<select id="selectForFindPassword" 
+			parameterType="map" 
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT * FROM 
+			TBL_USER_MEMBER 
+		WHERE 
+			U_M_ID = #{u_m_id} AND U_M_NAME = #{u_m_name} 
+			AND U_M_MAIL = #{u_m_mail}
+	
+	</select>
+	
+	<update id="updatePassword" 
+			parameterType="map">
+	
+		UPDATE
+			TBL_USER_MEMBER 
+		SET 
+			U_M_PW = #{encodedPassword}, U_M_MOD_DATE = NOW() 
+		WHERE 
+			U_M_ID = #{u_m_id}
+	
+	</update>
 
 </mapper>
