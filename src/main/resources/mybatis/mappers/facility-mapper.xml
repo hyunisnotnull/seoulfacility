@@ -52,10 +52,12 @@
         SELECT DISTINCT AREANM FROM TBL_FACILITY
     </select>
 
-    <select id="getCategories" resultType="String">
+    <select id="getCategoriesByArea" parameterType="String" resultType="String">
         SELECT DISTINCT MINCLASSNM FROM TBL_FACILITY
+        WHERE AREANM = #{area}
     </select>
 
+    <!-- 지역 및 카테고리 기반 결과 조회 -->
     <select id="getResults" parameterType="Map" resultType="String">
         SELECT DISTINCT PLACENM FROM TBL_FACILITY
         <where>

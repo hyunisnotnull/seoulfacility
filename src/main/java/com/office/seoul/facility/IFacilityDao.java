@@ -18,7 +18,7 @@ public interface IFacilityDao {
 
 	public List<String> getAreas();
 
-	public List<String> getCategories();
+	public List<String> getCategoriesByArea(String area);
 
 	public List<String> getResults(Map<String, Object> params);
 
