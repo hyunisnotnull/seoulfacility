@@ -28,6 +28,8 @@ function loadData(page = 1, type = '') {
 	isLoading = true;		// 로딩 시작	
 	
     console.log('Loading data with type:', type);
+	$("a:contains(" + type + ")").css("background-color","#378bee")
+	$("a:contains(" + type + ")").css("color","#fff")
     
     $.ajax({
         url: `/facility/page?page=${page}&size=${pageSize}&type=${type}`,
@@ -74,7 +76,7 @@ function renderTable(facilities, totalItems) {
     let item_count = 0;
     
     facilities.forEach(item => {
-        rows += `<a href="/facility/detailView/${item.svcid}"><li class="result_wrap">
+        rows += `<li class="result_wrap"><a href="/facility/detailView/${item.svcid}">
             <div class="img_box">
 	            <img class="thumb" src="${item.imgurl}"  alt=""> <br>
 	                <div class="ib_top">
@@ -94,11 +96,11 @@ function renderTable(facilities, totalItems) {
 		           <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_date2.png" width="16px" alt=""> <span> 이용기간 :</span> ${item.svcopnbgndt}</li> 
 		       </ul> 
 	       <br>
-	       <a class="btn" href="/facility/detailView/${item.svcid}">상세보기 + </a><br>
+	      <input type="button" class="btn" value="상세보기 + "> 
        
        </div>  
 
-     </li></a>`;
+       </a></li> `;
      
      item_count++;
      
@@ -173,7 +175,7 @@ $('#searchForm').on('submit', function(e) {
     $('#searchKeyword').val('');
 });
 
-<<<<<<< HEAD
+
 
 
 
@@ -181,13 +183,9 @@ $('#searchForm').on('submit', function(e) {
 
 
 
-
-
-</script>
-=======
-// 페이지 로드
 loadData(currentPage, type);
 
 });
+
+
 </script>
->>>>>>> a54c218d13d945147ab6894b6d15f037a9c8a826

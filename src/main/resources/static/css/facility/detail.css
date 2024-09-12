@@ -177,4 +177,65 @@ section #section_wrap .right_box .reservation_apply {
 }
 
 
+ /* 탭 css  */
 
+   .tab {
+            display: flex;
+        }
+        .tab button {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc ;
+            height: 60px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #495f74;
+        }
+        
+        .tab button:nth-child(1) {
+        border-radius: 15px 0 0 0 ;
+        }
+        .tab button:nth-child(3) {
+        border-radius:  0  15px  0 0 ;
+        }
+        
+        .tab button:hover {
+            background-color: #f5f7f9;
+            border: 2px solid #00afee;
+        }
+        .tab button.active {
+             background-color: #fff;
+            border: 2px solid #00afee;
+        }
+        .tab-content {
+            display: none;
+            padding: 10px;
+            border-top: none;
+        }
+        
+        .tab-content h3 {
+        display: hidden;
+        
+        }
+        
+         .tab-content textarea {
+         width: 1180px;
+         padding: 10px;
+         font-size: 1.2em;
+         outline-style: none;
+         border: none;
+         line-height: 28px;
+          box-sizing: border-box;
+          resize: none; /* 사용자가 크기를 수동으로 조절하지 못하게 함 */
+          overflow: hidden;
+         }
+        
+        
+        
+        .tab-content.active {
+            display: block;
+        }
+ 
