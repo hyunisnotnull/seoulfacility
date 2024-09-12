@@ -1,4 +1,4 @@
-<script th:fragment="js">
+<script th:fragment="js" th:inline="javascript">
 
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -27,9 +27,6 @@ window.onload = function() {
 
 
 
-function autoResize(textarea) {
-    textarea.style.height = 'auto'; // 높이를 일단 자동으로 초기화
-    textarea.style.height = textarea.scrollHeight + 'px'; // 입력 내용에 따라 높이 설정
-}
+// 텍스트 에어리어 자동 높이 설정
 
 </script>
