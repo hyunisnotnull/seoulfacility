@@ -143,7 +143,17 @@ $(document).ready(function() {
         $(this).addClass('selected');
         console.log(`Selected Date: ${selectedDate}`); 
     });
+ 	
+    $('#reservation_button').click(function() {
+        console.log('RESERVATION BTN CLICK');
+        const selectedDate = $('#selectedDate').val();
+        if (!selectedDate) {
+            alert('날짜를 선택해주세요.');
+            return;
+        }
 
+        $('#reservation-form').submit();
+    });
     updateCalendar();
 });
 

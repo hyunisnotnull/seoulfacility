@@ -17,7 +17,7 @@ public class ReservationDto {
 	private String r_reserve_date;
 	private String r_reg_date;
 	private String r_mod_date;
-	private String r_use_state;
+	private int r_use_state;
 	private String r_use_time;
 
 }
