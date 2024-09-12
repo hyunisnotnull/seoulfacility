@@ -80,5 +80,12 @@ public class FacilityController {
 	    
 	    return nextPage; 
 	}
+	
+	@GetMapping("/options")
+    @ResponseBody
+    public Map<String, Object> getOptions(@RequestParam(value = "area", required = false) String area,
+                                           @RequestParam(value = "category", required = false) String category) {
+        return facilityService.getOptions(area, category);
+    }
 
 }

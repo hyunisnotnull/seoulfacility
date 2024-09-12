@@ -1,5 +1,6 @@
 package com.office.seoul.facility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +53,9 @@ public class FacilityService {
         return iFacilityDao.getAreas();
     }
 
-    public List<String> getCategories() {
-    	
-        return iFacilityDao.getCategories();
+	public List<String> getCategoriesByArea(String area) {
+		
+        return iFacilityDao.getCategoriesByArea(area);
     }
 
     public List<String> getResults(String area, String category) {
@@ -62,6 +63,25 @@ public class FacilityService {
         params.put("area", area);
         params.put("category", category);
         return iFacilityDao.getResults(params);
+    }
+
+    public Map<String, Object> getOptions(String area, String category) {
+        Map<String, Object> options = new HashMap<>();
+        
+        // Get areas (if needed, you might not need to fetch areas every time)
+        List<String> areas = getAreas();
+        
+        // Get categories based on selected area
+        List<String> categories = area != null ? getCategoriesByArea(area) : new ArrayList<>();
+        
+        // Get results based on selected area and category
+        List<String> results = (area != null && category != null) ? getResults(area, category) : new ArrayList<>();
+        
+        options.put("areas", areas);
+        options.put("categories", categories);
+        options.put("results", results);
+        
+        return options;
     }
 
 }

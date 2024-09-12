@@ -14,7 +14,7 @@ $(document).ready(function() {
 
         // ajax 시작
         $.ajax({
-            url: '/options',
+            url: '/facility/options',
             method: 'GET',
             data: {
                 area: area,
@@ -32,7 +32,7 @@ $(document).ready(function() {
                 areaSelect.append('<option value="">선택</option>');
                 if (Array.isArray(data.areas)) {
                     $.each(data.areas, function(index, area) {
-                        areaSelect.append(`<option value=${area}>${area}</option>`);
+                        areaSelect.append(`<option value="${area}">${area}</option>`);
                     });
                 } else {
                     console.error('Invalid data format for areas:', data.areas);
@@ -40,10 +40,10 @@ $(document).ready(function() {
 
                 // 카테고리값 업데이트
                 categorySelect.empty();
-                categorySelect.append('<option value="">선택</option>');
+                categorySelect.append('<option value="">선택 (' + (data.categories ? data.categories.length : 0) + ')</option>');
                 if (Array.isArray(data.categories)) {
                     $.each(data.categories, function(index, category) {
-                        categorySelect.append(`<option value=${category}>${category}</option>`);
+                        categorySelect.append(`<option value="${category}">${category}</option>`);
                     });
                 } else {
                     console.error('Invalid data format for categories:', data.categories);
@@ -51,10 +51,10 @@ $(document).ready(function() {
 
                 // 결과값 업데이트
                 resultSelect.empty();
-                resultSelect.append('<option value="">선택</option>');
+                resultSelect.append('<option value="">선택 (' + (data.results ? data.results.length : 0) + ')</option>');
                 if (Array.isArray(data.results)) {
                     $.each(data.results, function(index, result) {
-                        resultSelect.append(`<option value=${result}>${result}</option>`);
+                        resultSelect.append(`<option value="${result}">${result}</option>`);
                     });
                 } else {
                     console.error('Invalid data format for results:', data.results);
