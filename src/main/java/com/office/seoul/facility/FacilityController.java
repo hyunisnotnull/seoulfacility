@@ -1,5 +1,6 @@
 package com.office.seoul.facility;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -62,14 +63,17 @@ public class FacilityController {
     }
 	
 	@GetMapping("/detailView/{id}")
-	public String detailView(@PathVariable("id") String id, Model model) {
+	public String detailView(@PathVariable("id") String id, Model model, Principal principal) {
 		log.info("detailView() with id: {}", id);
 		
 		String nextPage = "facility/detail_view";
+		
+		String loginedMemberDto = principal.getName();
 	    
 	    FacilityDto facilityDto = facilityService.getFacilityById(id);
 	    if (facilityDto != null) {
 	        model.addAttribute("facilityDto", facilityDto);
+	        model.addAttribute("loginedMemberDto", loginedMemberDto);
 	    } else {
 	        model.addAttribute("error", "Facility not found");
 	    }

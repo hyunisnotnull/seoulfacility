@@ -69,6 +69,19 @@
 			U_M_ID = #{u_m_id}
 	
 	</delete>
+	
+	<select id="selectForFindId" 
+			parameterType="map" 
+			resultType="com.office.seoul.facility.member.MemberDto">
+	
+		SELECT 
+			U_M_ID 
+		FROM 
+			TBL_USER_MEMBER 
+		WHERE 
+			U_M_NAME = #{u_m_name} AND U_M_MAIL = #{u_m_mail}
+	
+	</select>
 
 	<select id="selectForFindPassword" 
 			parameterType="map" 

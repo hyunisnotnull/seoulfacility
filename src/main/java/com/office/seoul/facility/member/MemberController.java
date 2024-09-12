@@ -128,6 +128,40 @@ public class MemberController {
 	}
 	
 	/*
+	 * 아이디 찾기
+	 */
+	@GetMapping("/find_id_form")
+    public String findIdForm() {
+        log.info("findIdForm()");
+        
+        return "member/find_id_form";
+    }
+	
+	/*
+	 * 아이디 찾기 확인
+	 */
+	@PostMapping("/find_id_confirm")
+    public String findIdConfirm(MemberDto memberDto, Model model) {
+		log.info("findIdConfirm()");
+		
+		String nextPage= "member/find_id_result";
+		
+		MemberDto dto= memberService.findIdConfirm(memberDto);
+        
+		if (dto != null) {
+	        model.addAttribute("isUpdate", true);
+	        model.addAttribute("name", memberDto.getU_m_name());
+	        model.addAttribute("userId", dto.getU_m_id());
+	        
+	    } else {
+	        model.addAttribute("isUpdate", false);
+	        
+	    }
+	    
+        return nextPage;
+    }
+	
+	/*
 	 * 비밀번호 찾기
 	 */
 	@GetMapping("/find_password_form")
