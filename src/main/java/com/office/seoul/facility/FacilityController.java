@@ -53,7 +53,7 @@ public class FacilityController {
             									@RequestParam(value = "size", defaultValue = "6") int size,
             									@RequestParam(value = "type", required = false) String type) {
 		
-		log.info("Request Params - page: {}, size: {}, type: {}, keyword: {}", page, size, type);
+		log.info("Request Params - page: {}, size: {}, type: {}", page, size, type);
 		
 	    Map<String, Object> response = facilityService.getFacilities(page, size, type);
 	    

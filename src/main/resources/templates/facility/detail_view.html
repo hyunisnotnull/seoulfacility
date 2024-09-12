@@ -7,7 +7,7 @@
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
 <script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
-<script th:replace="~{/include/pagination_js.html::js}"></script>
+<script th:replace="~{/include/calendar_js.html::js}"></script>
 </head>
 <body>
     <header th:replace="~{/include/header_nav_footer.html::header}"></header>
@@ -30,8 +30,13 @@
             <div class="thumb">
                 <img th:src="${facilityDto.IMGURL}" alt="시설 이미지">
             </div>
+            
             <div class="calendar">
-				<h3>2024년 9월</h3>
+				<div class="calendar-controls">
+                    <a id="pre-month" href="#none">이전 달</a>
+                    <span id="calendar-month"><!-- 년, 월 동적  --></span>
+                    <a id="next-month" href="#none">다음 달</a>
+                </div>
                 <table>
                       
                     <thead>
@@ -45,53 +50,10 @@
                             <th>일요일</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1일</td>
-                            <td>2일</td>
-                            <td>3일</td>
-                            <td>4일</td>
-                            <td>5일</td>
-                            <td>6일</td>
-                            <td>7일</td>
-                         </tr>
-                         <tr>
-                            <td>8일</td>
-                            <td>9일</td>
-                            <td>10일</td>
-                            <td>11일</td>
-                            <td>12일</td>
-                            <td>13일</td>
-                            <td>14일</td>
-                        </tr>
-                        <tr>
-                            <td>15일</td>
-                            <td>16일</td>
-                            <td>17일</td>
-                            <td>18일</td>
-                            <td>19일</td>
-                            <td>20일</td>
-                            <td>21일</td>
-                        </tr>          
-                        <tr>          
-                            <td>22일</td>
-                            <td>23일</td>
-                            <td>24일</td>
-                            <td>25일</td>
-                            <td>26일</td>
-                            <td>27일</td>
-                            <td>28일</td>
-                        </tr> 
-                        <tr>         
-                            <td>29일</td>
-                            <td>30일</td>
-                            <td>31일</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
+                    
+                    <tbody id="calendar-date">
+			            <!-- 날짜 동적으로 -->
+			        </tbody>
 
                 </table>
 
@@ -115,14 +77,20 @@
             <li><b>예약방법 </b> : <span>인터넷</span></li>
             <li><b>문의전화 </b> : <span th:text="${facilityDto.TELNO}"></span></li>
            </ul>
-            <button class="reservation_apply">예약하기</button>
+           
+           <!-- <a th:href="@{/reservation}" class="reservation_apply">예약하기</a> -->
+           <!-- <form id="reservation-form" action="#" method="post">
+               <input type="hidden" name="facilityId" th:value="${facilityDto.SVCID}">
+               <input type="hidden" name="userId" th:value="${userId}">
+               <input type="hidden" name="selectedDate" id="selectedDate">
+               <button type="button" onclick="redirectToReservationPage()" class="reservation_apply">예약하기</button>
+           </form> -->
+           
         </li>
 
 
 
-       </ul> 
-
-
+       </ul>
 
 
       </div>
