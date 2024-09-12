@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
 <script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
 <script th:replace="~{/include/calendar_js.html::js}"></script>
+<script th:replace="~{/include/tab_js.html::js}"></script>
 </head>
 <body>
     <header th:replace="~{/include/header_nav_footer.html::header}"></header>
@@ -63,7 +64,12 @@
         <li class="right_box">
            <ul>
             <li><b>대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 상 </b> : <span th:text="${facilityDto.USETGTINFO}"></span></li>
-            <li><b>장&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 소 </b> : <div th:text="${facilityDto.SVCNM}"></div></li>
+            <li><b>장&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 소 </b> : 
+            	<span class="line2" th:if="${facilityDto.SVCNM.length >= 30}" th:text="${facilityDto.SVCNM}" />
+            	<span class="line1"  th:unless="${facilityDto.SVCNM.length >= 30}" th:text="${facilityDto.SVCNM}" />
+            
+          	</li>
+
             <li><b>이용기간 </b> : <span th:text="${facilityDto.SVCOPNBGNDT}"></span></li>
             <li><b>접수기간 </b> : <span th:text="${facilityDto.RCPTBGNDT}"></span> </li>
             <li><b>선별방법 </b> : <span>선착순</span></li>
@@ -75,7 +81,9 @@
       
             </li>
             <li><b>예약방법 </b> : <span>인터넷</span></li>
-            <li><b>문의전화 </b> : <span th:text="${facilityDto.TELNO}"></span></li>
+            <li><b>문의전화 </b> : 
+            <span class="line2" th:if="${facilityDto.TELNO.length >= 30}" th:text="${facilityDto.TELNO}" />
+            <span class="line1"  th:unless="${facilityDto.TELNO.length >= 30}" th:text="${facilityDto.TELNO}" />
            </ul>
            
            <!-- <a th:href="@{/reservation}" class="reservation_apply">예약하기</a> -->
@@ -88,9 +96,31 @@
            
         </li>
 
-
-
        </ul>
+	
+		<div class="tab">
+  	  <button class="tablinks" onclick="openTab(event, 'Tab1')">이용안내</button>
+  	 <button class="tablinks" onclick="openTab(event, 'Tab2')">장소안내</button>
+   	 <button class="tablinks" onclick="openTab(event, 'Tab3')">이용후기</button>
+		</div>
+
+	<div id="Tab1" class="tab-content">
+	    
+	    <textarea rows="100" cols="170" th:text="${facilityDto.DTLCONT}"></textarea>
+	    
+	</div>
+	
+	<div id="Tab2" class="tab-content">
+	  
+	    <p>이곳은 탭 2의 내용입니다.</p>
+	</div>
+
+	<div id="Tab3" class="tab-content">
+	  
+	    <p>이곳은 탭 3의 내용입니다.</p>
+	</div>
+
+
 
 
       </div>

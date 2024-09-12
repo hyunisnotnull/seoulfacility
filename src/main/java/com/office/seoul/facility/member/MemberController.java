@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -115,14 +114,76 @@ public class MemberController {
 	 * 회원 탈퇴
 	 */
 	@GetMapping("/member_delete_confirm")
-	public String memberDeleteConfirm(@RequestParam("confirm") boolean confirm, Principal principal) {
+	public String memberDeleteConfirm(Principal principal) {
 		log.info("memberDeleteConfirm()");
 		
 		String nextPage = "redirect:/member/member_logout_confirm";
 
 		int result = memberService.memberDeleteConfirm(principal.getName());
 		if (result <= 0) 
-			nextPage = "member/member_delete_result";
+			nextPage = "/member/member_delete_result";
+		
+		return nextPage;
+		
+	}
+	
+	/*
+	 * 아이디 찾기
+	 */
+	@GetMapping("/find_id_form")
+    public String findIdForm() {
+        log.info("findIdForm()");
+        
+        return "member/find_id_form";
+    }
+	
+	/*
+	 * 아이디 찾기 확인
+	 */
+	@PostMapping("/find_id_confirm")
+    public String findIdConfirm(MemberDto memberDto, Model model) {
+		log.info("findIdConfirm()");
+		
+		String nextPage= "member/find_id_result";
+		
+		MemberDto dto= memberService.findIdConfirm(memberDto);
+        
+		if (dto != null) {
+	        model.addAttribute("isUpdate", true);
+	        model.addAttribute("name", memberDto.getU_m_name());
+	        model.addAttribute("userId", dto.getU_m_id());
+	        
+	    } else {
+	        model.addAttribute("isUpdate", false);
+	        
+	    }
+	    
+        return nextPage;
+    }
+	
+	/*
+	 * 비밀번호 찾기
+	 */
+	@GetMapping("/find_password_form")
+    public String findPasswordForm() {
+        log.info("findPasswordForm()");
+        
+        return "member/find_password_form";
+    }
+	
+	/*
+	 * 비밀번호 찾기 확인
+	 */
+	@PostMapping("/find_password_confirm")
+	public String findPasswordConfirm(MemberDto memberDto, Model model) {
+		log.info("findPasswordConfirm()");
+		
+		String nextPage= "member/find_password_result";
+		
+		int result = memberService.findPasswordConfirm(memberDto);
+		
+		boolean isUpdate = result == MemberService.INSERT_SUCCESS_AT_DB;
+	    model.addAttribute("isUpdate", isUpdate);
 		
 		return nextPage;
 		

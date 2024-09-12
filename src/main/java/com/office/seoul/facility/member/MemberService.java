@@ -1,8 +1,18 @@
 package com.office.seoul.facility.member;
 
+import java.security.SecureRandom;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import jakarta.mail.internet.MimeMessage;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -16,11 +26,13 @@ public class MemberService {
 	
 	final private IMemberDao iMemberDao;
 	final private PasswordEncoder passwordEncoder;
+	final private JavaMailSenderImpl javaMailSenderImpl;
 	
 	
-	public MemberService(IMemberDao iMemberDao, PasswordEncoder passwordEncoder) {
+	public MemberService(IMemberDao iMemberDao, PasswordEncoder passwordEncoder, JavaMailSenderImpl javaMailSenderImpl) {
 		this.iMemberDao = iMemberDao;
 		this.passwordEncoder = passwordEncoder;
+		this.javaMailSenderImpl = javaMailSenderImpl;
 	
 	}
 
@@ -87,6 +99,78 @@ public class MemberService {
 		log.info("memberDeleteConfirm()");
 			
 		return iMemberDao.deleteMemberByMId(loginedMemberID);
+	}
+
+	public MemberDto findIdConfirm(MemberDto memberDto) {
+		log.info("sendNewPasswordByMail()");
+		
+		MemberDto dto = iMemberDao.selectForFindId(memberDto.getU_m_name(), 
+	            								memberDto.getU_m_mail());
+		
+		if (dto != null) {
+	        return dto;
+	        
+	    } else {
+	        return null;
+	        
+	    }
+	}
+
+	public int findPasswordConfirm(MemberDto memberDto) {
+		log.info("findPasswordConfirm()");
+	    
+	    MemberDto dto = iMemberDao.selectForFindPassword(
+										            memberDto.getU_m_id(),
+										            memberDto.getU_m_name(),
+										            memberDto.getU_m_mail());
+		
+		int result = 0;
+		if (dto != null) {
+			
+			final String newPassword = createNewPassword();
+			// 비밀번호 암호화
+			String encodedPassword = passwordEncoder.encode(newPassword);
+            result = iMemberDao.updatePassword(memberDto.getU_m_id(), encodedPassword);
+			if (result > 0) 
+				sendNewPasswordByMail(memberDto.getU_m_mail(), newPassword);
+			
+		}
+
+		return result;
+
+	}
+
+	private String createNewPassword() {
+	    log.info("createNewPassword()");
+	    
+	    // UUID를 생성하고 문자열로 변환
+	    String uuid = UUID.randomUUID().toString();
+	    
+	    // UUID에서 하이픈을 제거
+	    String password = uuid.replace("-", "");
+
+	    // 비밀번호 길이 조절
+	    return password.substring(0, 8);
+	}
+
+	private void sendNewPasswordByMail(String toMailAddr, String newPassword) {
+		log.info("sendNewPasswordByMail()");
+		
+		final MimeMessagePreparator mimeMessagePreparator = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				mimeMessageHelper.setTo(toMailAddr);
+				mimeMessageHelper.setSubject("[공공예약서비스] 새 비밀번호 안내입니다.");
+				mimeMessageHelper.setText("새 비밀번호 : " + newPassword, true);
+				
+			}
+			
+		};
+		
+		javaMailSenderImpl.send(mimeMessagePreparator);
+		
 	}
 
 	

@@ -165,7 +165,7 @@ a:hover {
 	
  } 
 
- section #section_wrap .search_form input[type="button"]{
+ section #section_wrap .search_form button {
 	height: 50px;
 	width: 200px;
 	padding: 15px;
@@ -314,19 +314,20 @@ a:hover {
 	line-height: 5px;
  }
 
- section #section_wrap .s_result .show_list .result_wrap .text_wrap .btn{
+/* 상세보기 버튼  */
+ section #section_wrap .s_result .show_list .result_wrap .text_wrap input[type="button"]{
 	padding: 10px 15px;
 	background-color: #495f74;
 	color: #fff;
 	border: 1px solid #c0c0c0;
 	border-radius: 30px;
-	width: 100%;
+	width: 120px;
 	outline: none;
 	text-align: center;
 	font-weight: bold;
 	line-height: 18px;
 	font-size: 0.9em;
- }
+ } 
 
 
 

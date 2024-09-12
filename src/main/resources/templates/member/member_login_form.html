@@ -32,7 +32,8 @@
 			</form>
 				<br>
 				<p>
-	              	<a href="javascript:void(0)" onclick="findpassword()">비밀번호</a>
+	              	<a href="javascript:void(0)" onclick="findid()">아이디</a>
+	              	<a href="javascript:void(0)" onclick="findpw()">비밀번호</a>
 	              	<button onclick="location.href='/member/create_account_form'">회원가입</button>
 				</p>
         	
@@ -44,7 +45,7 @@
             window.open(url, "_blank1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
         }
 
-        function findpassword() {
+        function findpw() {
             var url = "/member/find_password_form";
             window.open(url, "_blank1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
         }
