@@ -71,7 +71,6 @@ public class FacilityController {
 	    if (facilityDto != null) {
 	        model.addAttribute("facilityDto", facilityDto);
 	    } else {
-	        // 시설이 없을 경우 예외 처리
 	        model.addAttribute("error", "Facility not found");
 	    }
 	    

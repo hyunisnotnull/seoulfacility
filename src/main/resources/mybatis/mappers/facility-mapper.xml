@@ -18,18 +18,26 @@
         SELECT * FROM TBL_FACILITY
         <where>
 	        <if test="type != null and type != ''">
-	            AND MINCLASSNM = #{type}
+	            AND (
+                MINCLASSNM LIKE CONCAT('%', #{type}, '%')
+                OR PLACENM LIKE CONCAT('%', #{type}, '%')
+                OR AREANM LIKE CONCAT('%', #{type}, '%')
+            )
 	        </if>
 	    </where>
         LIMIT #{offset}, #{size}
     </select>
     
     <!-- 전체 시설 수 조회 -->
-    <select id="getTotalFacilitiesCount" parameterType="String" resultType="Integer">
+    <select id="getTotalFacilitiesCount" parameterType="Map" resultType="Integer">
         SELECT COUNT(*) FROM TBL_FACILITY
         <where>
 	        <if test="type != null and type != ''">
-	            AND MINCLASSNM = #{type}
+	            AND (
+                MINCLASSNM LIKE CONCAT('%', #{type}, '%')
+                OR PLACENM LIKE CONCAT('%', #{type}, '%')
+                OR AREANM LIKE CONCAT('%', #{type}, '%')
+            )
 	        </if>
 	    </where>
     </select>
@@ -38,5 +46,26 @@
 	<select id="getFacilityById" parameterType="String" resultType="com.office.seoul.facility.FacilityDto">
 		SELECT * FROM TBL_FACILITY WHERE SVCID = #{id}	
 	</select>
+	
+	<!-- 홈 빠른 예약 -->
+	<select id="getAreas" resultType="String">
+        SELECT DISTINCT AREANM FROM TBL_FACILITY
+    </select>
+
+    <select id="getCategories" resultType="String">
+        SELECT DISTINCT MINCLASSNM FROM TBL_FACILITY
+    </select>
+
+    <select id="getResults" parameterType="Map" resultType="String">
+        SELECT DISTINCT PLACENM FROM TBL_FACILITY
+        <where>
+            <if test="area != null and area != ''">
+                AND AREANM = #{area}
+            </if>
+            <if test="category != null and category != ''">
+                AND MINCLASSNM = #{category}
+            </if>
+        </where>
+    </select>
 	
 </mapper>

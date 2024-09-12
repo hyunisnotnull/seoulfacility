@@ -33,7 +33,7 @@ public class FacilityService {
 	        log.info("type : {}", type);
 
 	        List<FacilityDto> facilities = iFacilityDao.getFacilities(params);
-	        int totalItems = iFacilityDao.getTotalFacilitiesCount(type);
+	        int totalItems = iFacilityDao.getTotalFacilitiesCount(params);
 
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("items", facilities);
@@ -46,5 +46,22 @@ public class FacilityService {
 		
 		return iFacilityDao.getFacilityById(id);
 	}
+
+	public List<String> getAreas() {
+		
+        return iFacilityDao.getAreas();
+    }
+
+    public List<String> getCategories() {
+    	
+        return iFacilityDao.getCategories();
+    }
+
+    public List<String> getResults(String area, String category) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("area", area);
+        params.put("category", category);
+        return iFacilityDao.getResults(params);
+    }
 
 }

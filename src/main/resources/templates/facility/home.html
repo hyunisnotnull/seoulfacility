@@ -35,20 +35,16 @@
 
      
               <!-- 검색창 -->
-		<div class="search_form"> 
-		
-		
-            
-            <form action="" method="get" name="s_form">
-              
-                    <select name="area" id="search"> 
-                        <option value="all">전체</option>  
-                        <option value="area">지역</option>   
-                        <option value="service">서비스</option>   
-                        <option value="location">장소</option>            
-                    </select>
-                    <input type="text" name="keyword" id="">
-                    <input type="button"  value="검색">
+		<div class="search_form">
+            <form id="searchForm" action="" method="get">
+                <select name="type" id="searchType">
+                    <option value="all">전체</option>  
+                    <option value="area">지역</option>   
+                    <option value="service">서비스</option>   
+                    <option value="location">장소</option>            
+                </select>
+                <input type="text" name="keyword" id="searchKeyword" placeholder="검색어 입력">
+                <button type="submit">검색</button>
             </form>
         </div>
     	
