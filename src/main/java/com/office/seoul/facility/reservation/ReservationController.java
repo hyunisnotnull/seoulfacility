@@ -57,9 +57,9 @@ public class ReservationController {
         List<String> reservedTimes = reservationService.getReservedTimes(facilityId, selectedDate);
         List<String> allTimes = reservationService.getAllTimes();
         
-        log.info("select222() - availableTimes: {}, allTimes: {}", reservedTimes, allTimes);
+        log.info("select() - reservedTimes: {}, allTimes: {}", reservedTimes, allTimes);
         
-        model.addAttribute("availableTimes", reservedTimes);
+        model.addAttribute("reservedTimes", reservedTimes);
         model.addAttribute("allTimes", allTimes);
         
         return nextPage;
