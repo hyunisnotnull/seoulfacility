@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/reservation/select_time.css}">
 <script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
 <script th:replace="~{/include/selectTime_js.html::js}"></script>
 
@@ -17,24 +18,27 @@
 <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
 <article th:replace="~{/include/header_nav_footer.html::article}"></article>
 
-<section>
-        <div id="section_wrap">
-            <h2>시간 선택</h2>
-            <form id="time_select_form" th:action="@{/reservation/confirm}" method="post">
-                <input type="hidden" name="facilityId" th:value="${facilityId}">
-                <input type="hidden" name="userId" th:value="${userId}">
-                <input type="hidden" name="selectedDate" th:value="${selectedDate}">
+<section class="reservation-section">
+    <div class="container">
+        <h2>시간 선택</h2>
+        <h3>예약 날짜: <span th:text="${selectedDate}"></span></h3>
+        <form id="time_select_form" th:action="@{/reservation/confirm}" method="post">
+            <input type="hidden" name="facilityId" th:value="${facilityId}">
+            <input type="hidden" name="userId" th:value="${userId}">
+            <input type="hidden" name="selectedDate" th:value="${selectedDate}">
 
+            <div class="form-group">
                 <label for="selectedTime">예약 시간:</label>
                 <select id="selectedTime" name="selectedTime">
                     <option value="">-- 시간 선택 --</option>
                     <!-- JS 동적 생성 -->
                 </select>
+            </div>
 
-                <button type="submit">예약 확정</button>
-            </form>
-        </div>
-    </section>
+            <button type="submit" class="submit-btn">예약 확정</button>
+        </form>
+    </div>
+</section>
 
 <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
 

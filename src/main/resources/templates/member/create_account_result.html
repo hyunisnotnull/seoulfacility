@@ -6,29 +6,28 @@
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
 <link rel="stylesheet" th:href="@{/css/member/member_result.css}">
-
 </head>
 <body>
 
-     <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
     
     <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
 
-	<article th:replace="~{/include/header_nav_footer.html::article}">
-	</article>
+    <article th:replace="~{/include/header_nav_footer.html::article}"></article>
 
     <section>
-    	<div id="section_wrap">
-	    	<div>
-	    		<p th:if="${isSuccess}">회원가입 성공</p>
-	            <p th:if="${!isSuccess}">회원가입 실패</p>
-	    	</div>
-			
-			<div class="go_button">
-				<a th:if="${isSuccess}" th:href="@{/member/member_login_form}">로그인 화면으로 이동</a>
-	            <a th:if="${!isSuccess}" th:href="@{/member/create_account_form}">다시 회원 가입하기</a>
-			</div>
-	  	</div>
+        <div id="section_wrap">
+            <div class="message">
+                <p th:if="${isSuccess}" class="success-message">환영합니다.</p>
+                <p th:if="${isSuccess}" class="success-message">회원가입이 성공적으로 완료되었습니다!</p>
+                <p th:if="${!isSuccess}" class="error-message">회원가입에 실패했습니다. 다시 시도해 주세요.</p>
+            </div>
+
+            <div class="go_button">
+                <a th:if="${isSuccess}" th:href="@{/member/member_login_form}" class="button">로그인 화면으로 이동</a>
+                <a th:if="${!isSuccess}" th:href="@{/member/create_account_form}" class="button">다시 회원 가입하기</a>
+            </div>
+        </div>
     </section>
     
     <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>

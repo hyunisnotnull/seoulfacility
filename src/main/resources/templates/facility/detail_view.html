@@ -91,7 +91,7 @@
            </ul>
            
            <!-- <a th:href="@{/reservation}" class="reservation_apply">예약하기</a> -->
-           <form id="reservation_form" th:action="@{/reservation/select}" method="post">
+           <form id="reservation_form" th:action="@{/reservation/select_time}" method="post">
                <input type="hidden" name="facilityId" th:value="${facilityDto.SVCID}">
                <input type="hidden" name="userId" th:value="${loginedMemberDto}">
                <input type="hidden" name="selectedDate" id="selectedDate">

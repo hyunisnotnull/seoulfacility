@@ -40,14 +40,14 @@ public class ReservationController {
         return nextPage;
     }
 	
-	@PostMapping("/select")
-    public String select(@RequestParam("facilityId") String facilityId,
+	@PostMapping("/select_time")
+    public String selectTime(@RequestParam("facilityId") String facilityId,
                          @RequestParam("userId") String userId,
                          @RequestParam("selectedDate") String selectedDate,
                          Model model) {
-        log.info("select() - facilityId: {}, userId: {}, selectedDate: {}", facilityId, userId, selectedDate);
+        log.info("selectTime() - facilityId: {}, userId: {}, selectedDate: {}", facilityId, userId, selectedDate);
         
-        String nextPage = "reservation/select";
+        String nextPage = "reservation/select_time";
         
         model.addAttribute("facilityId", facilityId);
         model.addAttribute("userId", userId);
@@ -57,7 +57,7 @@ public class ReservationController {
         List<String> reservedTimes = reservationService.getReservedTimes(facilityId, selectedDate);
         List<String> allTimes = reservationService.getAllTimes();
         
-        log.info("select() - reservedTimes: {}, allTimes: {}", reservedTimes, allTimes);
+        log.info("selectTime() - reservedTimes: {}, allTimes: {}", reservedTimes, allTimes);
         
         model.addAttribute("reservedTimes", reservedTimes);
         model.addAttribute("allTimes", allTimes);
