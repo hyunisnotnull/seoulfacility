@@ -59,7 +59,7 @@
 
     <!-- 지역 및 카테고리 기반 결과 조회 -->
     <select id="getResults" parameterType="Map" resultType="String">
-        SELECT DISTINCT SVCNM FROM TBL_FACILITY
+        SELECT DISTINCT SVCNM FROM TBL_FACILITY WHERE SVCSTATNM = '안내중' OR SVCSTATNM = '접수중'
         <where>
             <if test="area != null and area != ''">
                 AND AREANM = #{area}
@@ -72,7 +72,7 @@
     
     <!-- 빠른 예약 SVCNM 으로 찾기 -->
     <select id="getFacilityIdBySvcnm" parameterType="String" resultType="String">
-    	SELECT SVCID FROM TBL_FACILITY WHERE SVCNM = #{svcnm} AND (SVCSTATNM = '안내중' OR SVCSTATNM = '접수중');
+    	SELECT SVCID FROM TBL_FACILITY WHERE SVCNM = #{svcnm};
 	</select>
 
     <select id="findFacilitiesByIds" 

@@ -69,10 +69,8 @@ public class FacilityService {
         Map<String, Object> options = new HashMap<>();
         
         List<String> areas = getAreas();
-        
         List<String> categories = area != null ? getCategoriesByArea(area) : new ArrayList<>();
-        
-        List<String> results = (area != null && category != null) ? getResults(area, category) : new ArrayList<>();
+        List<String> results = (area != null || category != null) ? getResults(area, category) : new ArrayList<>();
         
         options.put("areas", areas);
         options.put("categories", categories);
