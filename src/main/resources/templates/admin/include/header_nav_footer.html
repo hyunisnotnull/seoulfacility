@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
+<script th:replace="~{/include/pagination_js.html::js}"></script>
+</head>
+
+
+
+	<nav th:fragment="nav">
+        <div id="nav_wrap"> 
+		   <div><ul>
+                <li></li>
+                <li class="logo"> <a th:href="@{/}"><img src="http://ecobus.co.kr/wp-content/uploads/2024project/logo_m.png" alt="logo" width="230px"></a></li>
+                <li class="navigation" >
+                  <div sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/admin/home}">HOME</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/admin/admin_login_form}">로그인</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/admin/create_account_form}">계정생성</a> &nbsp; |&nbsp; 
+                	<a th:href="@{/facility}">체육시설</a>
+                	<a th:href="@{/api/data}">공공 API 불러오기</a>&nbsp;&nbsp;&nbsp;
+                   </div>
+                   <div sec:authorize="isAuthenticated()">
+                    <a th:href="@{/}">HOME</a> &nbsp; |&nbsp; 
+                    <a th:href="@{/admin/home}">관리계정관리</a>&nbsp; |&nbsp; 
+                    <a th:href="@{/admin/home}">통계</a>&nbsp; |&nbsp; 
+                    <a th:href="@{/admin/admin_logout_confirm}">로그아웃</a>
+               		<a th:href="@{/facility}">체육시설</a>
+                  	<a th:href="@{/api/data}">공공 API 불러오기</a>&nbsp;&nbsp;&nbsp;
+                   </div>
+                </li>
+           </ul>
+          </div> 
+        </div>
+	</nav>
+
+
+
+	
+</html>

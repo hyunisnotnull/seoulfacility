@@ -77,4 +77,55 @@ public class SecurityConfig {
 
 	    return http.build();
 	}
+	
+	@Bean
+	SecurityFilterChain securityFilterChain1(HttpSecurity http) throws Exception {
+	    http
+        .authorizeHttpRequests(authorizeRequests ->
+            authorizeRequests
+                .anyRequest().permitAll() // 모든 요청을 허용
+        )
+        .csrf(csrf -> csrf.disable());
+	    
+	    http
+    	.formLogin(login -> login
+    			.loginPage("/admin/admin_login_form")
+    			.loginProcessingUrl("/admin/admin_login_confirm")
+				.usernameParameter("a_m_id")
+				.passwordParameter("a_m_pw")
+				.successHandler((request, response, authentication) -> {
+					log.info("[ADMIN LOGIN SUCCESS]");
+					
+					RequestCache requestCache = new HttpSessionRequestCache();
+					SavedRequest savedRequest = requestCache.getRequest(request, response);
+					String targetURI = "/";
+					if (savedRequest != null) {
+						targetURI = savedRequest.getRedirectUrl();
+						requestCache.removeRequest(request, response);
+						
+					}
+					
+					response.sendRedirect(targetURI);
+					
+				})
+				.failureHandler((request, response, exception) -> {
+					log.info("[ADMIN LOGIN FAIL]");
+					log.info("Exception: {}", exception);
+					
+					response.sendRedirect("/admin/admin_login_result");
+					
+				}));
+	    
+	    http
+	    .logout(logout -> logout
+	    		.logoutUrl("/admin/admin_logout_confirm")
+	    		.logoutSuccessHandler((request, response, authentication) -> {
+	    			log.info("[ADMIN LOGOUT SUCCESS]");
+					
+					response.sendRedirect("/");
+	    		}));
+	    
+
+	    return http.build();
+	}
 }

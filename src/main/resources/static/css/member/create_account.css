@@ -1,6 +1,6 @@
 section {
     width: 100%;
-    height: 550px;
+    min-height: 70%;
     /* background-color: #dbe6f0; */
     padding: 40px 0;
 }
