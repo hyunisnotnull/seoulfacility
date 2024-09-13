@@ -13,6 +13,8 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
+import com.office.seoul.facility.member.MemberAccessDeniedHandler;
+
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -29,12 +31,31 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    http
-        .authorizeHttpRequests(authorizeRequests ->
-            authorizeRequests
-                .anyRequest().permitAll() // 모든 요청을 허용
+	    log.info("securityFilterChain()");
+		http
+        .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+        		.requestMatchers(
+        				"/css/**",
+        				"/img/**",
+        				"/js/**",
+        				"/",
+        				"/member/create_account_form",
+        				"/member/create_account_confirm",
+        				"/member/member_login_form",
+        				"/member/find_id_form",
+        				"/member/find_id_confirm",
+        				"/member/find_password_form",
+        				"/member/find_password_confirm",
+        				"/facility/**").permitAll() // 모든 요청을 허용
+                .requestMatchers("/reservation/**").hasAnyRole("USER", "ADMIN")
+                .anyRequest().authenticated()
         )
         .csrf(csrf -> csrf.disable());
+		
+		http
+		.exceptionHandling(exceptionConfig -> exceptionConfig
+//				.authenticationEntryPoint(null)
+				.accessDeniedHandler(new MemberAccessDeniedHandler()));
 	    
 	    http
     	.formLogin(login -> login
@@ -48,6 +69,7 @@ public class SecurityConfig {
 					RequestCache requestCache = new HttpSessionRequestCache();
 					SavedRequest savedRequest = requestCache.getRequest(request, response);
 					String targetURI = "/";
+					
 					if (savedRequest != null) {
 						targetURI = savedRequest.getRedirectUrl();
 						requestCache.removeRequest(request, response);

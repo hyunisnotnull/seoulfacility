@@ -19,6 +19,8 @@ $(document).ready(function() {
     // 예약 상태 데이터
     const reservationStatus = /*[[${reservationStatus}]]*/ {};
     console.log('Reservation Status:', reservationStatus); // 데이터 확인
+    const loginedMemberDto = /*[[${loginedMemberDto}]]*/ {};
+    console.log('loginedMemberDto:', loginedMemberDto);
 
     // 달력 생성
     function generateCalendar(year, month) {
@@ -160,12 +162,22 @@ $(document).ready(function() {
         console.log('RESERVATION BTN CLICK');
         console.log('RESERVATION BTN CLICK  ', $('#selectedDate').val());
         const selectedDate = $('#selectedDate').val();
+
+        const loginedMemberDto = /*[[${loginedMemberDto}]]*/ {};
+        console.log('loginedMemberDto:', loginedMemberDto);
+        
+        if(!loginedMemberDto){
+        	alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
+            window.location.href = '/member/member_login_form'; 
+            return;
+        }
+        
         if (!selectedDate) {
             alert('날짜를 선택해주세요.');
             return;
         }
 
-        $('#reservation-form').submit();
+        $('#reservation_form').submit();
     });
 
     // 초기 달력 생성
