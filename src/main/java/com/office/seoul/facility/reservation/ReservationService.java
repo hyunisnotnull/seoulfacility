@@ -43,29 +43,32 @@ public class ReservationService {
     
     
     public Map<String, String> getReservationStatus(String id, LocalDate startDate, LocalDate endDate) {
-//    	public Map<String, Boolean> getReservationStatus(String id, LocalDate startDate, LocalDate endDate) {
-    	List<Map<String, Object>> reservationCounts = iReservationDao.findAllReservedDates(id, startDate, endDate);
-//    	Map<String, Boolean> reservationStatus = new HashMap<>();
-    	Map<String, String> reservationStatus = new HashMap<>();
-    	
-    	// 날짜별 예약 개수를 Map으로 변환
-    	Map<String, Integer> countMap = new HashMap<>();
-    	for (Map<String, Object> row : reservationCounts) {
-    		String dateStr = (String) row.get("R_RESERVE_DATE");
-    		Integer count = ((Number) row.get("reservation_count")).intValue();
-    		countMap.put(dateStr, count);
-    	}
-    	
-    	log.info(reservationCounts.get(0).get("R_RESERVE_DATE"));
-    	
-    	for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
-    		String dateStr = date.toString();
-//    		boolean isReserved = countMap.getOrDefault(dateStr, 0) >= 6; // 6개 이상의 예약이 있으면 예약 불가
-    		String isReserved = countMap.getOrDefault(dateStr, 0).toString();
-    		reservationStatus.put(dateStr, isReserved);
-    	}
-    	
-    	return reservationStatus;
+        List<Map<String, Object>> reservationCounts = iReservationDao.findAllReservedDates(id, startDate, endDate);
+        Map<String, String> reservationStatus = new HashMap<>();
+        
+        // 날짜별 예약 개수를 Map으로 변환
+        Map<String, Integer> countMap = new HashMap<>();
+        
+        // 예약 개수가 있는 경우만 처리
+        if (reservationCounts != null && !reservationCounts.isEmpty()) {
+            for (Map<String, Object> row : reservationCounts) {
+                String dateStr = (String) row.get("R_RESERVE_DATE");
+                Integer count = ((Number) row.get("reservation_count")).intValue();
+                countMap.put(dateStr, count);
+            }
+            log.info("First reservation date: {}", reservationCounts.get(0).get("R_RESERVE_DATE"));
+        } else {
+            log.info("No reservation counts found.");
+        }
+        
+        // 예약 상태를 날짜별로 설정
+        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+            String dateStr = date.toString();
+            String isReserved = countMap.getOrDefault(dateStr, 0).toString();
+            reservationStatus.put(dateStr, isReserved);
+        }
+        
+        return reservationStatus;
     }
 
 	public List<ReservationDto> getReservationsByMemberId(String u_m_id) {

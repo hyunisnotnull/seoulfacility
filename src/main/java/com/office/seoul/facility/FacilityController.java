@@ -90,6 +90,10 @@ public class FacilityController {
 	        LocalDate endDate = today.plusMonths(2);
 //	        Map<String, Boolean> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
 	        Map<String, String> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
+	        log.info("reservationStatus : {}", reservationStatus);
+	        if (reservationStatus == null) {
+	            reservationStatus = new HashMap<>(); // null 방지
+	        }
 	    	
 	        model.addAttribute("facilityDto", facilityDto);
 	        model.addAttribute("loginedMemberDto", loginedMemberDto);

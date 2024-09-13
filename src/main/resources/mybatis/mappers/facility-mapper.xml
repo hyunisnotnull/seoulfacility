@@ -70,21 +70,29 @@
         </where>
     </select>
     
+    <!-- 빠른 예약 SVCNM 으로 찾기 -->
     <select id="getFacilityIdBySvcnm" parameterType="String" resultType="String">
     	SELECT SVCID FROM TBL_FACILITY WHERE SVCNM = #{svcnm} <!-- AND SVCSTATNM = '안내중' -->;
 	</select>
 
     <select id="findFacilitiesByIds" 
-    		parameterType="list" 
-    		resultType="com.office.seoul.facility.FacilityDto">
-    
-        SELECT * FROM 
-        	TBL_FACILITY
-        WHERE 
-        	SVCID IN
-        <foreach item="facilityId" index="index" collection="facilityIds" open="(" separator="," close=")">
-            #{facilityId}
-        </foreach>
+        parameterType="list" 
+        resultType="com.office.seoul.facility.FacilityDto">
+        
+	    SELECT * FROM 
+	        TBL_FACILITY
+	    WHERE 
+	        <choose>
+	            <when test="facilityIds != null and !facilityIds.isEmpty()">
+	                SVCID IN
+	                <foreach item="facilityId" index="index" collection="facilityIds" open="(" separator="," close=")">
+	                    #{facilityId}
+	                </foreach>
+	            </when>
+	            <otherwise>
+	                1 = 0 <!-- 빈 리스트에 대해 항상 false 반환 => 아무것도 조회하지 않음 -->
+	            </otherwise>
+	        </choose>
 	</select>
 
 	
