@@ -81,10 +81,10 @@ public class FacilityService {
         return options;
     }
 
-	public String getFacilityIdByPlacenm(String placenm) {
-		log.info("placenm : ", placenm);
+	public String getFacilityIdBySvcnm(String svcnm) {
+		log.info("svcnm : ", svcnm);
 		
-		return iFacilityDao.getFacilityIdByPlacenm(placenm);
+		return iFacilityDao.getFacilityIdBySvcnm(svcnm);
 	}
 
 }

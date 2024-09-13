@@ -25,7 +25,7 @@ $(document).ready(function() {
                 console.log('data:', data); 
                 let areaSelect = $('#AREANM');
                 let categorySelect = $('#MINCLASSNM');
-                let resultSelect = $('#PLACENM');
+                let resultSelect = $('#SVCNM');
 
                 // 지역값 업데이트
                 areaSelect.empty();
@@ -89,13 +89,13 @@ $(document).ready(function() {
     
     // 빠른 예약 버튼 클릭 이벤트
     $('#quick_btn').click(function() {
-        var selectedResult = $('#PLACENM').val();
+        var selectedResult = $('#SVCNM').val();
 
         $.ajax({
             url: '/facility/quickReserved',
             method: 'GET',
             data: {
-                placenm: selectedResult
+                svcnm: selectedResult
             },
             success: function(response) {
                 if (response.redirectUrl) {

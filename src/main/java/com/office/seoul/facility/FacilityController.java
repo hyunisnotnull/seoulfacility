@@ -113,13 +113,13 @@ public class FacilityController {
 	
 	@GetMapping("/quickReserved")
 	@ResponseBody
-	public Map<String, String> quickReserved(@RequestParam(value = "placenm") String placenm) {
-	    log.info("quickReserved() with placenm: {}", placenm);
+	public Map<String, String> quickReserved(@RequestParam(value = "svcnm") String svcnm) {
+	    log.info("quickReserved() with svcnm: {}", svcnm);
 
-	    // placenm으로 시설 ID 조회
-	    String facilityId = facilityService.getFacilityIdByPlacenm(placenm);
+	    // svcnm으로 시설 ID 조회
+	    String facilityId = facilityService.getFacilityIdBySvcnm(svcnm);
 
-	    log.info("placenm: {}", placenm);
+	    log.info("svcnm: {}", svcnm);
 	    log.info("facilityId: {}", facilityId);
 
 	    Map<String, String> response = new HashMap<>();

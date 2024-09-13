@@ -59,7 +59,7 @@
 
     <!-- 지역 및 카테고리 기반 결과 조회 -->
     <select id="getResults" parameterType="Map" resultType="String">
-        SELECT DISTINCT PLACENM FROM TBL_FACILITY
+        SELECT DISTINCT SVCNM FROM TBL_FACILITY
         <where>
             <if test="area != null and area != ''">
                 AND AREANM = #{area}
@@ -70,8 +70,8 @@
         </where>
     </select>
     
-    <select id="getFacilityIdByPlacenm" parameterType="String" resultType="String">
-    	SELECT SVCID FROM TBL_FACILITY WHERE PLACENM = #{placenm} AND SVCSTATNM = '안내중';
+    <select id="getFacilityIdBySvcnm" parameterType="String" resultType="String">
+    	SELECT SVCID FROM TBL_FACILITY WHERE SVCNM = #{svcnm} <!-- AND SVCSTATNM = '안내중' -->;
     </select>
 	
 </mapper>
