@@ -62,4 +62,10 @@ public class ReservationService {
         return reservationStatus;
     }
 
+	public List<ReservationDto> getReservationsByMemberId(String u_m_id) {
+		log.info("getReservationsByMemberId() with u_m_id: {}", u_m_id);
+		
+		return iReservationDao.findReservationsByMemberId(u_m_id);
+	}
+
 }

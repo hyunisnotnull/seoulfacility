@@ -69,5 +69,18 @@
             </if>
         </where>
     </select>
+    
+    <select id="findFacilitiesByIds" 
+    		parameterType="list" 
+    		resultType="com.office.seoul.facility.FacilityDto">
+    
+        SELECT * FROM 
+        	TBL_FACILITY
+        WHERE 
+        	SVCID IN
+        <foreach item="facilityId" index="index" collection="facilityIds" open="(" separator="," close=")">
+            #{facilityId}
+        </foreach>
+	</select>
 	
 </mapper>
