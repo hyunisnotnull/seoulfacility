@@ -2,8 +2,8 @@
 
 // 랜더링 시작
 $(document).ready(function() {
-	console.log('DOCUMENT READY');
-	
+    console.log('DOCUMENT READY');
+    
     function updateOptions(area = '', category = '') {
         // 현재 선택된 값 저장
         let currentArea = $('#AREANM').val();
@@ -40,7 +40,11 @@ $(document).ready(function() {
 
                 // 카테고리값 업데이트
                 categorySelect.empty();
-                categorySelect.append('<option value="">선택 (' + (data.categories ? data.categories.length : 0) + ')</option>');
+                if (currentArea) {
+                    categorySelect.append('<option value="">선택 (' + (data.categories ? data.categories.length : 0) + ')</option>');
+                } else {
+                    categorySelect.append('<option value="">선택</option>');
+                }
                 if (Array.isArray(data.categories)) {
                     $.each(data.categories, function(index, category) {
                         categorySelect.append(`<option value="${category}">${category}</option>`);
@@ -51,7 +55,11 @@ $(document).ready(function() {
 
                 // 결과값 업데이트
                 resultSelect.empty();
-                resultSelect.append('<option value="">선택 (' + (data.results ? data.results.length : 0) + ')</option>');
+                if (currentArea && currentCategory) {
+                    resultSelect.append('<option value="">선택 (' + (data.results ? data.results.length : 0) + ')</option>');
+                } else {
+                    resultSelect.append('<option value="">선택</option>');
+                }
                 if (Array.isArray(data.results)) {
                     $.each(data.results, function(index, result) {
                         resultSelect.append(`<option value="${result}">${result}</option>`);
@@ -101,7 +109,7 @@ $(document).ready(function() {
                 if (response.redirectUrl) {
                     window.location.href = response.redirectUrl;
                 } else {
-                    alert('해당 시설을 찾을 수 없습니다.');
+                    alert('해당 시설 예약이 종료되었습니다.');
                 }
             },
             error: function(xhr, status, error) {
@@ -109,6 +117,6 @@ $(document).ready(function() {
             }
         });
     });
- 	
+    
 });
 </script>
