@@ -92,8 +92,8 @@ function renderTable(facilities, totalItems) {
 		       <ul>
 		           <li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_place.png" width="16px" alt=""> <span> 지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역 :</span> ${item.areanm}</li> 
 		           <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_user.png" width="16px" alt=""> <span> 이용대상 :</span> ${item.usetgtinfo}</li> 
-		           <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_date1.png" width="16px" alt=""> <span> 접수기간 :</span> ${item.svcopnenddt}</li> 
-		           <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_date2.png" width="16px" alt=""> <span> 이용기간 :</span> ${item.svcopnbgndt}</li> 
+		           <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_date1.png" width="16px" alt=""> <span> 접수기간 :</span> ${item.rcptbgndt.substr(0,10)} ~ ${item.rcptenddt.substr(0,10)}</li> 
+		           <li></li><img src="https://yeyak.seoul.go.kr/common/img/ko/icon_date2.png" width="16px" alt=""> <span> 이용기간 :</span> ${item.svcopnbgndt.substr(0,10)} ~ ${item.svcopnenddt.substr(0,10)}</li> 
 		       </ul> 
 	       <br>
 	      <input type="button" class="btn" value="상세보기 + "> 

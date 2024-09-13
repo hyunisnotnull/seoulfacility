@@ -50,12 +50,14 @@ $(document).ready(function() {
                     const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
                     // 예약 상태 확인
-                    const isReserved = reservationStatus[dateStr] === true; // `true` 값 확인
+                    const isReserved = reservationStatus[dateStr] >= 6 ? true : false; // `true` 값 확인
                     const cellContent = isPast 
-                        ? `${day}일 (예약 불가)` 
+                        ? `<span>${day}<br><span>&nbsp;&nbsp;&nbsp;</span>` 
                         : isReserved 
-                            ? `${day}일 (예약 불가)` 
-                            : `<a href="#none" class="date-cell">${day}일 (예약 가능)</a>`;
+                            ? `${day}<br><span></span>` 
+                            : reservationStatus[dateStr] == undefined 
+                            ? `${day}<br><span>&nbsp;&nbsp;&nbsp;</span>`
+                            :`<a href="#none" class="date-cell"><span>${day}</span><br><span>(${reservationStatus[dateStr]}/6)</span></a>`;
 
                     row += `<td>${cellContent}</td>`;
                     day++;
@@ -79,7 +81,7 @@ $(document).ready(function() {
         // 달력에 일 추가
         calendarDate.html(rows);
     }
-
+    
     // 달력 업데이트
     function updateCalendar() {
         generateCalendar(currentYear, currentMonth);
@@ -146,7 +148,7 @@ $(document).ready(function() {
     $(document).on('click', '.date-cell', function(event) {
         console.log('DATE BTN CLICK');
         event.preventDefault();
-        const day = $(this).text().split('일')[0];
+        const day = $(this).text().split('(')[0];
         const selectedDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.padStart(2, '0')}`;
         $('#selectedDate').val(selectedDate);
         $('.date-cell').removeClass('selected');
@@ -156,6 +158,7 @@ $(document).ready(function() {
 
     $('#reservation_button').click(function() {
         console.log('RESERVATION BTN CLICK');
+        console.log('RESERVATION BTN CLICK  ', $('#selectedDate').val());
         const selectedDate = $('#selectedDate').val();
         if (!selectedDate) {
             alert('날짜를 선택해주세요.');
