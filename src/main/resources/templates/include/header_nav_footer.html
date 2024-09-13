@@ -9,8 +9,10 @@
 <header th:fragment="header">
 	<div id="header_wrap">
 		 <div class="profile">
-                 <a href="#none"> USER |</a> 
-                <a href="#none"> ADMIN </a>
+
+                 <a th:href="@{/}"> USER |</a> 
+                <a th:href="@{/admin}"> ADMIN </a>
+
           </div>
 		
 	</div>

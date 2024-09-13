@@ -221,18 +221,12 @@ section #section_wrap .right_box .reservation_apply {
         
         }
         
-         .tab-content textarea {
-         font-family: Noto Sans KR; 
-         min-height:100%;
+        .tab-content p {
          width: 1180px;
          padding: 10px;
-         font-size: 1.2em;
+         font-size: 1.1em;
          outline-style: none;
-         border: none;
          line-height: 1.8em;
-          box-sizing: border-box;
-          resize: none; /* 사용자가 크기를 수동으로 조절하지 못하게 함 */
-          overflow: hidden;
          }
         
         

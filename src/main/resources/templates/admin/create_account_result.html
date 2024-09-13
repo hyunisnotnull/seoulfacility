@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member/member_result.css}">
+
+</head>
+<body>
+
+     <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/admin/include/header_nav_footer.html::nav}"></nav>
+
+
+    <section>
+    	<div id="section_wrap">
+	    	<div>
+	    		<p th:if="${isSuccess}">관리자 계정생성 성공</p>
+	            <p th:if="${!isSuccess}">관리자 계정생성 실패</p>
+	    	</div>
+			
+			<div class="go_button">
+				<a th:if="${isSuccess}" th:href="@{/admin/admin_login_form}">로그인 화면으로 이동</a>
+	            <a th:if="${!isSuccess}" th:href="@{/admin/create_account_form}"> 다시 시도</a>
+			</div>
+	  	</div>
+    </section>
+    
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

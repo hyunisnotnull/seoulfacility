@@ -87,4 +87,9 @@ public class FacilityService {
 		return iFacilityDao.getFacilityIdBySvcnm(svcnm);
 	}
 
+	public List<FacilityDto> getFacilitiesByIds(List<String> facilityIds) {
+		
+		return iFacilityDao.findFacilitiesByIds(facilityIds);
+	}
+
 }

@@ -88,7 +88,8 @@ public class FacilityController {
 	    	
 	    	LocalDate today = LocalDate.now();
 	        LocalDate endDate = today.plusMonths(2);
-	        Map<String, Boolean> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
+//	        Map<String, Boolean> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
+	        Map<String, String> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
 	    	
 	        model.addAttribute("facilityDto", facilityDto);
 	        model.addAttribute("loginedMemberDto", loginedMemberDto);

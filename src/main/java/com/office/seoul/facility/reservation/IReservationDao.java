@@ -15,4 +15,7 @@ public interface IReservationDao {
 	void insertReservation(@Param("facilityId") String facilityId, @Param("userId") String userId, @Param("selectedDate") String selectedDate, @Param("selectedTime") String selectedTime);
 
 	List<Map<String, Object>> findAllReservedDates(@Param("id") String id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+	List<ReservationDto> findReservationsByMemberId(@Param("u_m_id") String u_m_id);
+
 }
