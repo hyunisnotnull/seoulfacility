@@ -21,6 +21,6 @@ public class AdminDto {
 	private String a_m_phone;
 	private String a_m_reg_date ;
 	private String a_m_mod_date	;
-	
+	private String a_m_role;
 	
 }

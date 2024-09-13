@@ -1,4 +1,7 @@
 <script th:fragment="js" th:inline="javascript">
+/*<![CDATA[*/
+let textFromDB = /*[[${facilityDto.DTLCONT}]]*/ 
+/*]]>*/
 
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -29,4 +32,9 @@ window.onload = function() {
 
 // 텍스트 에어리어 자동 높이 설정
 
+$(document).ready(function() {	
+	let formattedText = textFromDB.replace(/\n/g, "<br>");
+	document.getElementById("output").innerHTML = formattedText;
+
+});
 </script>
