@@ -64,7 +64,7 @@ public class MemberController {
 	}
 	
 	/*
-	 * 로그인
+	 * 로그인 실패 
 	 */
 	@GetMapping("/member_login_result")
 	public String memberLoginConfirm() {
@@ -189,5 +189,14 @@ public class MemberController {
 		
 	}
 	
+	// 권한 거부
+	@GetMapping("/access_denied")
+	public String accessDenied() {
+		log.info("accessDenied()");
+		
+		String nextPage = "member/access_denied";
+		
+		return nextPage;
+	}	
 	
 }
