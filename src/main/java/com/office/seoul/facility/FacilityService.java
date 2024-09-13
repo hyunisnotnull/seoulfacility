@@ -68,13 +68,10 @@ public class FacilityService {
     public Map<String, Object> getOptions(String area, String category) {
         Map<String, Object> options = new HashMap<>();
         
-        // Get areas (if needed, you might not need to fetch areas every time)
         List<String> areas = getAreas();
         
-        // Get categories based on selected area
         List<String> categories = area != null ? getCategoriesByArea(area) : new ArrayList<>();
         
-        // Get results based on selected area and category
         List<String> results = (area != null && category != null) ? getResults(area, category) : new ArrayList<>();
         
         options.put("areas", areas);
@@ -84,9 +81,16 @@ public class FacilityService {
         return options;
     }
 
+
 	public List<FacilityDto> getFacilitiesByIds(List<String> facilityIds) {
 		
 		return iFacilityDao.findFacilitiesByIds(facilityIds);
+	}
+
+	public String getFacilityIdByPlacenm(String placenm) {
+		log.info("placenm : ", placenm);
+		
+		return iFacilityDao.getFacilityIdByPlacenm(placenm);
 	}
 
 }

@@ -18,5 +18,6 @@ public class MemberDto {
 	private String u_m_phone;
 	private String u_m_reg_date;
 	private String u_m_mod_date;
+	private String u_m_role;
 	
 }

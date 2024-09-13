@@ -23,6 +23,9 @@ public interface IFacilityDao {
 
 	public List<String> getResults(Map<String, Object> params);
 
+
 	public List<FacilityDto> findFacilitiesByIds(@Param("facilityIds") List<String> facilityIds);
+
+	public String getFacilityIdByPlacenm(String placenm);
 
 }

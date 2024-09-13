@@ -36,21 +36,21 @@
             
             <div class="calendar">
             <div class="calendar_control">
-                    <a id="pre_month" href="#none">이전 달</a>
+                    <a id="pre_month" href="#none">◀</a>
                     <span id="calendar_month"><!-- 년, 월 동적  --></span>
-                    <a id="next_month" href="#none">다음 달</a>
+                    <a id="next_month" href="#none">▶</a>
                 </div>
                 <table>
                       
                     <thead>
                        <tr class="day">
-                            <th>월요일</th>
-                            <th>화요일</th>
-                            <th>수요일</th>
-                            <th>목요일</th>
-                            <th>금요일</th>
-                            <th>토요일</th>
-                            <th>일요일</th>
+                            <th>월</th>
+                            <th>화</th>
+                            <th>수</th>
+                            <th>목</th>
+                            <th>금</th>
+                            <th>토</th>
+                            <th>일</th>
                         </tr>
                     </thead>
                     
@@ -72,8 +72,8 @@
             
              </li>
 
-            <li><b>이용기간 </b> : <span th:text="${facilityDto.SVCOPNBGNDT}"></span></li>
-            <li><b>접수기간 </b> : <span th:text="${facilityDto.RCPTBGNDT}"></span> </li>
+            <li><b>이용기간 </b> : <span th:text="|${#strings.substring(facilityDto.SVCOPNBGNDT,0,10)}  ~ ${#strings.substring(facilityDto.SVCOPNENDDT,0,10)}|"></span></li>
+            <li><b>접수기간 </b> : <span th:text="|${#strings.substring(facilityDto.RCPTBGNDT,0,10)}  ~ ${#strings.substring(facilityDto.RCPTENDDT,0,10)}|"></span> </li>
             <li><b>선별방법 </b> : <span>선착순</span></li>
             <li><b>이용요금 </b> : <span th:text="${facilityDto.PAYATNM}"></span> </li>
             <li><b>접수상태 </b> : <span th:text="${facilityDto.SVCSTATNM}"></span> </li>
@@ -89,7 +89,7 @@
            </ul>
            
            <!-- <a th:href="@{/reservation}" class="reservation_apply">예약하기</a> -->
-           <form id="reservation-form" th:action="@{/reservation/select}" method="post">
+           <form id="reservation_form" th:action="@{/reservation/select}" method="post">
                <input type="hidden" name="facilityId" th:value="${facilityDto.SVCID}">
                <input type="hidden" name="userId" th:value="${loginedMemberDto}">
                <input type="hidden" name="selectedDate" id="selectedDate">

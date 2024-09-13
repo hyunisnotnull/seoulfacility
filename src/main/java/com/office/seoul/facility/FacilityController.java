@@ -2,6 +2,7 @@ package com.office.seoul.facility;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,14 +78,18 @@ public class FacilityController {
 		
 		String nextPage = "facility/detail_view";
 		
-		String loginedMemberDto = principal.getName();
+		String loginedMemberDto = null;
+	    if (principal != null) {
+	        loginedMemberDto = principal.getName();
+	    }
 	    
 	    FacilityDto facilityDto = facilityService.getFacilityById(id);
 	    if (facilityDto != null) {
 	    	
 	    	LocalDate today = LocalDate.now();
 	        LocalDate endDate = today.plusMonths(2);
-	        Map<String, Boolean> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
+//	        Map<String, Boolean> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
+	        Map<String, String> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
 	    	
 	        model.addAttribute("facilityDto", facilityDto);
 	        model.addAttribute("loginedMemberDto", loginedMemberDto);
@@ -106,5 +111,26 @@ public class FacilityController {
                                            @RequestParam(value = "category", required = false) String category) {
         return facilityService.getOptions(area, category);
     }
+	
+	@GetMapping("/quickReserved")
+	@ResponseBody
+	public Map<String, String> quickReserved(@RequestParam(value = "placenm") String placenm) {
+	    log.info("quickReserved() with placenm: {}", placenm);
+
+	    // placenm으로 시설 ID 조회
+	    String facilityId = facilityService.getFacilityIdByPlacenm(placenm);
+
+	    log.info("placenm: {}", placenm);
+	    log.info("facilityId: {}", facilityId);
+
+	    Map<String, String> response = new HashMap<>();
+	    if (facilityId != null) {
+	        response.put("redirectUrl", "/facility/detailView/" + facilityId);
+	    } else {
+	        response.put("redirectUrl", "/");
+	    }
+
+	    return response;
+	}
 
 }
