@@ -52,7 +52,7 @@ select * from TBL_ADMIN_MEMBER;
 select * from TBL_USER_MEMBER;
 select * from TBL_RESERVE_INFO;
 select * from TBL_COMMENT;
-drop table TBL_FACILITY;
+drop table TBL_RESERVE_INFO;
 
 ALTER TABLE TBL_USER_MEMBER ADD COLUMN U_M_ROLE VARCHAR(10) DEFAULT 'USER';
 

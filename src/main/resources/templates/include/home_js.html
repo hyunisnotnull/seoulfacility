@@ -95,9 +95,9 @@ $(document).ready(function() {
         updateOptions(selectedArea, selectedCategory);
     });
     
-    // 빠른 예약 버튼 클릭 이벤트
     $('#quick_btn').click(function() {
-        var selectedResult = $('#SVCNM').val();
+        let selectedResult = $('#SVCNM').val();
+        console.log('Selected Result:', selectedResult); // 선택된 값 로그
 
         $.ajax({
             url: '/facility/quickReserved',
@@ -106,6 +106,7 @@ $(document).ready(function() {
                 svcnm: selectedResult
             },
             success: function(response) {
+                console.log('Response:', response); // 응답 로그
                 if (response.redirectUrl) {
                     window.location.href = response.redirectUrl;
                 } else {

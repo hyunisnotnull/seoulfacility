@@ -72,7 +72,7 @@
     
     <!-- 빠른 예약 SVCNM 으로 찾기 -->
     <select id="getFacilityIdBySvcnm" parameterType="String" resultType="String">
-    	SELECT SVCID FROM TBL_FACILITY WHERE SVCNM = #{svcnm} AND SVCSTATNM = '안내중' OR '접수중';
+    	SELECT SVCID FROM TBL_FACILITY WHERE SVCNM = #{svcnm} AND (SVCSTATNM = '안내중' OR SVCSTATNM = '접수중');
 	</select>
 
     <select id="findFacilitiesByIds" 

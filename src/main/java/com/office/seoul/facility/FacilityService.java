@@ -82,7 +82,7 @@ public class FacilityService {
     }
 
 	public String getFacilityIdBySvcnm(String svcnm) {
-		log.info("svcnm : ", svcnm);
+		log.info("svcnm : {}", svcnm);
 		
 		return iFacilityDao.getFacilityIdBySvcnm(svcnm);
 	}
