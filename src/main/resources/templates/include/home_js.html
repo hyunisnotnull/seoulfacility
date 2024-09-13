@@ -86,5 +86,29 @@ $(document).ready(function() {
         let selectedCategory = $(this).val();
         updateOptions(selectedArea, selectedCategory);
     });
+    
+    // 빠른 예약 버튼 클릭 이벤트
+    $('#quick_btn').click(function() {
+        var selectedResult = $('#PLACENM').val();
+
+        $.ajax({
+            url: '/facility/quickReserved',
+            method: 'GET',
+            data: {
+                placenm: selectedResult
+            },
+            success: function(response) {
+                if (response.redirectUrl) {
+                    window.location.href = response.redirectUrl;
+                } else {
+                    alert('해당 시설을 찾을 수 없습니다.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('시설 ID를 가져오는 데 실패했습니다:', error);
+            }
+        });
+    });
+ 	
 });
 </script>

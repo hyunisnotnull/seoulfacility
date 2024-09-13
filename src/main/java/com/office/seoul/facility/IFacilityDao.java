@@ -22,4 +22,6 @@ public interface IFacilityDao {
 
 	public List<String> getResults(Map<String, Object> params);
 
+	public String getFacilityIdByPlacenm(String placenm);
+
 }

@@ -29,8 +29,8 @@ public class MemberDetailService implements UserDetailsService {
 			return User.builder()
 					.username(selectedMemberDto.getU_m_id())
 					.password(selectedMemberDto.getU_m_pw())
+					.roles(selectedMemberDto.getU_m_role())
 					.build();
-			
 		}
 		
 		return null;

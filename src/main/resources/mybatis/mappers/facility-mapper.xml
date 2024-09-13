@@ -69,5 +69,9 @@
             </if>
         </where>
     </select>
+    
+    <select id="getFacilityIdByPlacenm" parameterType="String" resultType="String">
+    	SELECT SVCID FROM TBL_FACILITY WHERE PLACENM = #{placenm} AND SVCSTATNM = '안내중';
+    </select>
 	
 </mapper>
