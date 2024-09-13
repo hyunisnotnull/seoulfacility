@@ -1,6 +1,8 @@
 package com.office.seoul.facility.reservation;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,4 +14,5 @@ public interface IReservationDao {
 
 	void insertReservation(@Param("facilityId") String facilityId, @Param("userId") String userId, @Param("selectedDate") String selectedDate, @Param("selectedTime") String selectedTime);
 
+	List<Map<String, Object>> findAllReservedDates(@Param("id") String id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

@@ -28,7 +28,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api")
 public class ApiController {
 	
-	@Value("${api-key}")
+	@Value("${seoul-api-key}")
     private String apiKey;
 	
 	private final FacilityRepository facilityRepository;

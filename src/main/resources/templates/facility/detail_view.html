@@ -10,7 +10,7 @@
 <script th:replace="~{/include/calendar_js.html::js}"></script>
 <script th:replace="~{/include/tab_js.html::js}"></script>
 <script th:replace="~{/include/googlemap_js.html::js}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiexwwtmPQBCJLNF4cx3Vat0etDYXCdeY"></script>
+<script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${apiKey}"></script>
 </head>
 <body>
     <header th:replace="~{/include/header_nav_footer.html::header}"></header>

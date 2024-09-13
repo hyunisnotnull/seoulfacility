@@ -1,4 +1,4 @@
-<script th:fragment="js">
+<script th:fragment="js" th:inline="javascript">
 
 $(document).ready(function() {
     console.log('DOCUMENT READY');
@@ -15,6 +15,10 @@ $(document).ready(function() {
         const date = new Date(year, month, day);
         return date < now;
     }
+
+    // 예약 상태 데이터
+    const reservationStatus = /*[[${reservationStatus}]]*/ {};
+    console.log('Reservation Status:', reservationStatus); // 데이터 확인
 
     // 달력 생성
     function generateCalendar(year, month) {
@@ -43,8 +47,15 @@ $(document).ready(function() {
                     row += '<td></td>';
                 } else {
                     const isPast = isPastDate(year, month, day);
-                    // 현재 날짜 기준으로 지난 날들 예약불가 처리
-                    const cellContent = isPast ? `${day}일 (예약 불가)` : `<a href="#none" class="date-cell">${day}일 (예약 가능)</a>`;
+                    const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+                    // 예약 상태 확인
+                    const isReserved = reservationStatus[dateStr] === true; // `true` 값 확인
+                    const cellContent = isPast 
+                        ? `${day}일 (예약 불가)` 
+                        : isReserved 
+                            ? `${day}일 (예약 불가)` 
+                            : `<a href="#none" class="date-cell">${day}일 (예약 가능)</a>`;
 
                     row += `<td>${cellContent}</td>`;
                     day++;
@@ -77,8 +88,7 @@ $(document).ready(function() {
 
     // 달력 네비 버튼 상태 (활성화 / 비활성화) 함수
     function navBtn() {
-    	
-    	// 최대 허용 년, 월 설정
+        // 최대 허용 년, 월 설정
         const maxAllowedYear = now.getFullYear();
         let maxAllowedMonth = now.getMonth() + maxMonth;
 
@@ -94,9 +104,9 @@ $(document).ready(function() {
         $('#pre_month').toggle(!prevMonth);
     }
 
- 	// 이전 달 버튼
+    // 이전 달 버튼
     $('#pre_month').click(function(event) {
-    	console.log('PRE_MONTH BTN CLICK');
+        console.log('PRE_MONTH BTN CLICK');
         event.preventDefault(); 
         if (currentYear === now.getFullYear() && currentMonth === now.getMonth()) {
             return;
@@ -110,9 +120,9 @@ $(document).ready(function() {
         updateCalendar();
     });
 
- 	// 다음 달 버튼
+    // 다음 달 버튼
     $('#next_month').click(function(event) {
-    	console.log('NEXT_MONTH BTN CLICK');
+        console.log('NEXT_MONTH BTN CLICK');
         event.preventDefault(); 
         const maxAllowedYear = now.getFullYear();
         let maxAllowedMonth = now.getMonth() + maxMonth;
@@ -131,19 +141,19 @@ $(document).ready(function() {
             updateCalendar();
         }
     });
- 	
- 	// 날짜 클릭 이벤트
+
+    // 날짜 클릭 이벤트
     $(document).on('click', '.date-cell', function(event) {
-    	console.log('DATE BTN CLICK');
+        console.log('DATE BTN CLICK');
         event.preventDefault();
         const day = $(this).text().split('일')[0];
-        const selectedDate = `${currentYear}-${currentMonth + 1}-${day.padStart(2, '0')}`;
+        const selectedDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.padStart(2, '0')}`;
         $('#selectedDate').val(selectedDate);
         $('.date-cell').removeClass('selected');
         $(this).addClass('selected');
         console.log(`Selected Date: ${selectedDate}`); 
     });
- 	
+
     $('#reservation_button').click(function() {
         console.log('RESERVATION BTN CLICK');
         const selectedDate = $('#selectedDate').val();
@@ -154,7 +164,10 @@ $(document).ready(function() {
 
         $('#reservation-form').submit();
     });
+
+    // 초기 달력 생성
     updateCalendar();
+    
 });
 
 </script>

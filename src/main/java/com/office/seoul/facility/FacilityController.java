@@ -1,9 +1,11 @@
 package com.office.seoul.facility;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.office.seoul.facility.reservation.ReservationService;
+
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -19,10 +23,15 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/facility")
 public class FacilityController {
 	
-	private final FacilityService facilityService;
+	@Value("${google-api-key}")
+	private String apiKey;
 	
-	public FacilityController(FacilityService facilityService) {
+	private final FacilityService facilityService;
+	private final ReservationService reservationService;
+	
+	public FacilityController(FacilityService facilityService, ReservationService reservationService) {
 		this.facilityService = facilityService;
+		this.reservationService = reservationService;
 	}
 	
 	@GetMapping({"", "/"})
@@ -72,8 +81,18 @@ public class FacilityController {
 	    
 	    FacilityDto facilityDto = facilityService.getFacilityById(id);
 	    if (facilityDto != null) {
+	    	
+	    	LocalDate today = LocalDate.now();
+	        LocalDate endDate = today.plusMonths(2);
+	        Map<String, Boolean> reservationStatus = reservationService.getReservationStatus(id, today, endDate);
+	    	
 	        model.addAttribute("facilityDto", facilityDto);
 	        model.addAttribute("loginedMemberDto", loginedMemberDto);
+	        model.addAttribute("reservationStatus", reservationStatus);
+	        model.addAttribute("startDate", today.toString());
+	        model.addAttribute("endDate", endDate.toString());
+	        model.addAttribute("apiKey", apiKey);
+	        
 	    } else {
 	        model.addAttribute("error", "Facility not found");
 	    }

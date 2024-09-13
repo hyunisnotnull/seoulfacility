@@ -9,7 +9,7 @@
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
 <link rel="stylesheet" th:href="@{/css/common/home.css}">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
 <script th:replace="~{/include/home_js.html::js}"></script>
 
 </head>
