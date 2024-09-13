@@ -70,8 +70,23 @@
         </where>
     </select>
     
+
+    <select id="findFacilitiesByIds" 
+    		parameterType="list" 
+    		resultType="com.office.seoul.facility.FacilityDto">
+    
+        SELECT * FROM 
+        	TBL_FACILITY
+        WHERE 
+        	SVCID IN
+        <foreach item="facilityId" index="index" collection="facilityIds" open="(" separator="," close=")">
+            #{facilityId}
+        </foreach>
+	</select>
+
     <select id="getFacilityIdByPlacenm" parameterType="String" resultType="String">
     	SELECT SVCID FROM TBL_FACILITY WHERE PLACENM = #{placenm} AND SVCSTATNM = '안내중';
     </select>
+
 	
 </mapper>

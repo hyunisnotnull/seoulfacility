@@ -28,5 +28,16 @@
       	AND R_USE_STATE IN ('예약', '예약대기')
 	    GROUP BY R_RESERVE_DATE
 	</select>
+	
+	<!-- 예약 정보 조회 -->
+	<select id="findReservationsByMemberId" parameterType="String" resultType="com.office.seoul.facility.reservation.ReservationDto">
+        
+        SELECT * FROM 
+        	TBL_RESERVE_INFO
+		WHERE 
+			U_M_ID = #{u_m_id}
+		ORDER BY R_RESERVE_DATE ASC
+
+    </select>
 
 </mapper>

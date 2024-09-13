@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface IFacilityDao {
@@ -21,6 +22,9 @@ public interface IFacilityDao {
 	public List<String> getCategoriesByArea(String area);
 
 	public List<String> getResults(Map<String, Object> params);
+
+
+	public List<FacilityDto> findFacilitiesByIds(@Param("facilityIds") List<String> facilityIds);
 
 	public String getFacilityIdByPlacenm(String placenm);
 

@@ -81,6 +81,12 @@ public class FacilityService {
         return options;
     }
 
+
+	public List<FacilityDto> getFacilitiesByIds(List<String> facilityIds) {
+		
+		return iFacilityDao.findFacilitiesByIds(facilityIds);
+	}
+
 	public String getFacilityIdByPlacenm(String placenm) {
 		log.info("placenm : ", placenm);
 		
