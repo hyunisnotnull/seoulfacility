@@ -95,7 +95,10 @@
                <input type="hidden" name="facilityId" th:value="${facilityDto.SVCID}">
                <input type="hidden" name="userId" th:value="${loginedMemberDto}">
                <input type="hidden" name="selectedDate" id="selectedDate">
-               <button type="button" id="reservation_button" class="reservation_apply">예약하기</button>
+               <button type="button" id="reservation_button" class="reservation_apply" 
+                  th:classappend="${facilityDto.SVCSTATNM eq '예약마감' || 
+                  					facilityDto.SVCSTATNM eq '예약일시중지' || 
+                  					facilityDto.SVCSTATNM eq '접수종료'} ? 'disabled' : ''">예약하기</button>
            </form>
            
         </li>
@@ -103,9 +106,9 @@
        </ul>
    
       <div class="tab">
-       <button class="tablinks" onclick="openTab(event, 'Tab1')">이용안내</button>
-      <button class="tablinks" onclick="openTab(event, 'Tab2')">장소안내</button>
-       <button class="tablinks" onclick="openTab(event, 'Tab3')">이용후기</button>
+       	<button class="tablinks" onclick="openTab(event, 'Tab1')">이용안내</button>
+      	<button class="tablinks" onclick="openTab(event, 'Tab2')">장소안내</button>
+       	<button class="tablinks" onclick="openTab(event, 'Tab3')">이용후기</button>
       </div>
 
    <div id="Tab1" class="tab-content">

@@ -176,6 +176,11 @@ $(document).ready(function() {
             alert('날짜를 선택해주세요.');
             return;
         }
+        
+        if ($('#reservation_button').hasClass('disabled')) {
+            alert('현재 예약이 불가능한 상태입니다.');
+            return;
+        }
 
         $('#reservation_form').submit();
     });
