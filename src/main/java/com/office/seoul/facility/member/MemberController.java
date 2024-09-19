@@ -2,7 +2,6 @@ package com.office.seoul.facility.member;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
@@ -34,9 +33,7 @@ public class MemberController {
 		this.facilityService = facilityService;
 	}
 
-	/*
-	 * 회원가입
-	 */
+	// 회원가입
 	@GetMapping("/create_account_form")
 	public String createAccountForm() {
 		log.info("createAccountForm()");
@@ -77,17 +74,30 @@ public class MemberController {
 	}
 
 	/*
-	 * 로그인 실패 
+	 * 로그인 성공
+	 * 
+	 * @GetMapping("/member_login_confirm") public String memberLoginConfirm() {
+	 * log.info("memberLoginConfirm()");
+	 * 
+	 * String nextPage = "redirect:/";
+	 * 
+	 * return nextPage;
+	 * 
+	 * }
 	 */
-	@GetMapping("/member_login_result")
-	public String memberLoginConfirm() {
-		log.info("memberLoginConfirm()");
 
-		String nextPage = "/member/member_login_result";
-
-		return nextPage;
-
-	}
+	/*
+	 * 로그인 실패
+	 * 
+	 * @GetMapping("/member_login_result") public String memberLoginFail() {
+	 * log.info("memberLoginFail()");
+	 * 
+	 * String nextPage = "/member/member_login_result";
+	 * 
+	 * return nextPage;
+	 * 
+	 * }
+	 */
 
 	/*
 	 * 정보수정
@@ -102,24 +112,8 @@ public class MemberController {
 		MemberDto loginedMemberDto = memberService.MemberModifyForm(principal.getName());
 		log.info("MemberModifyForm() with loginedMemberDto: {}", loginedMemberDto);
 
-		// 해당 회원의 예약 정보 조회
-
-		List<ReservationDto> reservations = reservationService.getReservationsByMemberId(loginedMemberDto.getU_m_id());
-		log.info("MemberModifyForm() with reservations: {}", reservations);
-		
-		 // 예약된 시설 ID 목록 추출 (중복 허용)
-	    List<String> facilityIds = reservations.stream()
-	                                           .map(ReservationDto::getSVCID)
-	                                           .collect(Collectors.toList());
-
-	    // 시설 정보 조회
-	    List<FacilityDto> facilityMap = facilityService.getFacilitiesByIds(facilityIds);
-		 
-
-		// 모델에 회원 정보 및 예약 정보 추가
+		// 모델에 회원 정보 추가
 		model.addAttribute("loginedMemberDto", loginedMemberDto);
-		model.addAttribute("reservations", reservations);
-		model.addAttribute("facilityMap", facilityMap);
 
 		return nextPage;
 	}
@@ -141,6 +135,50 @@ public class MemberController {
 		return nextPage;
 
 	}
+
+	// 예약 확인 보기
+	@GetMapping("/member_reservation_form")
+	public String MemberReservationForm(Principal principal, Model model) {
+		log.info("MemberReservationForm()");
+
+		String nextPage = "/member/member_reservation_form";
+
+		// 로그인한 회원 정보 조회
+		MemberDto loginedMemberDto = memberService.MemberModifyForm(principal.getName());
+		log.info("MemberModifyForm() with loginedMemberDto: {}", loginedMemberDto);
+
+		// 해당 회원의 예약 정보 조회
+		List<ReservationDto> reservations = reservationService.getReservationsByMemberId(loginedMemberDto.getU_m_id());
+		log.info("MemberModifyForm() with reservations: {}", reservations);
+
+		// 예약된 시설 ID 목록 추출 (중복 허용)
+		List<String> facilityIds = reservations.stream().map(ReservationDto::getSVCID).collect(Collectors.toList());
+
+		// 시설 정보 조회
+		List<FacilityDto> facilityMap = facilityService.getFacilitiesByIds(facilityIds);
+
+		// 모델에 회원 정보 및 예약 정보 추가
+		model.addAttribute("reservations", reservations);
+		model.addAttribute("facilityMap", facilityMap);
+
+		return nextPage;
+	}
+
+	/*
+	 * // 예약 취소 확인
+	 * 
+	 * @PostMapping("/member_reservation_confirm") public String
+	 * memberReservationConfirm(MemberDto memberDto, Model model) {
+	 * log.info("memberReservationConfirm()");
+	 * 
+	 * String nextPage = "/member/member_reservation_form";
+	 * 
+	 * int result = memberService.memberReservationConfirm(memberDto);
+	 * 
+	 * return nextPage;
+	 * 
+	 * }
+	 */
 
 	/*
 	 * 회원 탈퇴
@@ -225,9 +263,9 @@ public class MemberController {
 	@GetMapping("/access_denied")
 	public String accessDenied() {
 		log.info("accessDenied()");
-		
+
 		String nextPage = "member/access_denied";
-		
+
 		return nextPage;
-	}	
+	}
 }

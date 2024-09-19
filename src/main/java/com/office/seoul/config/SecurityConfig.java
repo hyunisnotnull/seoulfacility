@@ -47,7 +47,8 @@ public class SecurityConfig {
         				"/member/find_id_confirm",
         				"/member/find_password_form",
         				"/member/find_password_confirm",
-        				"/facility/**").permitAll() // 모든 요청을 허용
+        				"/facility/**",
+        				"/review/{facilityId}").permitAll() // 모든 요청을 허용
                 .requestMatchers("/reservation/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
         )

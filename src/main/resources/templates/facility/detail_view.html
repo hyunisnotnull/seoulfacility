@@ -9,6 +9,7 @@
 <script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
 <script th:replace="~{/include/calendar_js.html::js}"></script>
 <script th:replace="~{/include/tab_js.html::js}"></script>
+<script th:replace="~{/include/review_js.html::js}"></script>
 <script th:replace="~{/include/googlemap_js.html::js}"></script>
 <script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${apiKey}"></script>
 </head>
@@ -90,7 +91,6 @@
             <span class="line1"  th:unless="${facilityDto.TELNO.length >= 41}" th:text="${facilityDto.TELNO}" />
            </ul>
            
-           <!-- <a th:href="@{/reservation}" class="reservation_apply">예약하기</a> -->
            <form id="reservation_form" th:action="@{/reservation/select_time}" method="post">
                <input type="hidden" name="facilityId" th:value="${facilityDto.SVCID}">
                <input type="hidden" name="userId" th:value="${loginedMemberDto}">
@@ -121,20 +121,55 @@
        <br>
       <div id="map" style="width:1180px; height:500px; margin: 0 auto;">
        </div>
+
        	<br><h3>주소</h3> <br>
        	 <span id="getAddress"></span>
        	 <br>
        	<br><h3>전화번호</h3> <br>
        	 <span class="phone" th:text="${facilityDto.TELNO}"></span>
+
    </div>
 
    <div id="Tab3" class="tab-content">
-     
-       <p>이곳은 탭 3의 내용입니다.</p>
-   </div>
-
-
-
+	    <h3>이용 후기</h3>
+	    <div id="averageRating"></div>
+	    <form id="reviewForm">
+	        <input type="hidden" id="facilityId" name="facilityId" th:value="${facilityDto.SVCID}">
+	        <input type="hidden" id="userId" name="userId" th:value="${loginedMemberDto}">
+	    
+	        <label for="reviewText">후기:</label>
+	        <textarea id="reviewText" name="reviewText" placeholder="후기를 입력해주세요" rows="4"></textarea><br>
+	    
+	        <label for="reviewRating">별점:</label>
+	        <div id="starRating">
+	            <span class="star" data-value="1">&#9733;</span>
+	            <span class="star" data-value="2">&#9733;</span>
+	            <span class="star" data-value="3">&#9733;</span>
+	            <span class="star" data-value="4">&#9733;</span>
+	            <span class="star" data-value="5">&#9733;</span>
+	        </div>
+	        <select id="reviewRating" name="reviewRating" style="display: none;">
+	            <option value="">-- 선택 --</option>
+	            <option value="1">1</option>
+	            <option value="2">2</option>
+	            <option value="3">3</option>
+	            <option value="4">4</option>
+	            <option value="5">5</option>
+	        </select><br>
+	    
+	        <button type="submit" id="submitReview">후기 등록</button>
+	    </form>
+	
+	    <ul id="reviewList">
+	        <!-- 후기 리스트 동적 추가 -->
+	    </ul>
+	    
+	    <div id="pagination">
+	        <button id="prevPage" disabled>◀</button>
+	        <span id="pageInfo"></span>
+	        <button id="nextPage">▶</button>
+	    </div>
+	</div>
 
       </div>
    </section>
