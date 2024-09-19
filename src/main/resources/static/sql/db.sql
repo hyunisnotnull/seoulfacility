@@ -1,10 +1,11 @@
 CREATE DATABASE DB_FACILITY;
 USE DB_FACILITY;
-
 -- SEOUL_FACILITY DATABASE
 
+SELECT host FROM mysql.user WHERE user = 'root';
+SELECT host FROM mysql.user WHERE user = 'user';
 
-drop table tbl_facility;
+drop table TBL_FACILITY;
 
 CREATE TABLE TBL_FACILITY(
 	GUBUN VARCHAR(20) ,
@@ -58,13 +59,12 @@ select * from TBL_USER_MEMBER;
 select * from TBL_RESERVE_INFO;
 select * from TBL_COMMENT;
 
-drop table TBL_ADMIN_MEMBER;
+drop table TBL_USER_MEMBER;
 
 SELECT c_no, SVCID, u_m_id, c_text, c_rank, c_reg_date, c_mod_date FROM TBL_COMMENT WHERE SVCID = 'S200903171905941615';
 SELECT * FROM TBL_COMMENT WHERE SVCID = 'S200903171905941615' order by c_no desc;
 
 ALTER TABLE TBL_USER_MEMBER ADD COLUMN U_M_ROLE VARCHAR(10) DEFAULT 'USER';
-
 
 -- 연습용 끝
 
@@ -111,11 +111,9 @@ CREATE TABLE TBL_RESERVE_INFO (
 	R_USE_TIME	VARCHAR(50),
 	PRIMARY KEY (R_NO)
 );
-<<<<<<< HEAD
-drop table TBL_COMMENT;
-=======
 
->>>>>>> 6de1e5e3a7442b42f268b3b142367fab589992d0
+drop table TBL_COMMENT;
+
 
 CREATE TABLE TBL_COMMENT (
 	C_NO		INT AUTO_INCREMENT,
