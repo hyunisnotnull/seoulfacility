@@ -1,22 +1,20 @@
  section {
     width: 100%;
-    min-height: 600px;
-    background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/bg_img2.jpg") ;
-
+    min-height: 680px;
+    background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/yback.jpg") ;
+	background-size: cover;
+	background-position: center;
+	
 } 
  
 
  section #section_wrap {
 	width: 1300px;
 	margin: 0 auto;
-	
+	position: relative;
 	
 	}
 
-	section #section_wrap .mention {
-		height: 390px;
-
-	}
 	
 	
 
@@ -28,8 +26,9 @@
 	margin: 0 auto;
 	padding: 40px;
 	border-radius: 20px 20px 0 0;
-	
-	
+	position: absolute;
+	top: 500px;
+ 	left: 80px;
  }
 
 
@@ -79,3 +78,91 @@
 	cursor: pointer;
 
  }
+<<<<<<< HEAD
+ 
+=======
+ 
+ 
+ #home_section2 {
+  width: 100%;
+  min-height: 680px;
+  background-image:none;
+ 
+ }
+ 
+ 
+ 
+  #home_section2 #section_wrap {
+ 	width: 1300px;
+	margin: 50px auto;
+  }
+  
+  #home_section2 #section_wrap .mention {
+   font-weight: bold;
+   font-size: 1.1em; 
+   margin: 10px 30px;
+  }
+  
+  #home_section2 #section_wrap .mention p {
+  	color : rgb(128, 128, 128);
+  }
+  
+  #home_section2 #section_wrap ul {
+    
+		display:flex;
+   		justify-content: center;
+    }
+  
+  
+  #home_section2 #section_wrap ul li {
+  	margin: 10px 20px;
+  }
+  
+  
+  /* 
+  추천 서비스 이미지 */
+  
+  .img_box {
+  width: 282px;
+  height: 380px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 10px;
+  }
+  
+  .img_box img {
+  height: 380px;
+  
+  }
+  
+  
+  .img_box .category {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #fff;
+  font-size: .9em;
+  padding-bottom:5px; 
+  border-bottom: 1px solid #fff;
+  
+  }
+  
+    .img_box h3 {
+    position: absolute;
+ 	top: 60px;
+ 	left: 20px;
+ 	color: #fff;
+ 	font-size: 1.6em;
+ 	font-weight: normal;
+    }
+  
+  
+    .img_box .location {
+    position: absolute;
+ 	top: 150px;
+ 	left: 20px;
+ 	color: #fff;
+ 	font-size: 1.1em;
+ 	font-weight: normal;
+    }
+>>>>>>> c4cc4a31c7171c882832c1617f18cba8992b89d3

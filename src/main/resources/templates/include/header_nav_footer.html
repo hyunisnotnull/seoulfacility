@@ -7,15 +7,15 @@
 </head>
 
 <header th:fragment="header">
-	<div id="header_wrap">
+	<!--  <div id="header_wrap">
 		 <div class="profile">
 
                  <a th:href="@{/}"> USER |</a> 
-                <a th:href="@{/admin}"> ADMIN </a>
+                <a th:href="@{/}"> ADMIN </a>
 
           </div>
 		
-	</div>
+	</div> -->
 </header>
 
 
@@ -36,7 +36,8 @@
                    </div>
                    <div sec:authorize="isAuthenticated()">
                     <a th:href="@{/}">HOME</a> &nbsp; |&nbsp; 
-                    <a th:href="@{/member/member_modify_form}">마이페이지</a>&nbsp; |&nbsp; 
+                    <a th:href="@{/member/member_modify_form}">예약내역확인</a>&nbsp; |&nbsp; 
+                    <a th:href="@{/member/member_modify_form}">회원정보수정</a>&nbsp; |&nbsp; 
                     <a th:href="@{/member/member_logout_confirm}">로그아웃</a>
                		<a th:href="@{/facility}">체육시설</a>
                   	<a th:href="@{/api/data}">공공 API 불러오기</a>&nbsp;&nbsp;&nbsp;

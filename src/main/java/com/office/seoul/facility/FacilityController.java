@@ -137,4 +137,18 @@ public class FacilityController {
 	    return response;
 	}
 
+	
+	@GetMapping("/findFour")
+	@ResponseBody
+    public Map<String, Object> findFour(){
+		
+		log.info("findFour");
+		
+	    Map<String, Object> response = facilityService.getFindFour();
+	    
+	    return response;
+	    
+    }
+
+	
 }
