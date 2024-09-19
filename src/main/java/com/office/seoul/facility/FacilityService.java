@@ -90,4 +90,18 @@ public class FacilityService {
 		return iFacilityDao.findFacilitiesByIds(facilityIds);
 	}
 
+	
+
+	public Map<String, Object> getFindFour() {
+        log.info("getFindFour");
+
+        List<FacilityDto> facilities = iFacilityDao.getFindFour();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("items", facilities);
+
+        return response;
+
+   }
+
 }
