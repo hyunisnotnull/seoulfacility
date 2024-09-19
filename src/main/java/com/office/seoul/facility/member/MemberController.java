@@ -4,11 +4,14 @@ import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.office.seoul.facility.FacilityDto;
 import com.office.seoul.facility.FacilityService;
@@ -164,21 +167,23 @@ public class MemberController {
 		return nextPage;
 	}
 
-	/*
-	 * // 예약 취소 확인
-	 * 
-	 * @PostMapping("/member_reservation_confirm") public String
-	 * memberReservationConfirm(MemberDto memberDto, Model model) {
-	 * log.info("memberReservationConfirm()");
-	 * 
-	 * String nextPage = "/member/member_reservation_form";
-	 * 
-	 * int result = memberService.memberReservationConfirm(memberDto);
-	 * 
-	 * return nextPage;
-	 * 
-	 * }
-	 */
+	
+	 // 예약 취소 확인
+	  
+	@PostMapping("/member_reservation_confirm")
+	public ResponseEntity<String> memberReservationConfirm(@RequestParam("r_no") String reservationId) {
+	    log.info("memberReservationConfirm() with reservationId: {}", reservationId);
+
+	    // 예약 취소 처리 로직 추가
+	    int result = reservationService.cancelReservation(reservationId);
+
+	    if (result > 0) {
+	        return ResponseEntity.ok("예약이 취소되었습니다.");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 취소에 실패했습니다.");
+	    }
+	}
+	 
 
 	/*
 	 * 회원 탈퇴

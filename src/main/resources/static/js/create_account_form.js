@@ -16,7 +16,7 @@ function createAccountForm() {
         return;
 	} else if (!idRegex.test(form.u_m_id.value)) {
 	        alert('아이디는 6자 이상 15자 이하의 영어 또는 숫자여야 합니다.');
-	        form.u_m_pw.focus();
+	        form.u_m_id.focus();
 	        return;
 	    }
 

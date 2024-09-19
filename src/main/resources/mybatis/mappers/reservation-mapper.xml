@@ -39,5 +39,12 @@
 		ORDER BY R_RESERVE_DATE ASC
 
     </select>
+    
+    <delete id="deleteReservationById" parameterType="String">
+    
+        DELETE FROM TBL_RESERVE_INFO
+        WHERE R_NO = #{reservationId}
+        
+    </delete>
 
 </mapper>

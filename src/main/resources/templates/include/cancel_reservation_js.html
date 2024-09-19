@@ -1,35 +1,30 @@
 <script th:fragment="js">
 
+
 $(document).ready(function() {
-    // 예약 취소 함수
-    function cancelReservation(reservationId) {
-        if (confirm('정말로 예약을 취소하시겠습니까?')) {
+	
+    $(".cancel_reservation").click(function() {
+        // 버튼의 data-reservation-id 속성에서 예약 ID 가져오기
+        let reservationId = $(this).data("reservation-id");
+        console.log("예약 ID:", reservationId);
+        // 확인 대화상자 표시
+        if (confirm("예약을 취소하시겠습니까?")) {
+            // AJAX POST 요청 전송
             $.ajax({
-                url: '/member_reservation_confirm',
-                method: 'POST',
-                data: {
-                    r_no: reservationId
-                },
+                url: '/member/member_reservation_confirm',
+                type: 'POST',
+                data: { r_no: reservationId },
                 success: function(response) {
-                    console.log('Response:', response); 
-                    if (response.redirectUrl) {
-                        window.location.href = response.redirectUrl;
-                    } else {
-                        alert('해당 시설 예약이 종료되었습니다.');
-                    }
+                    // 성공 응답 처리
+                    alert("예약이 취소되었습니다.");
+                    location.reload(); // 페이지를 새로고침하여 예약 목록 업데이트
                 },
                 error: function(xhr, status, error) {
-                    console.error('시설 ID를 가져오는 데 실패했습니다:', error);
+                    // 오류 응답 처리
+                    alert("예약 취소 중 오류가 발생했습니다. 다시 시도해주세요.");
                 }
             });
         }
-    }
-
-    // 예약취소 버튼 클릭 이벤트
-    $('#section_wrap').on('click', 'button.cancel_reservation', function() {
-        let reservationId = $(this).data('reservationId');
-        cancelReservation(reservationId);
     });
 });
-
 </script>

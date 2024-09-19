@@ -77,4 +77,19 @@ public class ReservationService {
 		return iReservationDao.findReservationsByMemberId(u_m_id);
 	}
 
+	public int cancelReservation(String reservationId) {
+		log.info("cancelReservation() with reservationId: {}", reservationId);
+
+		int result = iReservationDao.deleteReservationById(reservationId);
+		
+        if (result > 0) {
+            log.info("Reservation cancelled successfully for ID: {}", reservationId);
+        } else {
+            log.warn("Failed to cancel reservation for ID: {}", reservationId);
+        }
+
+        return result;
+    }
 }
+
+

@@ -6,7 +6,7 @@
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
 <link rel="stylesheet" th:href="@{/css/member/reservation.css}">
-<script th:replace="~{/include/common_js.html::js}"></script>
+<script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
 <script th:replace="~{/include/cancel_reservation_js.html::js}"></script>
 </head>
 <body>
@@ -52,7 +52,7 @@
                         <td th:text="${reservation.r_use_time}">예약 시간</td>
                         <td>
                             <button class="cancel_reservation"
-                                    data-reservation-id="${reservation.r_no}">예약취소</button>
+                                    th:data-reservation-id ="${reservation.r_no}">예약취소</button>
                         </td>
                     </tr>
 			    </tbody>
