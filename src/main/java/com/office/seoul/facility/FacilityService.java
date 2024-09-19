@@ -90,7 +90,7 @@ public class FacilityService {
 		return iFacilityDao.findFacilitiesByIds(facilityIds);
 	}
 
-	public Map<String, Object> getFindFour() {
+//	public Map<String, Object> getFindFour() {
 //        int offset = (page - 1) * size;
 //        Map<String, Object> params = new HashMap<>();
 //        params.put("offset", offset);
@@ -108,6 +108,6 @@ public class FacilityService {
 //
 //        return response;
 //		return null;
-	}
+//	}
 
 }
