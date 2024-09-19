@@ -1,7 +1,5 @@
 package com.office.seoul.facility.member;
 
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
