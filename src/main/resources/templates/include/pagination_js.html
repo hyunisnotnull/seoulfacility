@@ -28,13 +28,12 @@ function loadData(page = 1, type = '') {
 	isLoading = true;		// 로딩 시작	
 	
     console.log('Loading data with type:', type);
-	if (type !== ''){
-		$("a:contains(" + type + ")").css("background-color","#378bee");
-		$("a:contains(" + type + ")").css("color","#fff");
-	} else{
-		$(".btns a").css("background-color", "#fff");
-		$(".btns a").css("color", "#000");
-	}
+    $(".btns a").removeClass('selected').css("background-color", "#fff").css("color", "#000");
+
+    if (type !== '') {
+        // 선택된 버튼에 색상 적용
+        $("a:contains(" + type + ")").addClass('selected').css("background-color","#378bee").css("color","#fff");
+    }
 		
     
     $.ajax({
@@ -54,6 +53,7 @@ function loadData(page = 1, type = '') {
                 loadData(currentPage, type, ''); null값 오류시 1안 */
                 
                 $('div.s_result').html('<p>검색 결과가 없습니다.</p>'); // 2안
+                $('div.result_count span').text(0);
                 $('#pagination').html(''); 
                 
             } else {
