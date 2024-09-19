@@ -35,7 +35,7 @@ function createAccountForm() {
         form.u_m_name.focus();
         return;
     } else if (!nameRegex.test(form.u_m_name.value)) {
-        alert('닉네임은 2자 이상 6자 이하의 한글, 영어 또는 숫자여야 합니다.');
+        alert('이름은 3자 이상 8자 이하의 한글, 영어 또는 숫자여야 합니다.');
         form.u_m_name.focus();
         return;
     }

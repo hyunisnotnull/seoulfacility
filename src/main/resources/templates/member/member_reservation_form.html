@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member/reservation.css}">
+<script th:replace="~{/include/common_js.html::js}"></script>
+<script th:replace="~{/include/cancel_reservation_js.html::js}"></script>
+</head>
+<body>
+
+    <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+    
+    <nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+    
+    <article th:replace="~{/include/header_nav_footer.html::article}">
+	</article>
+
+    <section>
+    	<div id="section_wrap">
+    		<h2>예약 정보 수정</h2>
+			<p>회원님의 예약 정보는 다음과 같습니다:</p>
+			
+			<table>
+			    <thead>
+			        <tr>
+			            <th>예약자 이름</th>
+			            <th>시설 이름</th>
+			            <th>예약 날짜</th>
+			            <th>예약 상태</th>
+			            <th>전화번호</th>
+			            <th>예약 시간</th>
+			            <th>취소</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+	                <tr th:each="reservation : ${reservations}">
+	        
+                        <td th:text="${reservation.u_m_id}">예약자 이름</td>
+                        <td th:each="item: ${facilityMap}"
+                        	th:if="${item.SVCID eq reservation.SVCID }"
+                        	th:text="${item.SVCNM}">전화번호
+                        </td>
+                        <td th:text="${reservation.r_reserve_date}">예약 날짜</td>
+                        <td th:text="${reservation.r_use_state}">예약 상태</td>
+                        <td th:each="item: ${facilityMap}"
+                        	th:if="${item.SVCID eq reservation.SVCID }"
+                        	th:text="${item.TELNO}">전화번호
+                        </td>
+                        <td th:text="${reservation.r_use_time}">예약 시간</td>
+                        <td>
+                            <button class="cancel_reservation"
+                                    data-reservation-id="${reservation.r_no}">예약취소</button>
+                        </td>
+                    </tr>
+			    </tbody>
+			</table>
+    	</div>
+    </section>
+    
+    <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+
+</body>
+</html>

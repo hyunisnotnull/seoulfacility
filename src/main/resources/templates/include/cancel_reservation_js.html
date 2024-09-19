@@ -1,0 +1,35 @@
+<script th:fragment="js">
+
+$(document).ready(function() {
+    // 예약 취소 함수
+    function cancelReservation(reservationId) {
+        if (confirm('정말로 예약을 취소하시겠습니까?')) {
+            $.ajax({
+                url: '/member_reservation_confirm',
+                method: 'POST',
+                data: {
+                    r_no: reservationId
+                },
+                success: function(response) {
+                    console.log('Response:', response); 
+                    if (response.redirectUrl) {
+                        window.location.href = response.redirectUrl;
+                    } else {
+                        alert('해당 시설 예약이 종료되었습니다.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('시설 ID를 가져오는 데 실패했습니다:', error);
+                }
+            });
+        }
+    }
+
+    // 예약취소 버튼 클릭 이벤트
+    $('#section_wrap').on('click', 'button.cancel_reservation', function() {
+        let reservationId = $(this).data('reservationId');
+        cancelReservation(reservationId);
+    });
+});
+
+</script>

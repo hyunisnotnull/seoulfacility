@@ -119,79 +119,80 @@ $(document).ready(function() {
         });
     });
     
-    
-    
-    // 랜덤추천 서비스
-    
-    
-    
-    // 변수 선언
-    const pageSize = 4;
-    let currentPage = 1;
-    let totalItems = 0;
-    let totalPages = 0;
-    let type = getQueryParam('type') || '';
     let isLoading = false; // 무한루프 탈출 플래그
-
-// Query Parameter 가져오기
-function getQueryParam(param) {
-	
-    console.log('param : ', param );
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
     
-}
-
+  
     
-// Facility Home
-function loadData(page = 1, type = '') {
-	if (isLoading) return; 	// 로딩중이면 무시
-	
-	isLoading = true;		// 로딩 시작	
-	
-    console.log('Loading data with type:', type);
-	$("a:contains(" + type + ")").css("background-color","#378bee")
-	$("a:contains(" + type + ")").css("color","#fff")
-    
-    $.ajax({
-        url: `/facility/page?page=${page}&size=${pageSize}&type=${type}`,
-        		
-        method: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            console.log('AJAX Response:', response);
-            const facilities = response.items;
-            totalItems = response.totalItems;
-            totalPages = Math.ceil(totalItems / pageSize);
-            
-            if (totalItems === 0) {
-                /* alert("검색 결과가 없습니다.");
-                
-                loadData(currentPage, type, ''); null값 오류시 1안 */
-                
-                $('div.s_result').html('<p>검색 결과가 없습니다.</p>'); // 2안
-                $('#pagination').html(''); 
-                
-            } else {
-            	
-                renderTable(facilities, totalItems);
-                renderPagination();
-                
+    function loadData() {
+    	if (isLoading) return; 	// 로딩중이면 무시
+    	
+    	isLoading = true;		// 로딩 시작	
+    	
+        
+        $.ajax({
+            url: `/findfour`,
+            		
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log('AJAX Response:', response);
+                const facilities = response.results.items;
+                totalItems = response.results.items.length;
+              
+                console.log(totalItems ) 
+                if (totalItems === 0) {
+                    /* alert("검색 결과가 없습니다.");
+                    
+                    loadData(currentPage, type, ''); null값 오류시 1안 */
+                    
+                    $('div.s_result').html('<p>검색 결과가 없습니다.</p>'); // 2안
+                    $('#pagination').html(''); 
+                    
+                } else {
+                	
+                	
+                    renderTable(facilities, totalItems);
+                    
+                    
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", status, error);
+                alert("데이터를 로드하는 데 실패했습니다.");
+            },
+            complete: function() {
+                isLoading = false; // 로딩 완료
             }
-        },
-        error: function(xhr, status, error) {
-            console.error("AJAX Error:", status, error);
-            alert("데이터를 로드하는 데 실패했습니다.");
-        },
-        complete: function() {
-            isLoading = false; // 로딩 완료
-        }
-    });
+        });
+    }
     
-    
-    
-    
-    
-    
-}});
+ // Table(tbody UI 생성)
+ 
+ function renderTable(facilities, totalItems) {
+	  console.log('renderTable:', facilities);
+	   
+	    let rows = '<ul class="recommend">';
+	    
+	    facilities.forEach(item => {
+	    	console.log(item)
+	        rows += `<li class="result_wrap"><a href="/facility/detailView/${item.svcid}">
+	        <div class="img_box">
+	        	<img alt="" src="${item.imgurl}">
+					<span class="category">${item.minclassnm}</span>
+					 <h3>${item.placenm}</h3>
+					 
+					 <span class="location">서울시 ${item.areanm}</span>
+   			</a>
+   		  </div>
+   		  </li>`
+	        	});
+	            
+	            rows += `</ul>`;
+	      $('ul.recommend').html(rows);
+ }
+	      
+	      
+	      
+ loadData();	      
+});
 </script>

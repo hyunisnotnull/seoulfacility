@@ -33,22 +33,19 @@ public class HomeController {
         return nextPage;
     }
     
-//    @GetMapping("/options")
-//    @ResponseBody
-//    public Map<String, Object> getOptions(	@RequestParam(value = "area", required = false) String area,
-//    										@RequestParam(value = "category", required = false) String category) {
-//		log.info("getOptions()");
-//		
-//		Map<String, Object> options = new HashMap<>();
-//		options.put("areas", facilityService.getAreas());
-//		options.put("categories", facilityService.getCategoriesByArea(area));
-//		options.put("results", facilityService.getResults(area, category));
-//		
-//		log.info("area : {}", area);
-//		log.info("category : {}", category);
-//		
-//		return options;
-//	}
+    @GetMapping("/findfour")
+    @ResponseBody
+    public Map<String, Object> findFour() {
+      log.info("findFour()");
+      
+      Map<String, Object> options = new HashMap<>();
+      options.put("results", facilityService.getFindFour());
+      
+      return options;
+   }
     
+    
+    
+
     
 }
