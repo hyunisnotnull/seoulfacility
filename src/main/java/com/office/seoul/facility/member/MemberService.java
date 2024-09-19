@@ -169,5 +169,9 @@ public class MemberService {
 		
 	}
 
+
+
+	
+
 	
 }

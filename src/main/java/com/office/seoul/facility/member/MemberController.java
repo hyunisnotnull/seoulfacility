@@ -2,7 +2,6 @@ package com.office.seoul.facility.member;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.office.seoul.facility.FacilityDto;
 import com.office.seoul.facility.FacilityService;
@@ -34,9 +35,7 @@ public class MemberController {
 		this.facilityService = facilityService;
 	}
 
-	/*
-	 * 회원가입
-	 */
+	// 회원가입
 	@GetMapping("/create_account_form")
 	public String createAccountForm() {
 		log.info("createAccountForm()");
@@ -45,7 +44,7 @@ public class MemberController {
 
 		return nextPage;
 	}
-
+	
 	/*
 	 * 회원가입 확인
 	 */
@@ -54,7 +53,7 @@ public class MemberController {
 		log.info("createAccountConfirm()");
 
 		String nextPage = "member/create_account_result";
-
+		
 		int result = memberService.createAccountConfirm(memberDto);
 
 		boolean isSuccess = result == MemberService.INSERT_SUCCESS_AT_DB;
@@ -75,13 +74,26 @@ public class MemberController {
 		return nextPage;
 
 	}
+	
+	/*
+	 * 로그인 실패 
+	 */
+	@GetMapping("/member_login_confirm")
+	public String memberLoginConfirm() {
+		log.info("memberLoginConfirm()");
+
+		String nextPage = "/";
+
+		return nextPage;
+
+	}
 
 	/*
 	 * 로그인 실패 
 	 */
 	@GetMapping("/member_login_result")
-	public String memberLoginConfirm() {
-		log.info("memberLoginConfirm()");
+	public String memberLoginFail() {
+		log.info("memberLoginFail()");
 
 		String nextPage = "/member/member_login_result";
 

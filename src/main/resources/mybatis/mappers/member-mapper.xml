@@ -13,7 +13,7 @@
 		WHERE 
 			U_M_ID = #{u_m_id}
 			
-	</select>
+	</select>	
 	
 	<insert id="insertMember" 
 			parameterType="com.office.seoul.facility.member.MemberDto">
