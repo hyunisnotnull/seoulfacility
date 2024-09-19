@@ -15,7 +15,7 @@
 
    section #section_wrap .detail_title {
 
-      margin-bottom: 50px;
+      margin: 50px 0;
    }
 
 
@@ -29,7 +29,9 @@
  section #section_wrap .detail_title span {
    
    display: inline-block;
-   width: 100px; height: 30px;
+
+   height: 30px;
+   padding: 0 10px; 
    border-radius: 5px;
    line-height: 30px;
    color: #fff;
@@ -176,6 +178,18 @@ section #section_wrap .right_box .reservation_apply {
    font-weight: bold;
 }
 
+/* 달력 날짜 색칠 */
+.enableColor {
+	background-color: #fdf6d5;
+
+	
+}
+
+.disableColor {
+	background-color: #f1f1f1;	
+}
+
+
 
  /* 탭 css  */
 
@@ -235,6 +249,7 @@ section #section_wrap .right_box .reservation_apply {
             display: block;
         }
         
+
         /* 별점 css */
         .star {
             font-size: 24px; 
@@ -389,3 +404,8 @@ section #section_wrap .right_box .reservation_apply {
     margin: 10px 0;
     font-weight: bold;
 }
+
+        
+        #Tab2 {
+        font-size: 1.1em;
+        }

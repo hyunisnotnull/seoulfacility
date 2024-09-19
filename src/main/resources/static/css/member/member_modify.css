@@ -59,7 +59,7 @@ section #section_wrap form input[type="reset"]{
 } 
 
 
-section #section_wrap .go_button a {
+section #section_wrap .delete {
 	
 	font-weight: bold;
 	color: #378bee;

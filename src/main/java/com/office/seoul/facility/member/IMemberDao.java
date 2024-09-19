@@ -28,4 +28,5 @@ public interface IMemberDao {
 
 	public MemberDto selectForFindId(@Param("u_m_name") String u_m_name, @Param("u_m_mail") String u_m_mail);
 
+
 }

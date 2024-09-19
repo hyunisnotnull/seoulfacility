@@ -45,16 +45,16 @@
 	        	</form>
 	        </div>
 			
-			
+			<br>
 			<div>
-				<a th:href="@{/member/member_delete_confirm}">회원탈퇴</a>
+				<a class="delete" th:href="@{/member/member_delete_confirm}">회원탈퇴</a>
 			</div>
 		</div>
     </section>
     
     <section>
     	<div id="section_wrap">
-    		<h2>회원 정보 수정</h2>
+    		<h2>예약 정보 수정</h2>
 			<p>회원님의 예약 정보는 다음과 같습니다:</p>
 			
 			<table>
@@ -71,11 +71,25 @@
 			    </thead>
 			    <tbody>
 	                <tr th:each="reservation : ${reservations}">
+	        
                         <td th:text="${reservation.u_m_id}">예약자 이름</td>
-                        <td th:text="${reservation.SVCID}">시설 이름</td>
+                        
+                        <td th:each="item: ${facilityMap}"
+                        	th:if="${item.SVCID eq reservation.SVCID }"
+                        	th:text="${item.SVCNM}">전화번호
+                        </td>
+                        
+                        
                         <td th:text="${reservation.r_reserve_date}">예약 날짜</td>
                         <td th:text="${reservation.r_use_state}">예약 상태</td>
-                        <!-- <td th:text="#">전화번호</td> -->
+                        
+                         <td th:each="item: ${facilityMap}"
+                        	th:if="${item.SVCID eq reservation.SVCID }"
+                        	th:text="${item.TELNO}">전화번호
+                        </td>
+                        
+                        
+                        <!-- <td th:text="${facilityMap.SVCID eq reservation.SVCID }">전화번호</td> -->
                         <td th:text="${reservation.r_use_time}">예약 시간</td>
                         <td>
                             <!-- <form th:action="" method="post">
