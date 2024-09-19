@@ -90,24 +90,20 @@ public class FacilityService {
 		return iFacilityDao.findFacilitiesByIds(facilityIds);
 	}
 
-//	public Map<String, Object> getFindFour() {
-//        int offset = (page - 1) * size;
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("offset", offset);
-//        params.put("size", size);
-//        params.put("type", type);
-//        
-//        log.info("type : {}", type);
-//
-//        List<FacilityDto> facilities = iFacilityDao.getFacilities(params);
-//        int totalItems = iFacilityDao.getTotalFacilitiesCount(params);
-//
-//        Map<String, Object> response = new HashMap<>();
-//        response.put("items", facilities);
-//        response.put("totalItems", totalItems);
-//
-//        return response;
-//		return null;
-//	}
+	
+
+	public Map<String, Object> getFindFour() {
+        log.info("getFindFour");
+
+        List<FacilityDto> facilities = iFacilityDao.getFindFour();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("items", facilities);
+
+        return response;
+
+   }
+
+
 
 }

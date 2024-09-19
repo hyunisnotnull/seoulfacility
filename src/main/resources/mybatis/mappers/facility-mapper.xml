@@ -59,8 +59,9 @@
 
     <!-- 지역 및 카테고리 기반 결과 조회 -->
     <select id="getResults" parameterType="Map" resultType="String">
-        SELECT DISTINCT SVCNM FROM TBL_FACILITY WHERE SVCSTATNM = '안내중' OR SVCSTATNM = '접수중'
+        SELECT DISTINCT SVCNM FROM TBL_FACILITY 
         <where>
+        (SVCSTATNM = '안내중' OR SVCSTATNM = '접수중') 
             <if test="area != null and area != ''">
                 AND AREANM = #{area}
             </if>
@@ -94,6 +95,9 @@
 	            </otherwise>
 	        </choose>
 	</select>
-
+	
+   <select id="getFindFour" resultType="com.office.seoul.facility.FacilityDto">
+      SELECT * FROM TBL_FACILITY WHERE SVCSTATNM = "접수중" ORDER BY RAND() LIMIT 4;
+   </select>
 	
 </mapper>

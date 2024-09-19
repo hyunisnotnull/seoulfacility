@@ -39,6 +39,7 @@ public class SecurityConfig {
         				"/img/**",
         				"/js/**",
         				"/",
+        				"/findfour",
         				"/member/create_account_form",
         				"/member/create_account_confirm",
         				"/member/member_login_form",
