@@ -15,7 +15,7 @@
 
    section #section_wrap .detail_title {
 
-      margin-bottom: 50px;
+      margin: 50px 0;
    }
 
 
@@ -29,7 +29,8 @@
  section #section_wrap .detail_title span {
    
    display: inline-block;
-   width: 70px; height: 30px;
+   height: 30px;
+   padding: 0 10px; 
    border-radius: 5px;
    line-height: 30px;
    color: #fff;
@@ -245,5 +246,10 @@ section #section_wrap .right_box .reservation_apply {
         
         .tab-content.active {
             display: block;
+        }
+        
+        
+        #Tab2 {
+        font-size: 1.1em;
         }
  
