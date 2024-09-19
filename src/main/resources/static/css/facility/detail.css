@@ -176,6 +176,18 @@ section #section_wrap .right_box .reservation_apply {
    font-weight: bold;
 }
 
+/* 달력 날짜 색칠 */
+.enableColor {
+	background-color: #fdf6d5;
+
+	
+}
+
+.disableColor {
+	background-color: #f1f1f1;	
+}
+
+
 
  /* 탭 css  */
 

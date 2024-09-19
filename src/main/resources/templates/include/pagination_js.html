@@ -28,8 +28,14 @@ function loadData(page = 1, type = '') {
 	isLoading = true;		// 로딩 시작	
 	
     console.log('Loading data with type:', type);
-	$("a:contains(" + type + ")").css("background-color","#378bee")
-	$("a:contains(" + type + ")").css("color","#fff")
+	if (type !== ''){
+		$("a:contains(" + type + ")").css("background-color","#378bee");
+		$("a:contains(" + type + ")").css("color","#fff");
+	} else{
+		$(".btns a").css("background-color", "#fff");
+		$(".btns a").css("color", "#000");
+	}
+		
     
     $.ajax({
         url: `/facility/page?page=${page}&size=${pageSize}&type=${type}`,

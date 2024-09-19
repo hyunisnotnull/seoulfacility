@@ -38,51 +38,99 @@ $(document).ready(function() {
         let rows = '';
         let day = 1;
 
-        // 달력 테이블 UI(<tr> <td> 생성)
-        for (let i = 0; i < 6; i++) {
-            let row = '<tr>';
-
-            for (let j = 0; j < 7; j++) {
-                if (i === 0 && j < firstDay) {
-                    row += '<td></td>';
-                } else if (day > daysInMonth) {
-                    row += '<td></td>';
-                } else {
-                    const isPast = isPastDate(year, month, day);
-                    const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-
-                    // 예약 상태 확인
-                    const isReserved = reservationStatus[dateStr] >= 6 ? true : false; // `true` 값 확인
-                    const cellContent = isPast 
-                        ? `<span>${day}<br><span>&nbsp;&nbsp;&nbsp;</span>` 
-                        : isReserved 
-                            ? `${day}<br><span></span>` 
-                            : reservationStatus[dateStr] == undefined 
-                            ? `${day}<br><span>&nbsp;&nbsp;&nbsp;</span>`
-                            :`<a href="#none" class="date-cell"><span>${day}</span><br><span>(${reservationStatus[dateStr]}/6)</span></a>`;
-
-                    row += `<td>${cellContent}</td>`;
-                    day++;
-                }
-            }
-
-            row += '</tr>';
-            rows += row;
-
-            // 날이 끝나는 열에서 테이블 생성 중단
-            if (day > daysInMonth) {
-                const cells = row.match(/<td>/g) || [];
-                if (cells.length < 7) {
-                    // 모든 테이블 셀이 생성이 안 된 경우 마지막 행 제거 로직
-                    rows = rows.replace(/<tr>[\s\S]*<\/tr>$/, '');
-                }
-                break;
-            }
-        }
+        
+        if ($('#reservation_button').hasClass('disabled')) {
+        	
+	        // 달력 테이블 UI(<tr> <td> 생성)
+	        for (let i = 0; i < 6; i++) {
+	            let row = '<tr>';
+	
+	            for (let j = 0; j < 7; j++) {
+	                if (i === 0 && j < firstDay) {
+	                    row += '<td></td>';
+	                } else if (day > daysInMonth) {
+	                    row += '<td></td>';
+	                } else {
+	                    const isPast = isPastDate(year, month, day);
+	                    const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+	
+	                    row += `<td class="disableColor" ><span>${day}<br><span>&nbsp;&nbsp;&nbsp;</span></td>`;
+	                    day++;
+	                }
+	            }
+	
+	            row += '</tr>';
+	            rows += row;
+	
+	            // 날이 끝나는 열에서 테이블 생성 중단
+	            if (day > daysInMonth) {
+	                const cells = row.match(/<td>/g) || [];
+	//                if (cells.length < 7) {
+	                    // 모든 테이블 셀이 생성이 안 된 경우 마지막 행 제거 로직
+	//                    rows = rows.replace(/<tr>[\s\S]*<\/tr>$/, '');
+	//                }
+	                break;
+	            }
+	        }
 
         // 달력에 일 추가
         calendarDate.html(rows);
+        	
+        } else {
+	        // 달력 테이블 UI(<tr> <td> 생성)
+	        for (let i = 0; i < 6; i++) {
+	            let row = '<tr>';
+	
+	            for (let j = 0; j < 7; j++) {
+	                if (i === 0 && j < firstDay) {
+	                    row += '<td></td>';
+	                } else if (day > daysInMonth) {
+	                    row += '<td></td>';
+	                } else {
+	                    const isPast = isPastDate(year, month, day);
+	                    const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+	
+	                    // 예약 상태 확인
+	                    const isReserved = reservationStatus[dateStr] >= 6 ? true : false; // `true` 값 확인
+	                    const cellContent = isPast 
+	                        ? `<span>${day}<br><span>&nbsp;&nbsp;&nbsp;</span>` 
+	                        : isReserved 
+	                            ? `${day}<br><span>&nbsp;&nbsp;&nbsp;</span>` 
+	                            : reservationStatus[dateStr] == undefined 
+	                            ? `${day}<br><span>&nbsp;&nbsp;&nbsp;</span>`
+	                            :`<a href="#none" class="date-cell"><span>${day}</span><br><span>(${reservationStatus[dateStr]}/6)</span></a>`;
+	
+	                            row += `<td ${isPast ? 'class="disableColor"' : (reservationStatus[dateStr] == undefined) || isReserved ? 'class="disableColor"' : 'class="enableColor"' }>${cellContent}</td>`;
+	                    day++;
+	                }
+	            }
+	
+	            row += '</tr>';
+	            rows += row;
+	
+	            // 날이 끝나는 열에서 테이블 생성 중단
+	            if (day > daysInMonth) {
+	                const cells = row.match(/<td>/g) || [];
+	//                if (cells.length < 7) {
+	                    // 모든 테이블 셀이 생성이 안 된 경우 마지막 행 제거 로직
+	//                    rows = rows.replace(/<tr>[\s\S]*<\/tr>$/, '');
+	//                }
+	                break;
+	            }
+	        }
+
+        // 달력에 일 추가
+        calendarDate.html(rows);
+        	
+        }
+        
+        
+        
+        
+
+					        
     }
+    
     
     // 달력 업데이트
     function updateCalendar() {
