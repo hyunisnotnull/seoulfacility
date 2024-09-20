@@ -61,7 +61,11 @@
 			    </tbody>
 			</table>
 			
-			<div id="pagination" class="pagination">
+			<div th:if="${reservations.size() == 0}" class="no-reservations">
+	            <p>예약 내역이 없습니다.</p>
+	        </div>
+			
+			<div id="pagination" class="pagination" th:if="${totalPages > 0}">
 			    <a th:if="${currentPage > 1}" th:href="@{/member/member_reservation_form(page=${currentPage - 1})}" class="pagination-link" id="prevPage">이전</a>
 			    <span class="pagination-info" id="currentPage" th:text="${currentPage}"></span> /
 			    <span class="pagination-info" th:text="${totalPages}"></span>

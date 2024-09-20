@@ -198,11 +198,14 @@ $(document).ready(function() {
     $(document).on('click', '.date-cell', function(event) {
         console.log('DATE BTN CLICK');
         event.preventDefault();
+        
         const day = $(this).text().split('(')[0];
         const selectedDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.padStart(2, '0')}`;
+        
         $('#selectedDate').val(selectedDate);
         $('.date-cell').removeClass('selected');
         $(this).addClass('selected');
+        
         console.log(`Selected Date: ${selectedDate}`); 
     });
 

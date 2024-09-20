@@ -409,3 +409,7 @@ section #section_wrap .right_box .reservation_apply {
         #Tab2 {
         font-size: 1.1em;
         }
+
+.selected{
+    color: red;
+}
