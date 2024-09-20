@@ -2,13 +2,6 @@ CREATE DATABASE DB_FACILITY;
 USE DB_FACILITY;
 -- SEOUL_FACILITY DATABASE
 
-use mysql;
-select host, user, authentication_string from user;
-SELECT host, user, authentication_string FROM user WHERE user = 'dev01';
-SHOW GRANTS FOR 'dev01'@'192.168.56.1';
-SHOW GRANTS FOR 'dev01'@'%';
-FLUSH PRIVILEGES;
-
 drop table TBL_FACILITY;
 
 CREATE TABLE TBL_FACILITY(
