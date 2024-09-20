@@ -158,7 +158,7 @@ function renderPagination() {
         paginationHtml += `<a href="#" data-page="${totalPages}" class="pagination-button last-button">&gt;&gt;</a>`;
     }
     
-    paginationHtml += `<div class="pagination-status">현재 페이지: ${currentPage} / 총 ${totalPages} 페이지</div>`;
+    paginationHtml += `<div class="pagination-status">&nbsp;&nbsp;현재 페이지: ${currentPage} / 총 ${totalPages} 페이지</div>`;
 
     $('#pagination').html(paginationHtml);
 }
