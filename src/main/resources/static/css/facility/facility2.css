@@ -126,7 +126,7 @@ a:hover {
 /* 여기서 부터 리스트 시작 */
 
 
- section {
+section {
     width: 100%;
 	padding: 10px 0;
 } 
@@ -142,21 +142,20 @@ a:hover {
 	
 	
 
- section #section_wrap .search_form form {
-
+section #section_wrap .search_form form {
 	width: 1080px;
 	height: 50px;
-	background-color: rgba(225, 230, 248, 0.8);
+	background-color: rgba(227, 228, 247, 0.5);
 	margin: 50px auto;
 	padding: 40px;
 	border-radius: 20px;
 	text-align: center;
-	
+	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
  }
 
 
 
- section #section_wrap .search_form form select {
+section #section_wrap .search_form form select {
 	width: 200px;
 	height: 50px;
 	font-size: 1.1em;
@@ -166,10 +165,10 @@ a:hover {
 	border-radius: 5px;
 	box-sizing: border-box;
 	outline: none;
- }
+}
 
 
- section #section_wrap .search_form form input {
+section #section_wrap .search_form form input {
 	width: 300px;
 	height: 50px;
 	padding: 15px;
@@ -181,7 +180,7 @@ a:hover {
 	box-sizing: border-box;
 	outline: none;
 	
- } 
+} 
 
  section #section_wrap .search_form button {
 	height: 50px;
@@ -230,12 +229,14 @@ a:hover {
 	overflow: hidden;
 	position: relative;
 	cursor: pointer;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
  }
 
  section #section_wrap .s_result .show_list .result_wrap .img_box {
 	width: 400px;
 	height: 245px;
 	overflow: hidden;
+	
  }
 
 
@@ -244,8 +245,6 @@ a:hover {
 	height: 100%;
 	object-fit: cover; /* 이미지를 div 크기에 맞게 조정 */
 	transition: transform 0.5s ease; 
-
-
  }
 
 
@@ -257,7 +256,9 @@ a:hover {
 
  section #section_wrap .s_result .show_list .result_wrap:hover {
 	border: 1px solid #1a1a1a;
-
+	transform: scale(1.03);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s, box-shadow 0.3s;
  }
 
 

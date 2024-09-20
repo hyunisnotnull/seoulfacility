@@ -25,7 +25,7 @@ section #section_wrap .search_form form {
     position: absolute;
     top: 500px;
     left: 80px;
-    box-shadow: 0 8px 16px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 8px 8px 12px 1px rgba(0, 0, 0, 0.2);
 }
 
 section #section_wrap .search_form form h3 {

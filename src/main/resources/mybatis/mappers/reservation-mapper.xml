@@ -40,11 +40,12 @@
 
     </select>
     
-    <delete id="deleteReservationById" parameterType="String">
+    <update id="deleteReservationById" parameterType="String">
     
-        DELETE FROM TBL_RESERVE_INFO
+        UPDATE TBL_RESERVE_INFO
+        SET R_USE_STATE = "취소"
         WHERE R_NO = #{reservationId}
         
-    </delete>
+    </update>
 
 </mapper>
