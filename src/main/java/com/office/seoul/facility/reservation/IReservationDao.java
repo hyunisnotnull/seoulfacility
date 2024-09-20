@@ -16,8 +16,10 @@ public interface IReservationDao {
 
 	List<Map<String, Object>> findAllReservedDates(@Param("id") String id, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
-	List<ReservationDto> findReservationsByMemberId(@Param("u_m_id") String u_m_id);
+	List<ReservationDto> findReservationsByMemberId(@Param("params") Map<String, Object> params);
 
 	int deleteReservationById(@Param("reservationId") String reservationId);
+
+	int countReservationsByMemberId(String u_m_id);
 
 }

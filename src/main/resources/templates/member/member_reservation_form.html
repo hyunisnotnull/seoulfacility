@@ -2,12 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+
 <title th:replace="~{include/title.html::title}"></title>
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
 <link rel="stylesheet" th:href="@{/css/member/reservation.css}">
+
 <script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
 <script th:replace="~{/include/cancel_reservation_js.html::js}"></script>
+
 </head>
 <body>
 
@@ -57,6 +60,14 @@
                     </tr>
 			    </tbody>
 			</table>
+			
+			<div id="pagination" class="pagination">
+			    <a th:if="${currentPage > 1}" th:href="@{/member/member_reservation_form(page=${currentPage - 1})}" class="pagination-link" id="prevPage">이전</a>
+			    <span class="pagination-info" id="currentPage" th:text="${currentPage}"></span> /
+			    <span class="pagination-info" th:text="${totalPages}"></span>
+			    <a th:if="${currentPage < totalPages}" th:href="@{/member/member_reservation_form(page=${currentPage + 1})}" class="pagination-link" id="nextPage">다음</a>
+			</div>
+			
     	</div>
     </section>
     

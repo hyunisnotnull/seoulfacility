@@ -89,3 +89,38 @@ button {
 button:hover {
     background-color: #d32f2f;
 }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.pagination-link {
+    color: #007bff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 14px;
+}
+
+.pagination-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination-link:disabled {
+    color: gray;
+    border: 1px solid gray;
+    pointer-events: none;
+}
+
+.pagination-info {
+    padding: 0 10px;
+    font-weight: bold;
+}

@@ -81,11 +81,12 @@ $(document).ready(function() {
     // 기본옵션
     updateOptions();
 
-    // area 드롭다운 변경 시
+ 	// area 드롭다운 변경 시
     $('#AREANM').change(function() {
         let selectedArea = $(this).val();
-        let selectedCategory = $('#MINCLASSNM').val();
-        updateOptions(selectedArea, selectedCategory);
+        $('#MINCLASSNM').val(''); // MINCLASSNM 초기화
+        $('#SVCNM').val(''); // SVCNM 초기화
+        updateOptions(selectedArea);
     });
 
     // category 드롭다운 변경 시
