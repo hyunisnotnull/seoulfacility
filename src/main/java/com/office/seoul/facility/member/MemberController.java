@@ -89,18 +89,17 @@ public class MemberController {
 	 * }
 	 */
 
-	/*
-	 * 로그인 실패
-	 * 
-	 * @GetMapping("/member_login_result") public String memberLoginFail() {
-	 * log.info("memberLoginFail()");
-	 * 
-	 * String nextPage = "/member/member_login_result";
-	 * 
-	 * return nextPage;
-	 * 
-	 * }
-	 */
+	
+	 //로그인 실패
+	 @GetMapping("/member_login_result") public String memberLoginFail() {
+	 log.info("memberLoginFail()");
+	  
+	 String nextPage = "/member/member_login_result";
+	  
+	 return nextPage;
+	  
+	 }
+	 
 
 	/*
 	 * 정보수정
@@ -167,23 +166,21 @@ public class MemberController {
 		return nextPage;
 	}
 
-	
-	 // 예약 취소 확인
-	  
+	// 예약 취소 확인
+
 	@PostMapping("/member_reservation_confirm")
 	public ResponseEntity<String> memberReservationConfirm(@RequestParam("r_no") String reservationId) {
-	    log.info("memberReservationConfirm() with reservationId: {}", reservationId);
+		log.info("memberReservationConfirm() with reservationId: {}", reservationId);
 
-	    // 예약 취소 처리 로직 추가
-	    int result = reservationService.cancelReservation(reservationId);
+		// 예약 취소 처리 로직 추가
+		int result = reservationService.cancelReservation(reservationId);
 
-	    if (result > 0) {
-	        return ResponseEntity.ok("예약이 취소되었습니다.");
-	    } else {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 취소에 실패했습니다.");
-	    }
+		if (result > 0) {
+			return ResponseEntity.ok("예약이 취소되었습니다.");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 취소에 실패했습니다.");
+		}
 	}
-	 
 
 	/*
 	 * 회원 탈퇴

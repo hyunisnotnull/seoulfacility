@@ -1,0 +1,217 @@
+/* header {
+	width: 100%;
+	padding: 7px 0;
+	}
+
+ header #header_wrap {
+	width: 1300px;
+	margin: 0 auto;
+	text-align: right;
+	
+	}
+
+header #header_wrap a {
+	color: #c0c0c0;
+} */
+
+
+/* NAV CSS  */
+
+ nav {
+	width: 100%;
+	padding: 10px 0;
+	background-color: rgb(0, 106, 202);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	}
+
+ nav #nav_wrap {
+	width: 1200px;
+	height: 50px;
+	margin: 0 auto;
+	justify-content: space-between;
+	align-items: center;
+	line-height: 50px;
+	color: #fff;
+	}
+
+nav #nav_wrap .logo {
+	flex: 1;
+}
+
+nav #nav_wrap .navigation {
+	flex: 2;
+	text-align: right;
+}
+
+nav #nav_wrap .logo img {
+	width: 230px;
+}
+
+nav #nav_wrap ul {
+	padding: 0;
+	margin: 0;
+	display: flex;
+}
+
+nav #nav_wrap ul li {
+	margin: 0 10px;
+	font-size: 1.1em;
+}
+
+nav #nav_wrap ul li a {
+	color: #fff;
+	text-decoration: none;
+}
+
+nav #nav_wrap ul li a:hover {
+	color: #ffd700; 
+}
+
+
+/* ARTICLE CSS  */
+
+
+article {
+	width: 100%;
+    height: 140px;
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban.png");
+	background-repeat: no-repeat;
+	background-color: #f1f1f1;
+}
+
+
+article #article_wrap {
+	width: 1200px;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+
+article #article_wrap div ul {
+	display:flex;
+  	justify-content: right;
+}  
+
+article div ul li a {
+	display: block;
+	width: 130px; height: 30px;
+	background-color: #fff;
+	line-height: 30px;
+	font-weight: bold;
+	padding: 5px;
+    margin: 5px;
+	border: 1px solid #bebebe;
+    border-radius: 5px;
+	text-align: center;
+	text-decoration: none;
+	color: #000;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+ 
+
+ article div ul li a:hover {
+	background-color: #378bee;
+	transform: scale(1.1);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 호버 시 그림자 확대 */
+	color: #fff;
+	transition: 0.3s;
+  }
+
+
+
+
+
+/* 단추 마우스 오버시 이미지 변경  */
+
+
+
+  article:has(.soccer:hover) {
+   background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban00.png");
+   transition: 0.5s ease-in-out;
+
+  }
+
+   
+  article:has(.futsal:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban02.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+
+  article:has(.foot:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban03.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.baseball:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban04.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.tennis:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban05.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.basket:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban06.png");
+    transition: 0.5s ease-in-out;
+
+  }
+  article:has(.volley:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban07.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.multi:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban08.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.badminton:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban09.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.table:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban10.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.study:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban11.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+  article:has(.golf:hover) {
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban12.png");
+	 transition: 0.5s ease-in-out;
+
+  }
+
+
+
+
+
+
+
+/* FOOTER CSS  */
+
+ footer {
+
+	width: 100%;
+	padding: 10px 0;
+	background-color: #363636;
+	bottom: 0;
+}
+
+ footer #footer_wrap {
+	width: 1500px; height: 100px;
+	line-height: 100px;
+	color: #fafafa;
+	margin: 0 auto;
+	text-align: center;
+	font-size: .9em;
+
+	}

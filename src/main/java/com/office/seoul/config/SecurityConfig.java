@@ -43,6 +43,7 @@ public class SecurityConfig {
         				"/member/create_account_form",
         				"/member/create_account_confirm",
         				"/member/member_login_form",
+        				"/member/member_login_result",
         				"/member/find_id_form",
         				"/member/find_id_confirm",
         				"/member/find_password_form",

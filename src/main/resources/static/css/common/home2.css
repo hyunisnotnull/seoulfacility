@@ -1,0 +1,171 @@
+/* 전체 섹션 스타일 */
+section {
+    width: 100%;
+    min-height: 700px;
+    background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/yback.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+/* 섹션 랩 스타일 */
+section #section_wrap {
+    width: 1300px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* 검색 폼 스타일 */
+section #section_wrap .search_form form {
+    width: 1080px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 20px 20px 7px 7px;
+    position: absolute;
+    top: 500px;
+    left: 80px;
+    box-shadow: 0 8px 16px 1px rgba(0, 0, 0, 0.2);
+}
+
+section #section_wrap .search_form form h3 {
+    color: #495f74;
+    font-size: 1.3em;
+}
+
+section #section_wrap .search_form form select {
+    height: 50px;
+    padding: 10px;
+    margin-right: 20px;
+    border: 1px solid #c5cdd3;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: .9em;
+}
+
+#AREANM {
+    width: 100px;
+}
+
+#MINCLASSNM {
+    width: 130px;
+}
+
+#SVCNM {
+    width: 570px;
+}
+
+section #section_wrap .search_form input[type="button"] {
+    height: 50px;
+    width: 170px;
+    padding: 10px;
+    margin-right: 20px;
+    background-color: #495f74;
+    color: #fff;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 1em;
+    line-height: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-family: 'Arial', sans-serif; /* 글꼴 적용 */
+}
+
+section #section_wrap .search_form input[type="button"]:hover {
+    background-color: #374a63;
+    border-color: #374a63;
+}
+
+/* 추천 서비스 섹션 스타일 */
+#home_section2 {
+    width: 100%;
+    min-height: 680px;
+    background-image: none;
+}
+
+/* 추천 서비스 섹션 랩 스타일 */
+#home_section2 #section_wrap {
+    width: 1300px;
+    margin: 50px auto;
+}
+
+/* 추천 서비스 제목 스타일 */
+#home_section2 #section_wrap .mention {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 10px 30px;
+    font-family: 'Arial', sans-serif; /* 글꼴 적용 */
+}
+
+#home_section2 #section_wrap .mention p {
+    color: rgb(128, 128, 128);
+}
+
+/* 추천 서비스 리스트 스타일 */
+#home_section2 #section_wrap ul {
+    display: flex;
+    justify-content: center;
+}
+
+#home_section2 #section_wrap ul li {
+    margin: 10px 20px;
+}
+
+/* 추천 서비스 이미지 스타일 */
+.img_box {
+    width: 282px;
+    height: 380px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid #dadada;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.img_box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.img_box img {
+    height: 380px;
+    z-index: 10;
+    filter: brightness(70%);
+    transition: filter 0.3s;
+}
+
+.img_box:hover img {
+    filter: brightness(100%);
+}
+
+.img_box .category {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    font-size: .9em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #fff;
+}
+
+.img_box h3 {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    color: #fff;
+    font-size: 1.6em;
+    font-weight: normal;
+    text-shadow: 0px 0px 10px black;
+}
+
+.img_box .location {
+    position: absolute;
+    top: 320px;
+    left: 20px;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: normal;
+}
