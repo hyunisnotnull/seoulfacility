@@ -2,8 +2,12 @@ CREATE DATABASE DB_FACILITY;
 USE DB_FACILITY;
 -- SEOUL_FACILITY DATABASE
 
-SELECT host FROM mysql.user WHERE user = 'root';
-SELECT host FROM mysql.user WHERE user = 'user';
+use mysql;
+select host, user, authentication_string from user;
+SELECT host, user, authentication_string FROM user WHERE user = 'dev01';
+SHOW GRANTS FOR 'dev01'@'192.168.56.1';
+SHOW GRANTS FOR 'dev01'@'%';
+FLUSH PRIVILEGES;
 
 drop table TBL_FACILITY;
 
@@ -43,7 +47,6 @@ WHERE (
     OR AREANM LIKE '%축구%'
 );
 SELECT DISTINCT PLACENM FROM TBL_FACILITY;
-SELECT DISTINCT SVCNM FROM TBL_FACILITY WHERE SVCSTATNM = '안내중' OR SVCSTATNM = '접수중';
 
 SELECT * FROM TBL_FACILITY WHERE AREANM = '과천시';
 
@@ -66,6 +69,7 @@ SELECT c_no, SVCID, u_m_id, c_text, c_rank, c_reg_date, c_mod_date FROM TBL_COMM
 SELECT * FROM TBL_COMMENT WHERE SVCID = 'S200903171905941615' order by c_no desc;
 
 ALTER TABLE TBL_USER_MEMBER ADD COLUMN U_M_ROLE VARCHAR(10) DEFAULT 'USER';
+
 
 -- 연습용 끝
 
