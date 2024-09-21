@@ -15,7 +15,7 @@ $(document).ready(function() {
             url: '/review/' + facilityId,
             type: 'GET',
             success: function(data) {
-            	if (!Array.isArray(data)) {
+                if (!Array.isArray(data)) {
                     console.error("Received data is not an array:", data);
                     return;
                 }
@@ -58,7 +58,7 @@ $(document).ready(function() {
                 <span class="review-author">${review.u_m_id}</span>
                 <span class="review-rating">${'★'.repeat(review.c_rank)}</span>
                 <div class="review-text">${review.c_text}</div>
-                <div class="review-date">${review.c_reg_date}</div>
+                <div class="review-date">${review.c_mod_date}</div>
                 <div class="review-buttons">`;
 
             // 로그인한 사용자의 ID에 맞는 후기글만 수정 및 삭제 버튼 표시
@@ -68,7 +68,13 @@ $(document).ready(function() {
                     <button class="deleteReview" data-review-id="${review.c_no}">삭제</button>`;
             }
             
-            reviewHtml += `</div></li>`;
+            reviewHtml += `</div>
+                <div class="edit-review" style="display:none;">
+                    <input type="text" class="edit-review-text" value="${review.c_text}" />
+                    <button class="saveEdit" data-review-id="${review.c_no}">저장</button>
+                    <button class="cancelEdit">취소</button>
+                </div>
+            </li>`;
             reviewList.append(reviewHtml);
         });
 
@@ -80,19 +86,19 @@ $(document).ready(function() {
 
     // 페이지네이션 업데이트 함수
     function updatePagination() {
-	    const totalPages = Math.ceil(reviews.length / reviewsPerPage);
-	
-	    // 후기 없을 경우
-	    if (totalPages === 0) {
-	        $('#pageInfo').text(''); 
-	        $('#prevPage').hide(); 
-	        $('#nextPage').hide(); 
-	    } else {
-	        $('#pageInfo').text(`${currentPage} / ${totalPages}`);
-	        $('#prevPage').prop('disabled', currentPage === 1).show();
-	        $('#nextPage').prop('disabled', currentPage === totalPages).show();
-	    }
-	}
+        const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+    
+        // 후기 없을 경우
+        if (totalPages === 0) {
+            $('#pageInfo').text(''); 
+            $('#prevPage').hide(); 
+            $('#nextPage').hide(); 
+        } else {
+            $('#pageInfo').text(`${currentPage} / ${totalPages}`);
+            $('#prevPage').prop('disabled', currentPage === 1).show();
+            $('#nextPage').prop('disabled', currentPage === totalPages).show();
+        }
+    }
 
     // 페이지 버튼 클릭 이벤트
     $('#prevPage').on('click', function() {
@@ -136,91 +142,92 @@ $(document).ready(function() {
         $(this).addClass("selected"); 
     });
 
-    // 후기 제출 이벤트 핸들러
-    $("#reviewForm").on("submit", function(event) {
-        event.preventDefault(); // 폼 제출 방지
-        
-     	// 로그인 여부 확인
-        if (!loginedUserId) {
-            alert("후기를 등록하시려면 로그인해 주세요.");
-            window.location.href = '/member/member_login_form';
-            return;
-        }
-        
-        // 입력 필드 검증
-        let reviewText = $("#reviewText").val().trim();
-        let reviewRating = $("#reviewRating").val();
-
-        if (reviewText === "") {
-            alert("후기를 입력해 주세요.");
-            $("#reviewText").focus();
-            return; 
-        }
-
-        if (reviewRating === "") {
-            alert("별점을 선택해 주세요.");
-            $("#reviewRating").focus();
-            return; 
-        }
-
-        let formData = $(this).serialize(); // jQuery serialize()를 사용하여 폼 데이터를 직렬화
-
-        $.ajax({
-            url: '/review/add',
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                alert("후기가 등록되었습니다.");
-                updateReviewList(); 
-                $("#reviewText").val(''); 
-                $("#reviewRating").val('');
-                $(".star").removeClass("selected"); 
-            },
-            error: function(xhr, status, error) {
-                alert("후기 등록에 실패했습니다: " + xhr.responseText);
-                console.error("후기 등록 중 오류 발생:", error);
+    // 후기 제출 이벤트 핸들러 초기화 함수
+    function initSubmitHandler() {
+        $("#reviewForm").off("submit").on("submit", function(event) {
+            event.preventDefault(); // 폼 제출 방지
+            
+            // 로그인 여부 확인
+            if (!loginedUserId) {
+                alert("후기를 등록하시려면 로그인해 주세요.");
+                window.location.href = '/member/member_login_form';
+                return;
             }
+            
+            // 입력 필드 검증
+            let reviewText = $("#reviewText").val().trim();
+            let reviewRating = $("#reviewRating").val();
+
+            if (reviewText === "") {
+                alert("후기를 입력해 주세요.");
+                $("#reviewText").focus();
+                return; 
+            }
+
+            if (reviewRating === "") {
+                alert("별점을 선택해 주세요.");
+                $("#reviewRating").focus();
+                return; 
+            }
+
+            let formData = $(this).serialize(); // jQuery serialize()를 사용하여 폼 데이터를 직렬화
+
+            $.ajax({
+                url: '/review/add',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    alert("후기가 등록되었습니다.");
+                    updateReviewList(); 
+                    $("#reviewText").val(''); 
+                    $("#reviewRating").val('');
+                    $(".star").removeClass("selected"); 
+                },
+                error: function(xhr, status, error) {
+                    alert("후기 등록에 실패했습니다: " + xhr.responseText);
+                    console.error("후기 등록 중 오류 발생:", error);
+                }
+            });
         });
-    });
+    }
 
     // 후기 수정 이벤트 핸들러
     $(document).on("click", ".editReview", function() {
-        let reviewId = $(this).data("review-id");
-        let reviewText = $(this).data("review-text");
-        let reviewRating = $(this).data("review-rating");
+        const reviewId = $(this).data("review-id");
+        const reviewText = $(this).data("review-text");
 
         // 수정할 후기에 대한 값 폼에 채우기
-        $("#reviewText").val(reviewText);
-        $("#reviewRating").val(reviewRating);
-        $(".star").removeClass("selected"); 
-        $(".star").slice(0, reviewRating).addClass("selected");
+        const editSection = $(this).closest("li").find(".edit-review");
+        editSection.find(".edit-review-text").val(reviewText);
+        editSection.show();
+    });
+    
+ 	// 후기 수정 취소 이벤트 핸들러
+    $(document).on("click", ".cancelEdit", function() {
+        const editSection = $(this).closest(".edit-review");
+        editSection.hide(); // 입력폼 숨기기
+    });
 
-        // 제출 이벤트 처리
-        $("#reviewForm").off("submit").on("submit", function(event) {
-            event.preventDefault();
+    // 후기 저장 이벤트 핸들러
+    $(document).on("click", ".saveEdit", function() {
+        const reviewId = $(this).data("review-id");
+        const newReviewText = $(this).siblings(".edit-review-text").val();
 
-            $.ajax({
-                url: '/review/update/' + reviewId,
-                type: 'PUT',
-                data: {
-                    userId: loginedUserId,
-                    reviewText: $("#reviewText").val(),
-                    reviewRating: $("#reviewRating").val()
-                },
-                success: function(response) {
-                    alert("후기가 수정되었습니다.");
-                    updateReviewList();
-                    
-                    // 입력 필드 초기화
-                    $("#reviewText").val('');
-                    $("#reviewRating").val('');
-                    $(".star").removeClass("selected");
-                },
-                error: function(xhr, status, error) {
-                    alert("후기 수정에 실패했습니다.");
-                    console.error("후기 수정 중 오류 발생:", error);
-                }
-            });
+        $.ajax({
+            url: '/review/update/' + reviewId,
+            type: 'PUT',
+            data: {
+                userId: loginedUserId,
+                reviewText: newReviewText
+            },
+            success: function(response) {
+                alert("후기가 수정되었습니다.");
+                updateReviewList();
+            },
+            error: function(xhr, status, error) {
+                alert("후기 수정에 실패했습니다.");
+                console.error("후기 수정 중 오류 발생:", error);
+            }
         });
     });
 
@@ -252,8 +259,10 @@ $(document).ready(function() {
         }
     });
     
-	// 초기 후기 목록 로드
-	updateReviewList(); 
-
+    // 초기 후기 목록 로드
+    updateReviewList();
+    
+    // 등록 핸들러 초기화
+    initSubmitHandler();
 });
 </script>

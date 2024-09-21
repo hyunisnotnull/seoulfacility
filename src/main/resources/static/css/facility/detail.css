@@ -283,7 +283,7 @@ section #section_wrap .right_box .reservation_apply {
 }
 
 #reviewText {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -412,4 +412,56 @@ section #section_wrap .right_box .reservation_apply {
 
 .selected{
     color: red;
+}
+
+.edit-review {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 50%; 
+    max-width: 400px; 
+}
+
+.edit-review-text {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+    width: 100%; 
+}
+
+.saveEdit {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    background-color: #4CAF50; 
+    color: white; 
+    margin-right: 5px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.saveEdit:hover {
+    background-color: #45a049; 
+}
+
+.cancelEdit {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    background-color: #f44336; 
+    color: white; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cancelEdit:hover {
+    background-color: #e53935; 
 }

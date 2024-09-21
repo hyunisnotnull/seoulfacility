@@ -39,11 +39,10 @@ public class ReviewService {
         iReviewDao.insertReview(reviewDto);
     }
     
-    public void updateReview(String reviewId, String userId, String reviewText, int reviewRating) {
+    public void updateReview(String reviewId, String userId, String reviewText) {
         ReviewDto reviewDto = iReviewDao.selectReviewById(reviewId);
         if (reviewDto != null && reviewDto.getU_m_id().equals(userId)) {
             reviewDto.setC_text(reviewText);
-            reviewDto.setC_rank(reviewRating);
             iReviewDao.updateReview(reviewDto);
         } else {
             throw new UnauthorizedAccessException("이 리뷰를 수정할 권한이 없습니다.");
