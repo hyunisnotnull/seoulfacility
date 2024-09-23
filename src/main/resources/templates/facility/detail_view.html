@@ -124,6 +124,7 @@
 
        	<br><h3>주소</h3> <br>
        	 <span id="getAddress"></span>
+       	 <a class="direction" target="blank" th:href="|https://map.naver.com/p/directions/-/${facilityDto.x},${facilityDto.y}/-/transit?c=15.00,0,0,0,dh|">길찾기</a>
        	 <br>
        	<br><h3>전화번호</h3> <br>
        	 <span class="phone" th:text="${facilityDto.TELNO}"></span>
