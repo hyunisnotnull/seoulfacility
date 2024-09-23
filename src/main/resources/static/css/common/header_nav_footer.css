@@ -76,7 +76,7 @@ nav #nav_wrap ul li a:hover {
 article {
 	width: 100%;
     height: 140px;
-	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban.png");
+	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban00.png");
 	background-repeat: no-repeat;
 	background-color: #f1f1f1;
 }
@@ -127,7 +127,7 @@ article div ul li a {
 
 
   article:has(.soccer:hover) {
-   background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban00.png");
+   background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban01.png");
    transition: 0.5s ease-in-out;
 
   }

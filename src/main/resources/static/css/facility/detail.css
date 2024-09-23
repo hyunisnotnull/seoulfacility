@@ -186,7 +186,7 @@ section #section_wrap .right_box .reservation_apply {
 }
 
 .disableColor {
-	background-color: #f1f1f1;	
+	background-color:  #808080;	
 }
 
 
@@ -261,11 +261,27 @@ section #section_wrap .right_box .reservation_apply {
             color: gold;
         }
         
+ /* 주소창 길찾기 링크 */
+        
+     #Tab2 .direction {
+     
+    background-color: #00c73c; 
+    color: white; 
+    border: none; 
+    padding: 5px 10px; 
+    margin-left: 5px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+     
+     
+     }   
+        
         
 /* 후기 섹션 스타일 */
 #Tab3 {
     padding: 20px;
-    border-top: 2px solid #00afee;
+   /*  border-top: 2px solid #00afee; */
 }
 
 #Tab3 h3 {
