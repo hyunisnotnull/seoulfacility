@@ -2,12 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+
 <title th:replace="~{include/title.html::title}"></title>
 <link rel="stylesheet" th:href="@{/css/common/common.css}">
 <link rel="stylesheet" th:href="@{/css/common/header_nav_footer.css}">
 <link rel="stylesheet" th:href="@{/css/member/reservation.css}">
+
 <script th:replace="~{/include/common_js.html::jquery_cdn}"></script>
 <script th:replace="~{/include/cancel_reservation_js.html::js}"></script>
+
 </head>
 <body>
 
@@ -21,16 +24,16 @@
     <section>
     	<div id="section_wrap">
     		<h2>예약 정보 수정</h2>
-			<p>회원님의 예약 정보는 다음과 같습니다:</p>
+			<p>회원님의 예약 정보는 다음과 같습니다.</p>
 			
 			<table>
 			    <thead>
 			        <tr>
 			            <th>예약자 이름</th>
-			            <th>시설 이름</th>
+			            <th class="facility_name">시설 이름</th>
 			            <th>예약 날짜</th>
 			            <th>예약 상태</th>
-			            <th>전화번호</th>
+			            <th class="phone_number">전화번호</th>
 			            <th>예약 시간</th>
 			            <th>취소</th>
 			        </tr>
@@ -40,23 +43,35 @@
 	        
                         <td th:text="${reservation.u_m_id}">예약자 이름</td>
                         <td th:each="item: ${facilityMap}"
-                        	th:if="${item.SVCID eq reservation.SVCID }"
-                        	th:text="${item.SVCNM}">전화번호
+                        	th:if="${item.SVCID eq reservation.SVCID }" class="facility_name">
+                        	<a th:href="|/facility/detailView/${item.SVCID}|" th:text="${item.SVCNM}"></a>
                         </td>
                         <td th:text="${reservation.r_reserve_date}">예약 날짜</td>
                         <td th:text="${reservation.r_use_state}">예약 상태</td>
                         <td th:each="item: ${facilityMap}"
                         	th:if="${item.SVCID eq reservation.SVCID }"
-                        	th:text="${item.TELNO}">전화번호
+                        	th:text="${item.TELNO}" class="phone_number">전화번호
                         </td>
                         <td th:text="${reservation.r_use_time}">예약 시간</td>
                         <td>
-                            <button class="cancel_reservation"
+                            <button class="cancel_reservation" th:if="${reservation.r_use_state eq '예약대기'}"
                                     th:data-reservation-id ="${reservation.r_no}">예약취소</button>
                         </td>
                     </tr>
 			    </tbody>
 			</table>
+			
+			<div th:if="${reservations.size() == 0}" class="no-reservations">
+	            <p>예약 내역이 없습니다.</p>
+	        </div>
+			
+			<div id="pagination" class="pagination" th:if="${totalPages > 0}">
+			    <a th:if="${currentPage > 1}" th:href="@{/member/member_reservation_form(page=${currentPage - 1})}" class="pagination-link" id="prevPage">이전</a>
+			    <span class="pagination-info" id="currentPage" th:text="${currentPage}"></span> /
+			    <span class="pagination-info" th:text="${totalPages}"></span>
+			    <a th:if="${currentPage < totalPages}" th:href="@{/member/member_reservation_form(page=${currentPage + 1})}" class="pagination-link" id="nextPage">다음</a>
+			</div>
+			
     	</div>
     </section>
     

@@ -18,12 +18,13 @@
 	</article>
 
     <section>
-    	<div>
-    		<p>로그인 실패</p>
-    	</div>
-    	<div>
-			<a th:href="@{/member/member_login_form}">로그인 화면으로 이동</a>
-            <a th:href="@{/member/create_account_form}">다시 회원 가입하기</a>
+    	<div id="section_wrap">
+    		<h3>로그인에 실패하셨습니다.</h3>
+    		<br>
+    		<p>
+				<a th:href="@{/member/member_login_form}">로그인</a>
+            	<a th:href="@{/member/create_account_form}">회원 가입</a>
+            </p>
 		</div>
     </section>
     

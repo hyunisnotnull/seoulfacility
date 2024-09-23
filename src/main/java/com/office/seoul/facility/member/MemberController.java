@@ -89,18 +89,17 @@ public class MemberController {
 	 * }
 	 */
 
-	/*
-	 * 로그인 실패
-	 * 
-	 * @GetMapping("/member_login_result") public String memberLoginFail() {
-	 * log.info("memberLoginFail()");
-	 * 
-	 * String nextPage = "/member/member_login_result";
-	 * 
-	 * return nextPage;
-	 * 
-	 * }
-	 */
+	
+	 //로그인 실패
+	 @GetMapping("/member_login_result") public String memberLoginFail() {
+	 log.info("memberLoginFail()");
+	  
+	 String nextPage = "/member/member_login_result";
+	  
+	 return nextPage;
+	  
+	 }
+	 
 
 	/*
 	 * 정보수정
@@ -141,9 +140,13 @@ public class MemberController {
 
 	// 예약 확인 보기
 	@GetMapping("/member_reservation_form")
-	public String MemberReservationForm(Principal principal, Model model) {
+	public String MemberReservationForm(Principal principal, Model model,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+	        @RequestParam(value = "size", defaultValue = "5") int size) {
+		
 		log.info("MemberReservationForm()");
-
+		log.info("MemberReservationForm() with page: {}, size: {}", page, size);
+		
 		String nextPage = "/member/member_reservation_form";
 
 		// 로그인한 회원 정보 조회
@@ -151,7 +154,7 @@ public class MemberController {
 		log.info("MemberModifyForm() with loginedMemberDto: {}", loginedMemberDto);
 
 		// 해당 회원의 예약 정보 조회
-		List<ReservationDto> reservations = reservationService.getReservationsByMemberId(loginedMemberDto.getU_m_id());
+		List<ReservationDto> reservations = reservationService.getReservationsByMemberId(loginedMemberDto.getU_m_id(), page, size);
 		log.info("MemberModifyForm() with reservations: {}", reservations);
 
 		// 예약된 시설 ID 목록 추출 (중복 허용)
@@ -159,31 +162,36 @@ public class MemberController {
 
 		// 시설 정보 조회
 		List<FacilityDto> facilityMap = facilityService.getFacilitiesByIds(facilityIds);
+		
+		// 전체 예약 수 조회
+	    int totalReservations = reservationService.countReservationsByMemberId(loginedMemberDto.getU_m_id());
+	    log.info("Total reservations: {}", totalReservations);
 
 		// 모델에 회원 정보 및 예약 정보 추가
 		model.addAttribute("reservations", reservations);
 		model.addAttribute("facilityMap", facilityMap);
+		model.addAttribute("totalReservations", totalReservations);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", (int) Math.ceil((double) totalReservations / size));
 
 		return nextPage;
 	}
 
-	
-	 // 예약 취소 확인
-	  
+	// 예약 취소 확인
+
 	@PostMapping("/member_reservation_confirm")
 	public ResponseEntity<String> memberReservationConfirm(@RequestParam("r_no") String reservationId) {
-	    log.info("memberReservationConfirm() with reservationId: {}", reservationId);
+		log.info("memberReservationConfirm() with reservationId: {}", reservationId);
 
-	    // 예약 취소 처리 로직 추가
-	    int result = reservationService.cancelReservation(reservationId);
+		// 예약 취소 처리 로직 추가
+		int result = reservationService.cancelReservation(reservationId);
 
-	    if (result > 0) {
-	        return ResponseEntity.ok("예약이 취소되었습니다.");
-	    } else {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 취소에 실패했습니다.");
-	    }
+		if (result > 0) {
+			return ResponseEntity.ok("예약이 취소되었습니다.");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 취소에 실패했습니다.");
+		}
 	}
-	 
 
 	/*
 	 * 회원 탈퇴

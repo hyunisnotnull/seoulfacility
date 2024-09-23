@@ -71,10 +71,16 @@ public class ReservationService {
         return reservationStatus;
     }
 
-	public List<ReservationDto> getReservationsByMemberId(String u_m_id) {
+	public List<ReservationDto> getReservationsByMemberId(String u_m_id, int page, int size) {
 		log.info("getReservationsByMemberId() with u_m_id: {}", u_m_id);
+		int offset = (page - 1) * size;
 		
-		return iReservationDao.findReservationsByMemberId(u_m_id);
+		Map<String, Object> params = new HashMap<>();
+	    params.put("u_m_id", u_m_id);
+	    params.put("size", size);
+	    params.put("offset", offset);
+		
+		return iReservationDao.findReservationsByMemberId(params);
 	}
 
 	public int cancelReservation(String reservationId) {
@@ -90,6 +96,11 @@ public class ReservationService {
 
         return result;
     }
+
+	public int countReservationsByMemberId(String u_m_id) {
+		
+		return iReservationDao.countReservationsByMemberId(u_m_id);
+	}
 }
 
 

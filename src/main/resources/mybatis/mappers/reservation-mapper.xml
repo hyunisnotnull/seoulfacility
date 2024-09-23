@@ -30,21 +30,33 @@
 	</select>
 	
 	<!-- 예약 정보 조회 -->
-	<select id="findReservationsByMemberId" parameterType="String" resultType="com.office.seoul.facility.reservation.ReservationDto">
+	<select id="findReservationsByMemberId" parameterType="Map" resultType="com.office.seoul.facility.reservation.ReservationDto">
         
         SELECT * FROM 
-        	TBL_RESERVE_INFO
-		WHERE 
-			U_M_ID = #{u_m_id}
-		ORDER BY R_RESERVE_DATE ASC
+	        TBL_RESERVE_INFO
+	    WHERE 
+	        U_M_ID = #{params.u_m_id}
+	    ORDER BY 
+	        CASE 
+	            WHEN R_USE_STATE = '취소' THEN 1 
+	            ELSE 0 
+	        END, 
+	        R_RESERVE_DATE ASC
+       	LIMIT #{params.size} OFFSET #{params.offset}
 
     </select>
     
-    <delete id="deleteReservationById" parameterType="String">
+    <update id="deleteReservationById" parameterType="String">
     
-        DELETE FROM TBL_RESERVE_INFO
+        UPDATE TBL_RESERVE_INFO
+        SET R_USE_STATE = "취소"
         WHERE R_NO = #{reservationId}
         
-    </delete>
+    </update>
+    
+    <select id="countReservationsByMemberId" parameterType="String" resultType="int">
+	    SELECT COUNT(*) FROM TBL_RESERVE_INFO
+	    WHERE U_M_ID = #{u_m_id}
+	</select>
 
 </mapper>

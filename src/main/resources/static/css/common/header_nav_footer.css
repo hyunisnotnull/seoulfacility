@@ -21,68 +21,79 @@ header #header_wrap a {
 	width: 100%;
 	padding: 10px 0;
 	background-color: rgb(0, 106, 202);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	}
 
  nav #nav_wrap {
-	width: 1300px;
-    height: 50px;
+	width: 1200px;
+	height: 50px;
 	margin: 0 auto;
-	text-align: right;
-    line-height: 50px;
-    color: #fff;
+	justify-content: space-between;
+	align-items: center;
+	line-height: 50px;
+	color: #fff;
 	}
 
+nav #nav_wrap .logo {
+	flex: 1;
+}
 
+nav #nav_wrap .navigation {
+	flex: 2;
+	text-align: right;
+}
 
-nav #nav_wrap a {
+nav #nav_wrap .logo img {
+	width: 230px;
+}
 
- color: #fff;
+nav #nav_wrap ul {
+	padding: 0;
+	margin: 0;
+	display: flex;
+}
 
- } 
+nav #nav_wrap ul li {
+	margin: 0 10px;
+	font-size: 1.1em;
+}
 
- nav #nav_wrap ul li{
+nav #nav_wrap ul li a {
+	color: #fff;
+	text-decoration: none;
+}
 
-    font-size: 1.1em;
-    float: left;
-  }  
-
-
-  nav #nav_wrap ul li.navigation {
-
-    float: right;
- }   
+nav #nav_wrap ul li a:hover {
+	color: #ffd700; 
+}
 
 
 /* ARTICLE CSS  */
 
 
-  article {
-    width: 100%;
+article {
+	width: 100%;
     height: 140px;
 	background-image: url("http://ecobus.co.kr/wp-content/uploads/2024project/ban00.png");
 	background-repeat: no-repeat;
 	background-color: #f1f1f1;
-
 }
 
 
-  article #article_wrap {
-	width: 1300px;
+article #article_wrap {
+	width: 1200px;
 	margin: 0 auto;
 	padding-top: 20px;
-	}
+}
 
-	article #article_wrap div ul {
+article #article_wrap div ul {
+	display:flex;
+  	justify-content: right;
+}  
 
-		display:flex;
-   		justify-content: right;
-	
-	  }  
-	
-
-
-
-  article div ul li a {
+article div ul li a {
 	display: block;
 	width: 130px; height: 30px;
 	background-color: #fff;
@@ -93,14 +104,18 @@ nav #nav_wrap a {
 	border: 1px solid #bebebe;
     border-radius: 5px;
 	text-align: center;
-  }
+	text-decoration: none;
+	color: #000;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
  
 
  article div ul li a:hover {
 	background-color: #378bee;
-	border: 1px solid #378bee;
+	transform: scale(1.1);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 호버 시 그림자 확대 */
 	color: #fff;
-/* 	transition: 0.9s; */
+	transition: 0.3s;
   }
 
 

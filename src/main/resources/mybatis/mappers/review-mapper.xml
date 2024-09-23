@@ -18,7 +18,7 @@
     <!-- 리뷰 수정 -->
 	<update id="updateReview" parameterType="com.office.seoul.facility.review.ReviewDto">
         UPDATE TBL_COMMENT
-        SET C_TEXT = #{c_text}, C_RANK = #{c_rank}
+        SET C_TEXT = #{c_text}, C_MOD_DATE = NOW() 
         WHERE C_NO = #{c_no} AND U_M_ID = #{u_m_id}
     </update>
 	

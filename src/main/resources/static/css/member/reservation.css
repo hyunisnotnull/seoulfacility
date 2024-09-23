@@ -10,20 +10,25 @@ body {
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 69vh;
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 25px;
     color: #333;
-    margin-bottom: 15px;
+    margin: 15px 0 5px 0;
+    text-align: center;
 }
 
 p {
-    font-size: 16px;
+    font-size: 18px;
     color: #666;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 table {
@@ -45,29 +50,80 @@ th, td {
 
 th {
     font-size: 16px;
+    text-align: left;
     background-color: #444;
 }
 
 td {
-    font-size: 14px;
+    font-size: 15px;
     color: #555;
+}
+
+.facility_name {
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.phone_number {
+    width: 170px;
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 tr:hover {
     background-color: #f1f1f1;
 }
 
-input[type="button"] {
+button {
     background-color: #f44336;
-    color: #fff;
+    color: rgb(242, 242, 242);
     border: none;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
 }
 
-input[type="button"]:hover {
+button:hover {
     background-color: #d32f2f;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.pagination-link {
+    color: #007bff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 14px;
+}
+
+.pagination-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination-link:disabled {
+    color: gray;
+    border: 1px solid gray;
+    pointer-events: none;
+}
+
+.pagination-info {
+    padding: 0 10px;
+    font-weight: bold;
 }
