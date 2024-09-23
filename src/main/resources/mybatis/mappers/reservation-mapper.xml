@@ -37,6 +37,11 @@
 	    WHERE 
 	        U_M_ID = #{params.u_m_id}
 	    ORDER BY 
+	    <!-- 취소 맨뒤로 보내기
+	    	CASE 
+	            WHEN R_USE_STATE = '취소' THEN 1 
+	            ELSE 0 
+	        END,  -->
 	        R_REG_DATE DESC
        	LIMIT #{params.size} OFFSET #{params.offset}
 
