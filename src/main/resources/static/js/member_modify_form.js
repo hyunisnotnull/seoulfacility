@@ -10,21 +10,20 @@ function MemberModifyForm() {
     const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;           // 전화번호: 000-0000-0000 형식
 
 	// 원래 값
-    const originalPw = document.querySelector('input[name="u_m_pw"]').defaultValue;
+    const originalPw = document.querySelector('input[name="currentPassword"]').defaultValue;
     const originalName = document.querySelector('input[name="u_m_name"]').defaultValue;
     const originalMail = document.querySelector('input[name="u_m_mail"]').defaultValue;
     const originalPhone = document.querySelector('input[name="u_m_phone"]').defaultValue;
 
     
-    if (form.u_m_pw.value === '') {
-        alert('새로운 비밀번호 입력하세요');
-        form.u_m_pw.focus();
-        return;
-    } else if (!pwRegex.test(form.u_m_pw.value)) {
-        alert('비밀번호는 6자 이상이어야 합니다.');
-        form.u_m_pw.focus();
-        return;
-    }
+	if (form.u_m_pw.value === '') {
+	    // 기존 비밀번호 유지
+	    form.u_m_pw.value = originalPw; 
+	} else if (!pwRegex.test(form.u_m_pw.value)) {
+	    alert('비밀번호는 6자 이상이어야 합니다.');
+	    form.u_m_pw.focus();
+	    return;
+	}
 
     if (form.u_m_name.value === '') {
         alert('새로운 이름 입력하세요');

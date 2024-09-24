@@ -71,10 +71,23 @@ public class MemberService {
 	public int memberModifyConfirm(MemberDto memberDto) {
 		log.info("memberModifyConfirm()");
 		
-		if (memberDto.getU_m_pw() != null && !memberDto.getU_m_pw().isEmpty()) {
-			String encodedPassword = passwordEncoder.encode(memberDto.getU_m_pw());
-	        memberDto.setU_m_pw(encodedPassword);
-		}
+	    MemberDto currentMember = iMemberDao.selectMemberByMId(memberDto.getU_m_id());
+	    log.info("현재 비밀번호: " + currentMember.getU_m_pw());
+	    log.info("입력된 비밀번호: " + memberDto.getU_m_pw());
+	    
+	    if (memberDto.getU_m_pw() == null || memberDto.getU_m_pw().isEmpty()) {
+	        // 비밀번호가 비어있다면 기존 비밀번호 유지
+	        memberDto.setU_m_pw(currentMember.getU_m_pw());
+	    } else {
+	        // 사용자가 비밀번호를 입력했을 때만 처리
+	        if (!passwordEncoder.matches(memberDto.getU_m_pw(), currentMember.getU_m_pw())) {
+	            String encodedPassword = passwordEncoder.encode(memberDto.getU_m_pw());
+	            memberDto.setU_m_pw(encodedPassword);
+	        } else {
+	            // 비밀번호가 변경되지 않은 경우, 기존 비밀번호 유지
+	            memberDto.setU_m_pw(currentMember.getU_m_pw());
+	        }
+	    }
 		
 		int result = iMemberDao.updateMemberModify(memberDto);
 		
