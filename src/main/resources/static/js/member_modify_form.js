@@ -10,7 +10,7 @@ function MemberModifyForm() {
     const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;           // 전화번호: 000-0000-0000 형식
 
 	// 원래 값
-    const originalPw = document.querySelector('input[name="currentPassword"]').defaultValue;
+    const originalPw = document.querySelector('input[name="u_m_pw"]').defaultValue;
     const originalName = document.querySelector('input[name="u_m_name"]').defaultValue;
     const originalMail = document.querySelector('input[name="u_m_mail"]').defaultValue;
     const originalPhone = document.querySelector('input[name="u_m_phone"]').defaultValue;
@@ -30,7 +30,7 @@ function MemberModifyForm() {
         form.u_m_name.focus();
         return;
     } else if (!nameRegex.test(form.u_m_name.value)) {
-        alert('이름은 3자 이상 8자 이하의 한글, 영어 또는 숫자여야 합니다.');
+        alert('이름은 3자 이상 8자 이하의 한글, 영어 또는 숫자여야 합니다.(띄어쓰기 불가능)');
         form.u_m_name.focus();
         return;
     }
