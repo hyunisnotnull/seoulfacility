@@ -16,22 +16,21 @@ function MemberModifyForm() {
     const originalPhone = document.querySelector('input[name="u_m_phone"]').defaultValue;
 
     
-    if (form.u_m_pw.value === '') {
-        alert('새로운 비밀번호 입력하세요');
-        form.u_m_pw.focus();
-        return;
-    } else if (!pwRegex.test(form.u_m_pw.value)) {
-        alert('비밀번호는 6자 이상이어야 합니다.');
-        form.u_m_pw.focus();
-        return;
-    }
+	if (form.u_m_pw.value === '') {
+	    // 기존 비밀번호 유지
+	    form.u_m_pw.value = originalPw; 
+	} else if (!pwRegex.test(form.u_m_pw.value)) {
+	    alert('비밀번호는 6자 이상이어야 합니다.');
+	    form.u_m_pw.focus();
+	    return;
+	}
 
     if (form.u_m_name.value === '') {
         alert('새로운 이름 입력하세요');
         form.u_m_name.focus();
         return;
     } else if (!nameRegex.test(form.u_m_name.value)) {
-        alert('이름은 3자 이상 8자 이하의 한글, 영어 또는 숫자여야 합니다.');
+        alert('이름은 3자 이상 8자 이하의 한글, 영어 또는 숫자여야 합니다.(띄어쓰기 불가능)');
         form.u_m_name.focus();
         return;
     }
