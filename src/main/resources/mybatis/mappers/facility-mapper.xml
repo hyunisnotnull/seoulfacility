@@ -11,6 +11,7 @@
 	            AND MINCLASSNM = #{type}
 	        </if>
 	    </where>
+	    ORDER BY SVCOPNBGNDT DESC
 	</select>
 	
 	<!-- 페이지별 데이터 조회 -->
@@ -25,6 +26,7 @@
             )
 	        </if>
 	    </where>
+	    ORDER BY SVCOPNBGNDT DESC
         LIMIT #{offset}, #{size}
     </select>
     
