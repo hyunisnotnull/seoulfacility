@@ -22,5 +22,5 @@
 ![image](https://github.com/user-attachments/assets/914f6c53-3b92-41e4-b17a-034c5723f0ee)
 
 -----------------------------------
-↓↓↓ More Detail ↓↓↓
+More Detail →
 [서울시 체육시설 프로젝트 보고서 .pptx](https://github.com/user-attachments/files/17391063/default.pptx)
