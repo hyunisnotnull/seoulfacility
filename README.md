@@ -20,7 +20,3 @@
 - 프로젝트 구조
 
 ![image](https://github.com/user-attachments/assets/4cb497f2-6b6c-417f-a142-a845f8de284c)
-
------------------------------------
-More Detail →
-[서울시 체육시설 프로젝트 보고서 .pptx](https://github.com/user-attachments/files/17391063/default.pptx)
